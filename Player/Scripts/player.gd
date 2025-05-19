@@ -21,5 +21,18 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		
+	check_for_damage()
 
 	move_and_slide()
+	
+func check_for_damage():
+	# Check all collisions this frame
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision.get_collider().is_in_group("Enemies"):
+			print("Hit an enemy!")
+	
+	
+func take_damage():
+	return

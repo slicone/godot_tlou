@@ -11,4 +11,4 @@
 [node name="Platform" parent="." instance=ExtResource("2_h2yge")]
 
 [node name="EnemyBase" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(250, 78)
+position = Vector2(263, -1)
