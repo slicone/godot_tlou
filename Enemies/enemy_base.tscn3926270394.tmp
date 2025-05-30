@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://b7njof4dv3745"]
 
 [ext_resource type="Script" uid="uid://b8njxla5wf7gu" path="res://Enemies/Scripts/enemy_base.gd" id="1_8xqx4"]
-[ext_resource type="Texture2D" uid="uid://tnyxhi27faki" path="res://Enemies/Icons/enemy_prototype.png" id="2_gk4pb"]
+[ext_resource type="Texture2D" uid="uid://bb56tmahjgltd" path="res://Enemies/Icons/test.jpg" id="2_gk4pb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk4pb"]
-size = Vector2(28, 58)
+size = Vector2(96.5, 107)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gk4pb"]
 radius = 183.273
@@ -17,25 +17,28 @@ script = ExtResource("1_8xqx4")
 patrol_points = Array[NodePath]([NodePath("PatrolPoint1"), NodePath("PatrolPoint2")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(546, 330)
+scale = Vector2(0.272222, 0.297222)
 texture = ExtResource("2_gk4pb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(545.75, 329.5)
 shape = SubResource("RectangleShape2D_gk4pb")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(546, 329)
 shape = SubResource("CircleShape2D_gk4pb")
 
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(546, 329)
 shape = SubResource("CircleShape2D_guy7p")
 
 [node name="PatrolPoint1" type="Node2D" parent="."]
-position = Vector2(-150, 0)
 
 [node name="PatrolPoint2" type="Node2D" parent="."]
-position = Vector2(150, 0)

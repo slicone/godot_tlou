@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://beokxbdxxr45v"]
+
+[ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Player/player.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bjax3jwlbnhna" path="res://canvas_layer.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://jhnl70vwrpeb" path="res://Structures/platform.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://b7njof4dv3745" path="res://Enemies/enemy_base.tscn" id="3_h2yge"]
+
+[node name="Main" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_1bvp3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -43.0
+offset_right = 642.0
+grow_vertical = 0
+
+[node name="Platform" parent="." instance=ExtResource("2_h2yge")]
+position = Vector2(36, 609)
+
+[node name="Player" parent="." instance=ExtResource("1_0xm2m")]
+
+[node name="EnemyBase" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(64, 186)

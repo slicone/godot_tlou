@@ -1,18 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://jhnl70vwrpeb"]
 
-[ext_resource type="Texture2D" uid="uid://8u3beph3scew" path="res://Structures/Icons/snake.jpg" id="1_ibub6"]
+[ext_resource type="Texture2D" uid="uid://bwgemmlfi5j8" path="res://Structures/Icons/prototype_platform.png" id="1_45yay"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgam6"]
-size = Vector2(1149, 68)
+size = Vector2(641.5, 73)
 
 [node name="Platform" type="StaticBody2D"]
 position = Vector2(37, 609)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(538.5, 0)
-shape = SubResource("RectangleShape2D_vgam6")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(539, 0)
-scale = Vector2(15.9722, 1)
-texture = ExtResource("1_ibub6")
+position = Vector2(284, -285)
+texture = ExtResource("1_45yay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(284.25, -284.5)
+shape = SubResource("RectangleShape2D_vgam6")

@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+@export var health: float = 100
 
 
 func _physics_process(delta: float) -> void:
@@ -22,17 +23,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-	check_for_damage()
-
 	move_and_slide()
 	
-func check_for_damage():
-	# Check all collisions this frame
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider().is_in_group("Enemies"):
-			print("Hit an enemy!")
+func take_damage(damage: float):
+	health = health - damage
+	print(health)
+	if health <= 0:
+		die()
+		
+func die():
+	queue_free()
+
 	
-	
-func take_damage():
-	return

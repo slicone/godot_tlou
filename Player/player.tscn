@@ -1,19 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://big7uykx4f77p" path="res://Player/Scripts/player.gd" id="1_xhfnw"]
-[ext_resource type="Texture2D" uid="uid://dteuej2ab5bas" path="res://Player/icons/shrek.png" id="2_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://dauhcny8taqbh" path="res://Player/icons/player_prototype.png" id="2_4ntmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
-size = Vector2(119, 122.25)
+size = Vector2(26.5, 58.5)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_xhfnw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(474, 298)
-scale = Vector2(0.235816, 0.219858)
 texture = ExtResource("2_4ntmi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(475.5, 301.875)
 shape = SubResource("RectangleShape2D_kpjcp")

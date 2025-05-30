@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dteuej2ab5bas"
-path="res://.godot/imported/shrek.png-da376998ae073324cfe01a111786387c.ctex"
+uid="uid://bv12pv3scy2wm"
+path="res://.godot/imported/clicker_pixel_art.png-1e7942f5e65d1890913434f1dfe09a09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/icons/shrek.png"
-dest_files=["res://.godot/imported/shrek.png-da376998ae073324cfe01a111786387c.ctex"]
+source_file="res://Enemies/Icons/clicker_pixel_art.png"
+dest_files=["res://.godot/imported/clicker_pixel_art.png-1e7942f5e65d1890913434f1dfe09a09.ctex"]
 
 [params]
 
