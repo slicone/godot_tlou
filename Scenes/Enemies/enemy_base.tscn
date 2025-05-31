@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_sgjdr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk4pb"]
-size = Vector2(33, 58)
+size = Vector2(35.75, 58)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gk4pb"]
-radius = 156.205
+radius = 153.264
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_guy7p"]
 radius = 34.1321
@@ -47,5 +47,5 @@ position = Vector2(150, 0)
 [node name="HitboxComponent" parent="." groups=["Enemy"] instance=ExtResource("4_sgjdr")]
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-2.5, 0)
+position = Vector2(0.125, 0)
 shape = SubResource("RectangleShape2D_gk4pb")

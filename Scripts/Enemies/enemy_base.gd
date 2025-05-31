@@ -1,20 +1,25 @@
 extends CharacterBody2D
 
-@export var speed = 100 # max speed
+@export var speed = 150
 @export var acceleration = 70
 @export var attack_damage: float = 5.0
 @export var health: float = 20.0
-var player: Node2D
+@export var player_current_scene_path = "Player"
+const JUMP_VELOCITY = -400.0
+var player: Player
 var weapon: Weapon
 var player_detected: bool = false;
 
+var last_action_time := 0.0
+var cooldown := 1.5  # Sekunden
+
 # patrol
-@export var patrol_points: Array[NodePath]  # Im Inspector einstellbar
+@export var patrol_points: Array[NodePath]
 var current_target_index = 0
 var target_position: Vector2
 
 func setup_character():
-	player = get_tree().get_root().get_node("Main/Player")
+	player = get_tree().get_current_scene().get_node(player_current_scene_path) as Player
 	var hitbox = $HitboxComponent
 	var health_comp = $HealthComponent as HealthComponent
 	health_comp.setHealth(health)
@@ -28,24 +33,31 @@ func _ready():
 	
 # TODO auslagern als Komponente?
 func _physics_process(delta):
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	# Enemy Chase State TODO auslagern als Statemachine
 	if player && player_detected:
 		# target_pos should change with enemy_pos
 		target_position = get_node(patrol_points[current_target_index]).global_position
-		var pos_dif: Vector2 = player.global_position - global_position
+		# Jump State TODO auslagern als Statemachine
+		if not player.is_on_floor() and Time.get_ticks_msec() / 1000.0 - last_action_time >= cooldown:
+			velocity.y += JUMP_VELOCITY
+			last_action_time = Time.get_ticks_msec() / 1000.0
 		var distance: float = player.global_position.distance_to(global_position)
-		var direction: Vector2 = Vector2(pos_dif.x, 0).normalized()
-		#var direction: Vector2 = global_position.direction_to(player.global_position).normalized()
+		var direction: Vector2 = global_position.direction_to(player.global_position).normalized()
 		var target_velocity: Vector2 = direction * speed
 		if distance < 50:
 			# slow down
 			velocity = velocity.move_toward(Vector2.ZERO, acceleration / 2 * delta)
 		else:
 			velocity = velocity.move_toward(target_velocity, acceleration * delta)
+	# Enemy Idle State TODO auslagern als Statemachine
 	else:
 		if patrol_points.size() == 0:
 			return
-		var direction = (target_position - global_position).normalized()
-		velocity = direction * speed
+		var direction: Vector2 = global_position.direction_to(player.global_position).normalized()
+		var target_velocity: Vector2 = direction * speed
+		velocity = velocity.move_toward(target_velocity, acceleration * delta)
 		if global_position.distance_to(target_position) < 2:
 			current_target_index += 1
 			if current_target_index >= patrol_points.size():
