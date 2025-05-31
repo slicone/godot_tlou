@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://df8u6lxcfllsw"]
+
+[ext_resource type="Script" uid="uid://bx1ws0qluguys" path="res://Scripts/weapon.gd" id="1_aowxy"]
+[ext_resource type="Texture2D" uid="uid://cd84om61h17ay" path="res://Art/weapon.png" id="2_6o4l1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2q7ty"]
+size = Vector2(14, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd7ca"]
+size = Vector2(7, 10)
+
+[node name="Weapon" type="Area2D"]
+script = ExtResource("1_aowxy")
+metadata/_custom_type_script = "uid://bx1ws0qluguys"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6o4l1")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_2q7ty")
+
+[node name="AttackCollision" type="CollisionShape2D" parent="."]
+position = Vector2(3.6, -9)
+shape = SubResource("RectangleShape2D_dd7ca")
+
+[node name="MakeMeleeAttackComponent" type="Node2D" parent="."]

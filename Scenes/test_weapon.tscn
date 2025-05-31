@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmqmpekef4jhf"]
+
+[ext_resource type="Script" uid="uid://bx1ws0qluguys" path="res://Scripts/weapon.gd" id="1_0gn6l"]
+[ext_resource type="Texture2D" uid="uid://dtexk5m7ip2k6" path="res://Art/test_weapon.png" id="2_8hkyp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek4ho"]
+size = Vector2(7, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_as5ey"]
+size = Vector2(14, 27)
+
+[node name="Weapon" type="Area2D"]
+script = ExtResource("1_0gn6l")
+metadata/_custom_type_script = "uid://bx1ws0qluguys"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_8hkyp")
+
+[node name="AttackCollision" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, -10)
+shape = SubResource("RectangleShape2D_ek4ho")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_as5ey")
