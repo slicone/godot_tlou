@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://b7njof4dv3745"]
+
+[ext_resource type="Script" uid="uid://b8njxla5wf7gu" path="res://Scripts/Enemies/enemy_base.gd" id="1_8xqx4"]
+[ext_resource type="Texture2D" uid="uid://tnyxhi27faki" path="res://Art/Enemies/enemy_prototype.png" id="2_gk4pb"]
+[ext_resource type="PackedScene" uid="uid://dw0sg05tstssg" path="res://Scenes/detection_area_component.tscn" id="3_5xbfy"]
+[ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_b1gup"]
+[ext_resource type="PackedScene" uid="uid://cx15wiupr67d3" path="res://Scenes/attack_area_component.tscn" id="3_sgjdr"]
+[ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_sgjdr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gk4pb"]
+size = Vector2(33, 58)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gk4pb"]
+radius = 156.205
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_guy7p"]
+radius = 34.1321
+
+[node name="EnemyBase" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_8xqx4")
+patrol_points = Array[NodePath]([NodePath("PatrolPoint1"), NodePath("PatrolPoint2")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gk4pb")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gk4pb")
+
+[node name="DetectionAreaComponent" parent="." instance=ExtResource("3_5xbfy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionAreaComponent"]
+shape = SubResource("CircleShape2D_gk4pb")
+
+[node name="AttackAreaComponent" parent="." instance=ExtResource("3_sgjdr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaComponent"]
+shape = SubResource("CircleShape2D_guy7p")
+
+[node name="PatrolPoint1" type="Node2D" parent="."]
+position = Vector2(-150, 0)
+
+[node name="PatrolPoint2" type="Node2D" parent="."]
+position = Vector2(150, 0)
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_b1gup")]
+
+[node name="HitboxComponent" parent="." groups=["Enemy"] instance=ExtResource("4_sgjdr")]
+
+[node name="EnemyCollision" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-2.5, 0)
+shape = SubResource("RectangleShape2D_gk4pb")

@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cx15wiupr67d3"]
+
+[node name="AttackAreaComponent" type="Area2D"]

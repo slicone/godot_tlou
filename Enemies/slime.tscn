@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://clnpfvkcdb4kg"]
-
-[ext_resource type="PackedScene" uid="uid://b7njof4dv3745" path="res://Enemies/enemy_base.tscn" id="1_7mise"]
-[ext_resource type="Script" uid="uid://dinb4v4mgvdwp" path="res://slime.gd" id="2_xwn1d"]
-
-[node name="Slime" instance=ExtResource("1_7mise")]
-script = ExtResource("2_xwn1d")
