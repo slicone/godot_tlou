@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=12 format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://big7uykx4f77p" path="res://Scripts/Player/player.gd" id="1_xhfnw"]
-[ext_resource type="Texture2D" uid="uid://d0uye3t2oh1ua" path="res://Art/Player/player_prototype-Sheet-idle.png" id="2_dd0ac"]
-[ext_resource type="Texture2D" uid="uid://bf75ckbn2c64l" path="res://Art/Player/player_prototype-run-Sheet.png" id="3_dd0ac"]
+[ext_resource type="Texture2D" uid="uid://8cbi8s0lbi0v" path="res://Art/Player/player_prototype-Sheet.png" id="2_htcer"]
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
 [ext_resource type="Script" uid="uid://bbmisvu3ddobm" path="res://Scenes/Player/pickup_area.gd" id="5_htcer"]
@@ -17,12 +16,27 @@ size = Vector2(26.5, 58.5)
 radius = 30.0
 height = 142.0
 
+[sub_resource type="Animation" id="Animation_htcer"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+
 [sub_resource type="Animation" id="Animation_dd0ac"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Run:frame")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -31,62 +45,11 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Idle:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_htcer"]
-resource_name = "idle"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Idle:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.7, 0.766667, 0.833333, 0.9, 1.6, 2.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-}
-
-[sub_resource type="Animation" id="Animation_0u5uq"]
-resource_name = "run"
-length = 0.25
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Run:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.233333),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-
-[sub_resource type="Animation" id="Animation_jlvik"]
-resource_name = "run_left"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0u5uq"]
 _data = {
 &"RESET": SubResource("Animation_dd0ac"),
-&"idle": SubResource("Animation_htcer"),
-&"run": SubResource("Animation_0u5uq"),
-&"run_left": SubResource("Animation_jlvik")
+&"idle": SubResource("Animation_htcer")
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
@@ -95,16 +58,10 @@ script = ExtResource("1_xhfnw")
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mtuoh")
 
-[node name="Idle" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_dd0ac")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_htcer")
 hframes = 4
-vframes = 3
-
-[node name="Run" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_dd0ac")
-hframes = 3
+vframes = 4
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_mtuoh")]
 
@@ -121,7 +78,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_mtuoh")
 
 [node name="WeaponHolder" type="Node2D" parent="."]
-position = Vector2(26, -12)
+position = Vector2(14, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

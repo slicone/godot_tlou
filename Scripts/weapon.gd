@@ -1,16 +1,10 @@
 extends Area2D
 class_name Weapon
+@export var weapon_attack_component: AttackComponent
 
-@export var attack_damage: float = 20.0
 var velocity = Vector2.ZERO
 var gravity_enabled = true
 var on_floor = false
-
-func _ready():
-	register_events()
-
-func register_events() -> void:
-	self.connect("area_entered", _on_attack_entered)
 
 func contains_static_body(arr: Array) -> bool:
 	for item in arr:
@@ -27,10 +21,13 @@ func _physics_process(delta: float) -> void:
 		return
 	velocity.y += gravity * delta
 	position += velocity * delta
+
+func flip_sprite():
+	for child in get_children():
+		if child is Sprite2D:
+			child.flip_h = !child.flip_h
+
+func attack():
+	if weapon_attack_component:
+		weapon_attack_component.attack()
 	
-func _on_attack_entered(area: Area2D):
-	if area is HitboxComponent && area.is_in_group("Enemy"):
-		var hitbox: HitboxComponent = area
-		var attack = Attack.new()
-		attack.attack_damage = attack_damage
-		hitbox.damage(attack)

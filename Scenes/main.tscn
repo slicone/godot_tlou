@@ -25,7 +25,6 @@ position = Vector2(0, -80)
 
 [node name="test_weapon" parent="." instance=ExtResource("5_kry3j")]
 position = Vector2(311, 262)
-attack_damage = 5.0
 
 [node name="axe_weapon" parent="." instance=ExtResource("5_21xkr")]
 position = Vector2(188, 238)
