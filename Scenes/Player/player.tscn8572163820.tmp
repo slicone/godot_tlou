@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
 [ext_resource type="Script" uid="uid://bbmisvu3ddobm" path="res://Scenes/Player/pickup_area.gd" id="5_htcer"]
-[ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
+[ext_resource type="Script" uid="uid://wowehbeulcqj" path="res://Scenes/Player/state_machine.gd" id="7_0u5uq"]
 [ext_resource type="Script" uid="uid://q0kpbxlwbp0j" path="res://Scenes/Player/idle.gd" id="8_jlvik"]
 [ext_resource type="Script" uid="uid://dnoi6swdxvqw3" path="res://Scenes/Player/jump.gd" id="9_jhyir"]
 [ext_resource type="Script" uid="uid://dupcvde42f0ri" path="res://Scenes/Player/fall.gd" id="10_74mp2"]
@@ -133,7 +133,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_0u5uq")
 }
 
-[node name="state_machine" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("7_74mp2")]
+[node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("7_0u5uq")
 starting_state = NodePath("idle")
 
 [node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("fall_state", "jump_state", "move_state", "animation")]
@@ -141,7 +142,7 @@ script = ExtResource("8_jlvik")
 fall_state = NodePath("../fall")
 jump_state = NodePath("../jump")
 move_state = NodePath("../move")
-animation_name = "idle"
+animation_name = "\"idle\""
 animation = NodePath("../../Idle")
 
 [node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "move_state", "fall_state", "animation")]
@@ -156,7 +157,6 @@ animation = NodePath("../../Run")
 script = ExtResource("10_74mp2")
 idle_state = NodePath("../idle")
 move_state = NodePath("../move")
-animation_name = "fall"
 animation = NodePath("../../Run")
 
 [node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "fall_state", "jump_state", "animation")]

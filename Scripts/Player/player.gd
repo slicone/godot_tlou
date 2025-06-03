@@ -1,14 +1,17 @@
 extends CharacterBody2D
 class_name Player
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -350.0
 var weapons_nearby : Array[Weapon] = []
 var current_weapon: Weapon = null
-@onready var weapon_holder = $WeaponHolder
-@onready var world = get_tree().get_current_scene()
-var animation_player: AnimationPlayer
-var facing_left: bool = false
+@onready 
+var world = get_tree().get_current_scene()
+@onready 
+var weapon_holder = $WeaponHolder
+@onready 
+var animation_player: AnimationPlayer = $AnimationPlayer
+@onready
+var state_machine = $state_machine
+
 
 func _ready() -> void:
 	var hitbox = $HitboxComponent
@@ -16,17 +19,15 @@ func _ready() -> void:
 	health.setHealth(50)
 	hitbox.health_component = health
 	$Idle.visible = true
-	animation_player = get_node("AnimationPlayer")
+	#animation_player = get_node("AnimationPlayer")
 	animation_player.play("idle")
+	state_machine.init(self)
+
+func _unhandled_input(event: InputEvent) -> void:
+	state_machine.process_input(event)
 
 func _process(delta):
-	if Input.is_action_just_pressed("interact"):
-		pick_up_weapon()
-	if Input.is_action_just_pressed("drop"):
-		drop_current_weapon()
-	if Input.is_action_just_pressed("attack"):
-		if current_weapon and current_weapon.has_method("attack"):
-			current_weapon.attack()
+	state_machine.process_frame(delta)
 
 func pick_nearest_weapon() -> Weapon:
 	var shortest_distance = INF
@@ -61,32 +62,11 @@ func pick_up_weapon():
 	current_weapon = weapon
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	state_machine.process_physics(delta)
+	
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	var direction := Input.get_axis("ui_left", "ui_right")
 	
-	$Run.visible = direction != 0.0
-	$Idle.visible = direction == 0.0
-	if direction:
-		facing_left = direction < 0
-		$Run.flip_h = facing_left
-		if (facing_left and $WeaponHolder.position.x > 0) or (not facing_left and $WeaponHolder.position.x < 0):
-			if current_weapon:
-				$WeaponHolder.position.x *= -1
-				current_weapon.flip_sprite()
-
-		
-		animation_player.play("run")
-		velocity.x = direction * SPEED
-	else:
-		$Idle.flip_h = facing_left
-		animation_player.play("idle")
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
-	move_and_slide()
+	
+	
 	
