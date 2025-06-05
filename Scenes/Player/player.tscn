@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=23 format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://big7uykx4f77p" path="res://Scripts/Player/player.gd" id="1_xhfnw"]
 [ext_resource type="Texture2D" uid="uid://d0uye3t2oh1ua" path="res://Art/Player/player_prototype-Sheet-idle.png" id="2_dd0ac"]
 [ext_resource type="Texture2D" uid="uid://bf75ckbn2c64l" path="res://Art/Player/player_prototype-run-Sheet.png" id="3_dd0ac"]
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
+[ext_resource type="Texture2D" uid="uid://3804lxw0f1yg" path="res://Art/Player/player_2.png" id="4_dey5f"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
 [ext_resource type="Script" uid="uid://bbmisvu3ddobm" path="res://Scenes/Player/pickup_area.gd" id="5_htcer"]
 [ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
@@ -11,9 +12,12 @@
 [ext_resource type="Script" uid="uid://dnoi6swdxvqw3" path="res://Scenes/Player/jump.gd" id="9_jhyir"]
 [ext_resource type="Script" uid="uid://dupcvde42f0ri" path="res://Scenes/Player/fall.gd" id="10_74mp2"]
 [ext_resource type="Script" uid="uid://d1ooa5lhfbpiy" path="res://Scenes/Player/move.gd" id="11_oikmp"]
+[ext_resource type="Texture2D" uid="uid://b10a56ags8wmi" path="res://Art/Enemies/healthbarUnder.png" id="12_7g0yx"]
+[ext_resource type="Texture2D" uid="uid://b02yx44ixquh5" path="res://Art/Enemies/healthbarProgress.png" id="13_dey5f"]
+[ext_resource type="Script" uid="uid://27oggsglmf6o" path="res://Scenes/Enemies/enemy_progress_bar.gd" id="14_r5xpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtuoh"]
-size = Vector2(28, 58)
+size = Vector2(28, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
 size = Vector2(26.5, 58.5)
@@ -83,21 +87,18 @@ tracks/0/keys = {
 "values": [0, 1, 2]
 }
 
-[sub_resource type="Animation" id="Animation_jlvik"]
-resource_name = "run_left"
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0u5uq"]
 _data = {
 &"RESET": SubResource("Animation_dd0ac"),
 &"idle": SubResource("Animation_htcer"),
-&"run": SubResource("Animation_0u5uq"),
-&"run_left": SubResource("Animation_jlvik")
+&"run": SubResource("Animation_0u5uq")
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_xhfnw")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_mtuoh")
 
 [node name="Idle" type="Sprite2D" parent="."]
@@ -111,9 +112,13 @@ visible = false
 texture = ExtResource("3_dd0ac")
 hframes = 3
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_dey5f")
+
 [node name="HealthComponent" parent="." instance=ExtResource("3_mtuoh")]
 
-[node name="HitboxComponent" parent="." groups=["Player"] instance=ExtResource("4_htcer")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["Player"] instance=ExtResource("4_htcer")]
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_kpjcp")
@@ -126,7 +131,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_mtuoh")
 
 [node name="WeaponHolder" type="Node2D" parent="."]
-position = Vector2(26, -12)
+position = Vector2(18, -5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -141,8 +146,7 @@ script = ExtResource("8_jlvik")
 fall_state = NodePath("../fall")
 jump_state = NodePath("../jump")
 move_state = NodePath("../move")
-animation_name = "idle"
-animation = NodePath("../../Idle")
+animation = NodePath("../../Sprite2D")
 
 [node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "move_state", "fall_state", "animation")]
 script = ExtResource("9_jhyir")
@@ -150,14 +154,14 @@ idle_state = NodePath("../idle")
 move_state = NodePath("../move")
 fall_state = NodePath("../fall")
 animation_name = "jump"
-animation = NodePath("../../Run")
+animation = NodePath("../../Sprite2D")
 
 [node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "move_state", "animation")]
 script = ExtResource("10_74mp2")
 idle_state = NodePath("../idle")
 move_state = NodePath("../move")
 animation_name = "fall"
-animation = NodePath("../../Run")
+animation = NodePath("../../Sprite2D")
 
 [node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "fall_state", "jump_state", "animation")]
 script = ExtResource("11_oikmp")
@@ -165,4 +169,13 @@ idle_state = NodePath("../idle")
 fall_state = NodePath("../fall")
 jump_state = NodePath("../jump")
 animation_name = "run"
-animation = NodePath("../../Run")
+animation = NodePath("../../Sprite2D")
+
+[node name="EnemyProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -31.0
+offset_top = -35.0
+offset_right = 33.0
+offset_bottom = 5.0
+texture_under = ExtResource("12_7g0yx")
+texture_progress = ExtResource("13_dey5f")
+script = ExtResource("14_r5xpd")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7njof4dv3745"]
+[gd_scene load_steps=13 format=3 uid="uid://b7njof4dv3745"]
 
 [ext_resource type="Script" uid="uid://b8njxla5wf7gu" path="res://Scripts/Enemies/enemy_base.gd" id="1_8xqx4"]
 [ext_resource type="Texture2D" uid="uid://tnyxhi27faki" path="res://Art/Enemies/enemy_prototype.png" id="2_gk4pb"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_b1gup"]
 [ext_resource type="PackedScene" uid="uid://cx15wiupr67d3" path="res://Scenes/attack_area_component.tscn" id="3_sgjdr"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_sgjdr"]
+[ext_resource type="Script" uid="uid://27oggsglmf6o" path="res://Scenes/Enemies/enemy_progress_bar.gd" id="7_b1c7l"]
+[ext_resource type="Texture2D" uid="uid://b10a56ags8wmi" path="res://Art/Enemies/healthbarUnder.png" id="7_srdml"]
+[ext_resource type="Texture2D" uid="uid://b02yx44ixquh5" path="res://Art/Enemies/healthbarProgress.png" id="8_xxtca"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk4pb"]
 size = Vector2(45.375, 58)
@@ -18,6 +21,7 @@ radius = 34.1321
 
 [node name="EnemyBase" type="CharacterBody2D" groups=["Enemy"]]
 script = ExtResource("1_8xqx4")
+attack_damage = 10.0
 patrol_points = Array[NodePath]([NodePath("PatrolPoint1"), NodePath("PatrolPoint2")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -45,7 +49,17 @@ position = Vector2(150, 0)
 [node name="HealthComponent" parent="." instance=ExtResource("3_b1gup")]
 
 [node name="HitboxComponent" parent="." groups=["Enemy"] instance=ExtResource("4_sgjdr")]
+collision_layer = 2
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(1.3125, 0)
 shape = SubResource("RectangleShape2D_gk4pb")
+
+[node name="EnemyProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -31.0
+offset_top = -43.0
+offset_right = 33.0
+offset_bottom = -3.0
+texture_under = ExtResource("7_srdml")
+texture_progress = ExtResource("8_xxtca")
+script = ExtResource("7_b1c7l")

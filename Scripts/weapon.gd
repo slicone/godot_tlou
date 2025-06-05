@@ -1,6 +1,8 @@
 extends Area2D
 class_name Weapon
 @export var weapon_attack_component: AttackComponent
+@onready
+var animation_player = $AnimationPlayer
 
 var velocity = Vector2.ZERO
 var gravity_enabled = true

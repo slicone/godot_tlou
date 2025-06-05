@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://pr0h4440xlxl"]
+
+[ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/Player/player.tscn" id="1_b84ys"]
+[ext_resource type="Script" uid="uid://cqu70lcyiy8wj" path="res://levels/level_state.gd" id="1_ohbkr"]
+[ext_resource type="Script" uid="uid://qiyof2180iuj" path="res://levels/enemy_manager.gd" id="2_2j4y6"]
+[ext_resource type="Script" uid="uid://dy47ixfx16oo4" path="res://levels/score_system.gd" id="3_gqfrg"]
+[ext_resource type="PackedScene" uid="uid://jhnl70vwrpeb" path="res://Scenes/Structures/platform.tscn" id="5_cr8f5"]
+[ext_resource type="PackedScene" uid="uid://df8u6lxcfllsw" path="res://Scenes/axe.tscn" id="5_gqfrg"]
+[ext_resource type="PackedScene" uid="uid://cf2nugs1objng" path="res://Scenes/m4.tscn" id="6_dkril"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="LevelState" type="Node" parent="." node_paths=PackedStringArray("enemy_manager", "score_system", "timer", "player")]
+script = ExtResource("1_ohbkr")
+enemy_manager = NodePath("../EnemyManager")
+score_system = NodePath("../ScoreSystem")
+timer = NodePath("../Timer")
+player = NodePath("../Player")
+
+[node name="EnemyManager" type="Node" parent="."]
+script = ExtResource("2_2j4y6")
+
+[node name="ScoreSystem" type="Node" parent="."]
+script = ExtResource("3_gqfrg")
+
+[node name="Platform" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(16, 200)
+
+[node name="Platform2" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(208, 200)
+
+[node name="Platform8" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(303, 200)
+
+[node name="Platform11" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(335, 200)
+
+[node name="Platform12" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(367, 200)
+
+[node name="Platform13" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(399, 200)
+
+[node name="Platform9" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(272, 200)
+
+[node name="Platform10" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(240, 200)
+
+[node name="Platform3" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(176, 200)
+
+[node name="Platform4" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(144, 200)
+
+[node name="Platform5" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(112, 200)
+
+[node name="Platform6" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(80, 200)
+
+[node name="Platform7" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(48, 200)
+
+[node name="Player" parent="." instance=ExtResource("1_b84ys")]
+position = Vector2(16, 161)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -53)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Weapon" parent="." instance=ExtResource("5_gqfrg")]
+
+[node name="M4" parent="." instance=ExtResource("6_dkril")]
+position = Vector2(32.715, 0)

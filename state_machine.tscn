@@ -2,6 +2,5 @@
 
 [ext_resource type="Script" uid="uid://wowehbeulcqj" path="res://Scenes/Player/state_machine.gd" id="1_ahvgy"]
 
-[node name="state_machine" type="Node" node_paths=PackedStringArray("starting_state")]
+[node name="state_machine" type="Node"]
 script = ExtResource("1_ahvgy")
-starting_state = NodePath("")

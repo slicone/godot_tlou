@@ -11,13 +11,19 @@ config_version=5
 [application]
 
 config/name="TLOU_1"
-run/main_scene="uid://beokxbdxxr45v"
+run/main_scene="uid://pr0h4440xlxl"
 config/features=PackedStringArray("4.4", "Forward Plus")
+
+[autoload]
+
+LevelManager="*res://level_manager.gd"
+GameState="*res://game_state.gd"
+GlobalTypes="*res://global_types.gd"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=384
+window/size/viewport_height=216
 window/stretch/mode="viewport"
 
 [global_group]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://pr0h4440xlxl"]
+
+[ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/Player/player.tscn" id="1_b84ys"]
+[ext_resource type="Script" uid="uid://cqu70lcyiy8wj" path="res://levels/level_state.gd" id="1_ohbkr"]
+[ext_resource type="Script" uid="uid://qiyof2180iuj" path="res://levels/enemy_manager.gd" id="2_2j4y6"]
+[ext_resource type="PackedScene" uid="uid://jhnl70vwrpeb" path="res://Scenes/Structures/platform.tscn" id="5_cr8f5"]
+[ext_resource type="PackedScene" uid="uid://b7njof4dv3745" path="res://Scenes/Enemies/enemy_base.tscn" id="6_gqfrg"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="LevelState" type="Node" parent="."]
+script = ExtResource("1_ohbkr")
+enemy_manager_path = NodePath("../EnemyManager")
+timer_path = NodePath("../Timer")
+player_path = NodePath("../Player")
+required_score = null
+
+[node name="Player" parent="." instance=ExtResource("1_b84ys")]
+position = Vector2(186, 231)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -80)
+
+[node name="EnemyManager" type="Node" parent="."]
+script = ExtResource("2_2j4y6")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Platform" parent="." instance=ExtResource("5_cr8f5")]
+position = Vector2(321, 322)
+
+[node name="EnemyBase" parent="." instance=ExtResource("6_gqfrg")]
+position = Vector2(360, 233)

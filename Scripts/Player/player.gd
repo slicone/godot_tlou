@@ -11,17 +11,19 @@ var weapon_holder = $WeaponHolder
 var animation_player: AnimationPlayer = $AnimationPlayer
 @onready
 var state_machine = $state_machine
+@onready
+var hitbox_component: HitboxComponent = $HitboxComponent
 
+signal player_died
 
 func _ready() -> void:
-	var hitbox = $HitboxComponent
-	var health = $HealthComponent as HealthComponent
-	health.setHealth(50)
-	hitbox.health_component = health
-	$Idle.visible = true
-	#animation_player = get_node("AnimationPlayer")
-	animation_player.play("idle")
+	var health = $HealthComponent
+	health.connect("entity_died", _player_died)
+	hitbox_component.health_component = health
 	state_machine.init(self)
+
+func _player_died() -> void:
+	player_died.emit()
 
 func _unhandled_input(event: InputEvent) -> void:
 	state_machine.process_input(event)
@@ -63,10 +65,3 @@ func pick_up_weapon():
 
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
-	
-
-	# Handle jump.
-	
-	
-	
-	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnmotgfiy5thc"
-path="res://.godot/imported/joel.png-91b09e8894f68bd4ed06fc363620bcfa.ctex"
+uid="uid://b02yx44ixquh5"
+path="res://.godot/imported/healthbarProgress.png-b253c41ad5ab52822c02796f3cf46bb3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Player/joel.png"
-dest_files=["res://.godot/imported/joel.png-91b09e8894f68bd4ed06fc363620bcfa.ctex"]
+source_file="res://Art/Enemies/healthbarProgress.png"
+dest_files=["res://.godot/imported/healthbarProgress.png-b253c41ad5ab52822c02796f3cf46bb3.ctex"]
 
 [params]
 

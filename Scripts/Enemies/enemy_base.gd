@@ -1,3 +1,4 @@
+class_name EnemyBase
 extends CharacterBody2D
 
 @export var speed = 150
@@ -5,13 +6,16 @@ extends CharacterBody2D
 @export var attack_damage: float = 5.0
 @export var health: float = 20.0
 @export var player_current_scene_path = "Player"
+@onready
+var hitbox_component: HitboxComponent = $HitboxComponent
 const JUMP_VELOCITY = -400.0
 var player: Player
-var weapon: Weapon
 var player_detected: bool = false;
 
 var last_action_time := 0.0
 var cooldown := 1.5  # Sekunden
+#signal enemy_died(enemy: EnemyBase)
+signal enemy_died(enemy: EnemyBase, enemy_kill_result: Array)
 
 # patrol
 @export var patrol_points: Array[NodePath]
@@ -20,10 +24,15 @@ var target_position: Vector2
 
 func setup_character():
 	player = get_tree().get_current_scene().get_node(player_current_scene_path) as Player
-	var hitbox = $HitboxComponent
 	var health_comp = $HealthComponent as HealthComponent
-	health_comp.setHealth(health)
-	hitbox.health_component = health_comp
+	health_comp.connect("entity_died", _died)
+	hitbox_component.health_component = health_comp
+
+func _died():
+	# TODO muss woanderst erstellt werden
+	var enemy_kill_result = [GlobalTypes.EnemyKillResult.HEADSHOT]
+	#enemy_died.emit(self, kill_stats)
+	enemy_died.emit(self, enemy_kill_result)
 
 func _ready():
 	setup_character()
@@ -55,8 +64,8 @@ func _physics_process(delta):
 	else:
 		if patrol_points.size() == 0:
 			return
-		var direction: Vector2 = global_position.direction_to(player.global_position).normalized()
-		var target_velocity: Vector2 = direction * speed
+		var direction: Vector2 = global_position.direction_to(target_position).normalized()
+		var target_velocity: Vector2 = direction * speed 
 		velocity = velocity.move_toward(target_velocity, acceleration * delta)
 		if global_position.distance_to(target_position) < 2:
 			current_target_index += 1
