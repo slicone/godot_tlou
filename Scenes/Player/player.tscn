@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=22 format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://big7uykx4f77p" path="res://Scripts/Player/player.gd" id="1_xhfnw"]
-[ext_resource type="Texture2D" uid="uid://d0uye3t2oh1ua" path="res://Art/Player/player_prototype-Sheet-idle.png" id="2_dd0ac"]
-[ext_resource type="Texture2D" uid="uid://bf75ckbn2c64l" path="res://Art/Player/player_prototype-run-Sheet.png" id="3_dd0ac"]
+[ext_resource type="Texture2D" uid="uid://doyb00t4lty86" path="res://Art/Player/player_idle.png" id="2_7g0yx"]
+[ext_resource type="Texture2D" uid="uid://b8w2kcy8ogike" path="res://Art/Player/player_2-run-Sheet.png" id="3_dey5f"]
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
-[ext_resource type="Texture2D" uid="uid://3804lxw0f1yg" path="res://Art/Player/player_2.png" id="4_dey5f"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
 [ext_resource type="Script" uid="uid://bbmisvu3ddobm" path="res://Scenes/Player/pickup_area.gd" id="5_htcer"]
 [ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
@@ -12,19 +11,19 @@
 [ext_resource type="Script" uid="uid://dnoi6swdxvqw3" path="res://Scenes/Player/jump.gd" id="9_jhyir"]
 [ext_resource type="Script" uid="uid://dupcvde42f0ri" path="res://Scenes/Player/fall.gd" id="10_74mp2"]
 [ext_resource type="Script" uid="uid://d1ooa5lhfbpiy" path="res://Scenes/Player/move.gd" id="11_oikmp"]
-[ext_resource type="Texture2D" uid="uid://b10a56ags8wmi" path="res://Art/Enemies/healthbarUnder.png" id="12_7g0yx"]
-[ext_resource type="Texture2D" uid="uid://b02yx44ixquh5" path="res://Art/Enemies/healthbarProgress.png" id="13_dey5f"]
+[ext_resource type="Texture2D" uid="uid://nhqx0gy3ww3j" path="res://Art/Enemies/health_bar_under.png" id="12_7g0yx"]
+[ext_resource type="Texture2D" uid="uid://df5k2ru517j36" path="res://Art/Enemies/healtbar_progress.png" id="13_7g0yx"]
 [ext_resource type="Script" uid="uid://27oggsglmf6o" path="res://Scenes/Enemies/enemy_progress_bar.gd" id="14_r5xpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtuoh"]
-size = Vector2(28, 52)
+size = Vector2(18, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
-size = Vector2(26.5, 58.5)
+size = Vector2(18, 47)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtuoh"]
-radius = 30.0
-height = 142.0
+radius = 24.0
+height = 78.0
 
 [sub_resource type="Animation" id="Animation_dd0ac"]
 length = 0.001
@@ -72,7 +71,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_0u5uq"]
 resource_name = "run"
-length = 0.25
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -81,10 +80,10 @@ tracks/0/path = NodePath("Run:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.233333),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1, 2, 3, 4]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0u5uq"]
@@ -98,22 +97,17 @@ _data = {
 script = ExtResource("1_xhfnw")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_mtuoh")
 
 [node name="Idle" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("2_dd0ac")
-hframes = 4
-vframes = 3
+texture = ExtResource("2_7g0yx")
 
 [node name="Run" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("3_dd0ac")
-hframes = 3
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("4_dey5f")
+texture = ExtResource("3_dey5f")
+hframes = 5
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_mtuoh")]
 
@@ -121,6 +115,7 @@ texture = ExtResource("4_dey5f")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_kpjcp")
 
 [node name="PickupArea" type="Area2D" parent="."]
@@ -129,9 +124,6 @@ script = ExtResource("5_htcer")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_mtuoh")
-
-[node name="WeaponHolder" type="Node2D" parent="."]
-position = Vector2(18, -5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -146,7 +138,8 @@ script = ExtResource("8_jlvik")
 fall_state = NodePath("../fall")
 jump_state = NodePath("../jump")
 move_state = NodePath("../move")
-animation = NodePath("../../Sprite2D")
+animation_name = "idle"
+animation = NodePath("../../Idle")
 
 [node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "move_state", "fall_state", "animation")]
 script = ExtResource("9_jhyir")
@@ -154,14 +147,14 @@ idle_state = NodePath("../idle")
 move_state = NodePath("../move")
 fall_state = NodePath("../fall")
 animation_name = "jump"
-animation = NodePath("../../Sprite2D")
+animation = NodePath("../../Idle")
 
 [node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "move_state", "animation")]
 script = ExtResource("10_74mp2")
 idle_state = NodePath("../idle")
 move_state = NodePath("../move")
-animation_name = "fall"
-animation = NodePath("../../Sprite2D")
+animation_name = "run"
+animation = NodePath("../../Run")
 
 [node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "fall_state", "jump_state", "animation")]
 script = ExtResource("11_oikmp")
@@ -169,13 +162,16 @@ idle_state = NodePath("../idle")
 fall_state = NodePath("../fall")
 jump_state = NodePath("../jump")
 animation_name = "run"
-animation = NodePath("../../Sprite2D")
+animation = NodePath("../../Run")
 
 [node name="EnemyProgressBar" type="TextureProgressBar" parent="."]
-offset_left = -31.0
-offset_top = -35.0
-offset_right = 33.0
-offset_bottom = 5.0
+offset_left = -16.0
+offset_top = -30.0
+offset_right = 48.0
+offset_bottom = 10.0
 texture_under = ExtResource("12_7g0yx")
-texture_progress = ExtResource("13_dey5f")
+texture_progress = ExtResource("13_7g0yx")
 script = ExtResource("14_r5xpd")
+
+[node name="WeaponHolder" type="Node2D" parent="."]
+position = Vector2(12, -4)

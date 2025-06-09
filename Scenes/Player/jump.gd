@@ -7,7 +7,7 @@ var move_state: State
 @export
 var fall_state: State
 
-const JUMP_VELOCITY = -350.0
+const JUMP_VELOCITY = -300.0
 
 func process_input(event: InputEvent) -> State:
 	check_non_state_input()

@@ -12,6 +12,8 @@ func _on_attack_entered(area):
 	if area is HitboxComponent and area.is_in_group("Enemy"):
 		var hitbox: HitboxComponent = area
 		var attack = Attack.new()
+		attack.attack_position = global_position
+		attack.knockback_force = 20
 		attack.attack_damage = attack_damage
 		hitbox.damage(attack)
 
