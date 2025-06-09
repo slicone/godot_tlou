@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://pr0h4440xlxl"]
+[gd_scene load_steps=9 format=3 uid="uid://pr0h4440xlxl"]
 
 [ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/Player/player.tscn" id="1_b84ys"]
+[ext_resource type="Script" uid="uid://wmsawsvxofwx" path="res://levels/temp_level1.gd" id="1_dkril"]
 [ext_resource type="Script" uid="uid://cqu70lcyiy8wj" path="res://levels/level_state.gd" id="1_ohbkr"]
 [ext_resource type="Script" uid="uid://qiyof2180iuj" path="res://levels/enemy_manager.gd" id="2_2j4y6"]
 [ext_resource type="Script" uid="uid://dy47ixfx16oo4" path="res://levels/score_system.gd" id="3_gqfrg"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cf2nugs1objng" path="res://Scenes/m4.tscn" id="6_dkril"]
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_dkril")
 
 [node name="AssaultLevelState" type="Node" parent="." node_paths=PackedStringArray("enemy_manager", "score_system", "timer", "player")]
 script = ExtResource("1_ohbkr")

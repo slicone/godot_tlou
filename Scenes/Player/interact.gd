@@ -1,7 +1,5 @@
 extends State
 
-
-			
 var weapons_nearby : Array[Weapon] = []
 var current_weapon: Weapon = null
 @export

@@ -20,6 +20,7 @@ LevelManager="*res://level_manager.gd"
 GameState="*res://game_state.gd"
 GlobalTypes="*res://global_types.gd"
 AssaultGlobals="*res://assault_globals.gd"
+RunState="*res://run_state.gd"
 
 [display]
 

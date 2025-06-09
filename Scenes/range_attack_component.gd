@@ -37,7 +37,7 @@ func shoot():
 		var hit = ray_cast.get_collider()
 		if hit is HitboxComponent:
 			var attack = Attack.new()
-			attack.attack_damage = 10
+			attack.attack_damage = 100
 			hit.damage(attack)
 
 	# Optional: Sound oder Rückstoß

@@ -12,6 +12,11 @@ var enemies_per_round_template = {
 			[EnemyType.BASIC, EnemyType.BASIC, EnemyType.BASIC],
 			[EnemyType.BASIC, EnemyType.ADVANCED, EnemyType.BASIC],
 			[EnemyType.ADVANCED, EnemyType.ADVANCED, EnemyType.BASIC]
+		],
+		"template_test": [
+			[EnemyType.BASIC],
+			[EnemyType.BASIC],
+			[EnemyType.ADVANCED]
 		]
 	}
 }
