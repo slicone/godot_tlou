@@ -8,7 +8,7 @@
 size = Vector2(7, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2q7ty"]
-size = Vector2(10, 21)
+size = Vector2(11, 21)
 
 [sub_resource type="Animation" id="Animation_dd7ca"]
 length = 0.001
@@ -102,6 +102,7 @@ weapon_attack_component = NodePath("Sprite2D/MeleeAttackComponent")
 metadata/_custom_type_script = "uid://bx1ws0qluguys"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("2_6o4l1")
 
 [node name="MeleeAttackComponent" parent="Sprite2D" node_paths=PackedStringArray("weapon") instance=ExtResource("3_6o4l1")]
@@ -114,7 +115,7 @@ shape = SubResource("RectangleShape2D_6o4l1")
 disabled = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_2q7ty")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

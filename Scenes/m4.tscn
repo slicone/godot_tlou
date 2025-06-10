@@ -50,6 +50,7 @@ weapon_attack_component = NodePath("RangeAttackComponent")
 metadata/_custom_type_script = "uid://bx1ws0qluguys"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("2_187ft")
 hframes = 2
 

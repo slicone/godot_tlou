@@ -4,8 +4,6 @@ class_name Player
 var weapons_nearby : Array[Weapon] = []
 var current_weapon: Weapon = null
 @onready 
-var world = get_tree().get_current_scene()
-@onready 
 var weapon_holder = $WeaponHolder
 @onready 
 var animation_player: AnimationPlayer = $AnimationPlayer
@@ -22,7 +20,11 @@ func _ready() -> void:
 	hitbox_component.health_component = health
 	state_machine.init(self)
 
-func _player_died() -> void:
+func get_world() -> Node:
+	return get_tree().get_current_scene()
+
+# kill_result unused
+func _player_died(kill_result: Array) -> void:
 	player_died.emit()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -46,7 +48,7 @@ func pick_nearest_weapon() -> Weapon:
 func drop_current_weapon():
 	if current_weapon:
 		weapon_holder.remove_child(current_weapon)
-		world.add_child(current_weapon)
+		get_world().add_child(current_weapon)
 		current_weapon.position = global_position
 		current_weapon.gravity_enabled = true
 		current_weapon = null

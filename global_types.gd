@@ -2,7 +2,9 @@ extends Node
 enum EnemyKillResult {
 	HEADSHOT,
 	MELEE,
-	STUNNED
+	GUN,
+	STUNNED,
+	STEALTH
 }
 
 enum LevelNumber {

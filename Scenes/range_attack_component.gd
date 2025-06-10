@@ -30,7 +30,6 @@ func shoot():
 	var dir = (mouse_pos - global_position).normalized()
 	
 	ray_cast.target_position = dir * 1000  # Länge des Strahls
-
 	ray_cast.force_raycast_update()
 
 	if ray_cast.is_colliding():
@@ -38,10 +37,7 @@ func shoot():
 		if hit is HitboxComponent:
 			var attack = Attack.new()
 			attack.attack_damage = 100
-			hit.damage(attack)
-
-	# Optional: Sound oder Rückstoß
-	#$AudioStreamPlayer2D.play()
+			hit.damage(attack, self)
 
 func _on_fire_timer_timeout():
 	can_fire = true

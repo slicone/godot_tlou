@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b02yx44ixquh5"
-path="res://.godot/imported/healthbarProgress.png-b253c41ad5ab52822c02796f3cf46bb3.ctex"
+uid="uid://0or26fo6upya"
+path="res://.godot/imported/enemy_runner.png-fa4e67d5571bc7c58f4e1400bab48c1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enemies/healthbarProgress.png"
-dest_files=["res://.godot/imported/healthbarProgress.png-b253c41ad5ab52822c02796f3cf46bb3.ctex"]
+source_file="res://Art/Enemies/enemy_runner.png"
+dest_files=["res://.godot/imported/enemy_runner.png-fa4e67d5571bc7c58f4e1400bab48c1c.ctex"]
 
 [params]
 

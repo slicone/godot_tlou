@@ -1,12 +1,11 @@
 extends Area2D
 class_name Weapon
 @export var weapon_attack_component: AttackComponent
+@export var gravity_enabled = true
 @onready
 var animation_player = $AnimationPlayer
 
 var velocity = Vector2.ZERO
-var gravity_enabled = true
-var on_floor = false
 
 func contains_static_body(arr: Array) -> bool:
 	for item in arr:
@@ -19,7 +18,6 @@ func _physics_process(delta: float) -> void:
 		return
 	if contains_static_body(get_overlapping_bodies()):
 		velocity = Vector2.ZERO
-		on_floor = true
 		return
 	velocity.y += gravity * delta
 	position += velocity * delta

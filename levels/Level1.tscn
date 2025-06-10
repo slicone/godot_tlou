@@ -13,7 +13,7 @@
 [node name="AssaultLevelState" type="Node" parent="." node_paths=PackedStringArray("enemy_manager", "score_system", "timer", "player")]
 script = ExtResource("1_ohbkr")
 enemy_manager = NodePath("../EnemyManager")
-score_system = NodePath("../ScoreSystem")
+score_system = NodePath("../AssaultScoreSystem")
 timer = NodePath("../Timer")
 player = NodePath("../Player")
 
@@ -21,7 +21,7 @@ player = NodePath("../Player")
 script = ExtResource("2_2j4y6")
 level_state = NodePath("../AssaultLevelState")
 
-[node name="ScoreSystem" type="Node" parent="." node_paths=PackedStringArray("enemy_manager")]
+[node name="AssaultScoreSystem" type="Node" parent="." node_paths=PackedStringArray("enemy_manager")]
 script = ExtResource("3_gqfrg")
 enemy_manager = NodePath("../EnemyManager")
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b10a56ags8wmi"
-path="res://.godot/imported/healthbarUnder.png-88b344c4fce6734690db1d784137810f.ctex"
+uid="uid://bb4fmfpy6k6a7"
+path="res://.godot/imported/enemy_runner.png-31db72833cedab62ff9e66fcc09d5222.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Enemies/healthbarUnder.png"
-dest_files=["res://.godot/imported/healthbarUnder.png-88b344c4fce6734690db1d784137810f.ctex"]
+source_file="res://Art/Player/enemy_runner.png"
+dest_files=["res://.godot/imported/enemy_runner.png-31db72833cedab62ff9e66fcc09d5222.ctex"]
 
 [params]
 
