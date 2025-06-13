@@ -22,3 +22,5 @@ enum EnemyTypes {
 	ELITE,
 	BOSS
 }
+
+const preperation_time_in_sec: float = 2

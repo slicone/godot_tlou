@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7njof4dv3745"]
+[gd_scene load_steps=17 format=3 uid="uid://b7njof4dv3745"]
 
 [ext_resource type="Script" uid="uid://b8njxla5wf7gu" path="res://Scripts/Enemies/enemy_base.gd" id="1_8xqx4"]
 [ext_resource type="Texture2D" uid="uid://0or26fo6upya" path="res://Art/Enemies/enemy_runner.png" id="2_srdml"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://nhqx0gy3ww3j" path="res://Art/Enemies/health_bar_under.png" id="7_srdml"]
 [ext_resource type="Texture2D" uid="uid://df5k2ru517j36" path="res://Art/Enemies/healtbar_progress.png" id="8_xxtca"]
 [ext_resource type="PackedScene" uid="uid://s8atmq8n6b27" path="res://runner_weapon.tscn" id="10_xxtca"]
+[ext_resource type="PackedScene" uid="uid://ddw144wuk63po" path="res://Scenes/melee_attack_component.tscn" id="11_2j2wd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk4pb"]
 size = Vector2(17.5, 45)
@@ -19,6 +20,12 @@ radius = 153.264
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_guy7p"]
 radius = 34.1321
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2qay"]
+size = Vector2(15, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlbp2"]
+size = Vector2(22, 51)
 
 [node name="EnemyBase" type="CharacterBody2D" node_paths=PackedStringArray("animation") groups=["Enemy"]]
 script = ExtResource("1_8xqx4")
@@ -72,3 +79,15 @@ texture_progress = ExtResource("8_xxtca")
 script = ExtResource("7_b1c7l")
 
 [node name="Weapon" parent="." instance=ExtResource("10_xxtca")]
+
+[node name="WeaponCollision2" type="CollisionShape2D" parent="Weapon"]
+position = Vector2(2.5, 2)
+shape = SubResource("RectangleShape2D_s2qay")
+debug_color = Color(0.921377, 5.45803e-05, 0.691435, 0.42)
+
+[node name="MeleeAttackComponent2" parent="Weapon" instance=ExtResource("11_2j2wd")]
+
+[node name="AttackCollision" type="CollisionShape2D" parent="Weapon/MeleeAttackComponent2"]
+visible = false
+position = Vector2(2, 0.5)
+shape = SubResource("RectangleShape2D_vlbp2")

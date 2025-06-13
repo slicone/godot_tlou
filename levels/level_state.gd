@@ -11,7 +11,7 @@ func _ready():
 	
 func init():
 	self.level_number = RunState.level_number
-	var template = "template_test" # TODO make logic that gets template
+	var template = "template_1" # TODO make logic that gets template
 	assault_lookup = AssaultGlobals.enemies_per_round_template[level_number][template]
 	if not assault_lookup:
 		push_error("Error. No assault spawn template found for level_number %s and template string %s " % [level_number, template])
@@ -43,5 +43,4 @@ func get_assault_lookup_round_value():
 func start_assault_round():
 	await pause_game()
 	start_round.emit(get_assault_lookup_round_value())
-	# TODO nach den 20sec oder davor? bzw muss er kurzzeitig gestoppt oder einfach wartezeit abziehen
-	timer.start()
+	start_time = Time.get_ticks_msec() / 1000 # seconds

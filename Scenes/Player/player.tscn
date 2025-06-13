@@ -137,33 +137,33 @@ starting_state = NodePath("idle")
 
 [node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("fall_state", "jump_state", "move_state", "animation")]
 script = ExtResource("8_jlvik")
-animation_name = "idle"
 fall_state = NodePath("../fall")
 jump_state = NodePath("../jump")
 move_state = NodePath("../move")
+animation_name = "idle"
 animation = NodePath("../../Idle")
 
 [node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "move_state", "fall_state", "animation")]
 script = ExtResource("9_jhyir")
-animation_name = "jump"
 idle_state = NodePath("../idle")
 move_state = NodePath("../move")
 fall_state = NodePath("../fall")
+animation_name = "jump"
 animation = NodePath("../../Idle")
 
 [node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "move_state", "animation")]
 script = ExtResource("10_74mp2")
-animation_name = "run"
 idle_state = NodePath("../idle")
 move_state = NodePath("../move")
+animation_name = "run"
 animation = NodePath("../../Run")
 
 [node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "fall_state", "jump_state", "animation")]
 script = ExtResource("11_oikmp")
-animation_name = "run"
 idle_state = NodePath("../idle")
 fall_state = NodePath("../fall")
 jump_state = NodePath("../jump")
+animation_name = "run"
 animation = NodePath("../../Run")
 
 [node name="EnemyProgressBar" type="TextureProgressBar" parent="."]
