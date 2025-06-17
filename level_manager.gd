@@ -1,7 +1,7 @@
 extends Node
 
 var level_scenes = [
-	"res://levels/Level1.tscn",
+	"res://levels/Assault_1.tscn",
 ]
 
 var LevelNumber := GlobalTypes.LevelNumber

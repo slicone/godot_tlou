@@ -16,7 +16,7 @@ var player_detected: bool = false;
 
 var last_action_time := 0.0
 var jump_cooldown := 1.5
-# Enemy tracks 
+# Enemy stats 
 var kill_results: Array[GlobalTypes.EnemyKillResult]
 signal enemy_died(enemy: EnemyBase, enemy_kill_result: Array)
 
@@ -38,7 +38,6 @@ func setup_character():
 	hitbox_component.health_component = health_comp
 
 func _died(kill_result: Array):
-	# TODO muss woanderst erstellt werden
 	enemy_died.emit(self, kill_result)
 
 # TODO auslagern als Komponente?

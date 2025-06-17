@@ -133,7 +133,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_0u5uq")
 }
 
-[node name="WeaponManager" type="Node2D" parent="."]
+[node name="WeaponManager" type="Node" parent="."]
 script = ExtResource("7_dey5f")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]

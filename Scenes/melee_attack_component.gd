@@ -1,6 +1,5 @@
 class_name MeleeAttackComponent
 extends AttackComponent
-@export var attack_damage: float = 20.0
 
 func _ready():
 	register_events()
@@ -15,8 +14,9 @@ func _on_attack_entered(area):
 		attack.attack_position = global_position
 		attack.knockback_force = 20
 		attack.attack_damage = attack_damage
-		hitbox.damage(attack, self)
+		attack.attack_component = self
+		hitbox.damage(attack)
 
 func attack():
-	weapon.animation_player.play("slash")
+	weapon.animation_player.play("slash") # TODO what if weapon has different animations? or type
 	await weapon.animation_player.animation_finished

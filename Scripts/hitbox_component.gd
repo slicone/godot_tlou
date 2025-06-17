@@ -3,6 +3,6 @@ class_name HitboxComponent
 
 @export var health_component: HealthComponent
 
-func damage(attack: Attack, attack_component: AttackComponent):
+func damage(attack: Attack):
 	if health_component:
-		health_component.damage(attack, attack_component)
+		health_component.damage(attack)

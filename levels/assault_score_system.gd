@@ -7,7 +7,6 @@ func calculate_score():
 	var dynamics_score_mode = collect_points_from_dynamics_mode_stats()
 	var score_static =  collect_points_from_static_stats(encounter_stats_static, points_lookup_table_static)
 	current_score = score_static + dynamic_score + dynamics_score_mode
-	print(current_score)
 
 # calculate score for dynamic mode specific stats
 func collect_points_from_dynamics_mode_stats():

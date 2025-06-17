@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cf2nugs1objng"]
 
 [ext_resource type="Script" uid="uid://bx1ws0qluguys" path="res://Scripts/weapon.gd" id="1_wx2w5"]
-[ext_resource type="Texture2D" uid="uid://qf17lmdw2kr7" path="res://Art/m4_a1-Sheet.png" id="2_187ft"]
+[ext_resource type="Texture2D" uid="uid://d0shvg0746d7l" path="res://Art/bolt_action.png" id="2_187ft"]
 [ext_resource type="Script" uid="uid://dcjytld5nvhf1" path="res://Scenes/range_attack_component.gd" id="2_ksdga"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nc4x3"]
@@ -9,34 +9,10 @@ size = Vector2(32, 9)
 
 [sub_resource type="Animation" id="Animation_4qumj"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_nc4x3"]
 resource_name = "shoot"
 length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1, 0]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4umrq"]
 _data = {
@@ -44,7 +20,7 @@ _data = {
 &"shoot": SubResource("Animation_nc4x3")
 }
 
-[node name="M4" type="Area2D" node_paths=PackedStringArray("weapon_attack_component")]
+[node name="BoltActionRifle" type="Area2D" node_paths=PackedStringArray("weapon_attack_component")]
 script = ExtResource("1_wx2w5")
 weapon_attack_component = NodePath("RangeAttackComponent")
 metadata/_custom_type_script = "uid://bx1ws0qluguys"
@@ -52,7 +28,6 @@ metadata/_custom_type_script = "uid://bx1ws0qluguys"
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_187ft")
-hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -61,8 +36,11 @@ shape = SubResource("RectangleShape2D_nc4x3")
 [node name="RangeAttackComponent" type="Area2D" parent="." node_paths=PackedStringArray("weapon")]
 script = ExtResource("2_ksdga")
 weapon = NodePath("..")
+attack_damage = 50.0
 
 [node name="FireTimer" type="Timer" parent="RangeAttackComponent"]
+
+[node name="ReloadTimer" type="Timer" parent="RangeAttackComponent"]
 
 [node name="RayCast2D" type="RayCast2D" parent="RangeAttackComponent"]
 target_position = Vector2(69, 0)

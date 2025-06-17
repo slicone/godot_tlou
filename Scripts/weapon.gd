@@ -4,7 +4,6 @@ class_name Weapon
 @export var gravity_enabled = true
 @onready
 var animation_player = $AnimationPlayer
-
 var velocity = Vector2.ZERO
 
 func contains_static_body(arr: Array) -> bool:

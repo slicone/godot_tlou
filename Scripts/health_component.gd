@@ -4,24 +4,26 @@ class_name HealthComponent
 @export var MAX_HEALTH := 100.0
 @export
 var health: float
-signal healthChanged
+signal healthChanged # for progress bar
 signal entity_died(kill_result: Array) # Array is GlobalTypes.EnemyKillResult
+signal entity_took_damage(damage: int) # if damage is needed
 
 func _ready():
 	health = MAX_HEALTH
 	
-func damage(attack: Attack, attack_component: AttackComponent):
+func damage(attack: Attack):
 	if not get_parent() is CharacterBody2D:
 		push_error("HealtComponent needs a CharacterBody2D as parent")
 		return
 	var entity: CharacterBody2D = get_parent()
 	force_entity_knockback(attack, entity)
 	calculate_entity_health(attack)
-	check_if_entity_dies(entity, attack_component)
+	check_if_entity_dies(entity, attack.attack_component)
 
 func calculate_entity_health(attack: Attack):
 	health -= attack.attack_damage
 	healthChanged.emit()
+	entity_took_damage.emit(attack.attack_damage)
 
 func check_if_entity_dies(entity: CharacterBody2D, attack_component: AttackComponent):
 	if health <= 0:

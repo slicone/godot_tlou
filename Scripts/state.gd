@@ -30,9 +30,8 @@ func process_physics(delta: float) -> State:
 	
 func check_non_state_input() -> void:
 	if Input.is_action_just_pressed("interact"):
-		return parent.pick_up_weapon()
+		parent.interact.emit()
 	if Input.is_action_just_pressed("drop"):
-		return parent.drop_current_weapon()
+		parent.drop.emit()
 	if Input.is_action_just_pressed("attack"):
-		if parent.current_weapon and parent.current_weapon.has_method("attack"):
-			parent.current_weapon.attack()
+		parent.attack.emit()
