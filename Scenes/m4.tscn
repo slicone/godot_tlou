@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cf2nugs1objng"]
 
-[ext_resource type="Script" uid="uid://bx1ws0qluguys" path="res://Scripts/weapon.gd" id="1_wx2w5"]
+[ext_resource type="Script" uid="uid://bx1ws0qluguys" path="res://GD_Scripts/weapon.gd" id="1_wx2w5"]
 [ext_resource type="Texture2D" uid="uid://d0shvg0746d7l" path="res://Art/bolt_action.png" id="2_187ft"]
 [ext_resource type="Script" uid="uid://dcjytld5nvhf1" path="res://Scenes/range_attack_component.gd" id="2_ksdga"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://df8u6lxcfllsw"]
 
-[ext_resource type="Script" uid="uid://bx1ws0qluguys" path="res://Scripts/weapon.gd" id="1_aowxy"]
+[ext_resource type="Script" uid="uid://bx1ws0qluguys" path="res://GD_Scripts/weapon.gd" id="1_aowxy"]
 [ext_resource type="Texture2D" uid="uid://di12mqv3amnm7" path="res://Art/weapon_2.png" id="2_6o4l1"]
 [ext_resource type="PackedScene" uid="uid://ddw144wuk63po" path="res://Scenes/melee_attack_component.tscn" id="3_6o4l1"]
 

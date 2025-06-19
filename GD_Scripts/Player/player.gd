@@ -11,7 +11,7 @@ var weapon_manager = $WeaponManager
 @onready
 var hitbox_component: HitboxComponent = $HitboxComponent
 @onready
-var pickup_area: PickupArea = $PickupArea
+var pickup_area = $PickupArea
 
 signal player_died
 signal attack

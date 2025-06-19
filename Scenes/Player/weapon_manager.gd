@@ -6,14 +6,16 @@ var current_weapon
 var weapons_nearby : Array[Weapon] = []
 @onready 
 var weapon_holder = $WeaponHolder
+@export
+var item_event_dispatcher: Node
 
 func init(parent: Player):
 	player = parent
 	player.connect("attack", _attack)
 	player.connect("drop", _drop_current_weapon)
 	player.connect("interact", _pick_up_weapon)
-	player.pickup_area.connect("weapon_nearby_entered", _weapon_nearby_entered)
-	player.pickup_area.connect("weapon_nearby_exited", _weapon_nearby_exited)
+	item_event_dispatcher.connect("WeaponEntered", _weapon_nearby_entered)
+	#player.pickup_area.connect("ItemNearbyExited", _weapon_nearby_exited)
 
 func _weapon_nearby_entered(weapon: Weapon):
 	if weapon not in weapons_nearby:

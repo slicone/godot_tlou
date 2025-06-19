@@ -1,13 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=24 format=3 uid="uid://c6om3j5rle1fd"]
 
-[ext_resource type="Script" uid="uid://big7uykx4f77p" path="res://Scripts/Player/player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://big7uykx4f77p" path="res://GD_Scripts/Player/player.gd" id="1_xhfnw"]
 [ext_resource type="Texture2D" uid="uid://doyb00t4lty86" path="res://Art/Player/player_idle.png" id="2_7g0yx"]
 [ext_resource type="Texture2D" uid="uid://b8w2kcy8ogike" path="res://Art/Player/player_2-run-Sheet.png" id="3_dey5f"]
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
-[ext_resource type="Script" uid="uid://bbmisvu3ddobm" path="res://Scenes/Player/pickup_area.gd" id="5_htcer"]
+[ext_resource type="Script" uid="uid://bh4el1n8edue7" path="res://C#_Scripts/Player/PickupArea.cs" id="6_dey5f"]
 [ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
 [ext_resource type="Script" uid="uid://cpbfs8j6mwmg2" path="res://Scenes/Player/weapon_manager.gd" id="7_dey5f"]
+[ext_resource type="Script" uid="uid://s0dr3pwndx47" path="res://C#_Scripts/ItemEventDispatcher.cs" id="7_r5xpd"]
 [ext_resource type="Script" uid="uid://q0kpbxlwbp0j" path="res://Scenes/Player/idle.gd" id="8_jlvik"]
 [ext_resource type="Script" uid="uid://dnoi6swdxvqw3" path="res://Scenes/Player/jump.gd" id="9_jhyir"]
 [ext_resource type="Script" uid="uid://dupcvde42f0ri" path="res://Scenes/Player/fall.gd" id="10_74mp2"]
@@ -121,7 +122,7 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_kpjcp")
 
 [node name="PickupArea" type="Area2D" parent="."]
-script = ExtResource("5_htcer")
+script = ExtResource("6_dey5f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
 visible = false
@@ -133,8 +134,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_0u5uq")
 }
 
-[node name="WeaponManager" type="Node2D" parent="."]
+[node name="ItemEventDispatcher" type="Node" parent="." node_paths=PackedStringArray("PickupAreaReference")]
+script = ExtResource("7_r5xpd")
+PickupAreaReference = NodePath("../PickupArea")
+
+[node name="WeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("item_event_dispatcher")]
 script = ExtResource("7_dey5f")
+item_event_dispatcher = NodePath("../ItemEventDispatcher")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 position = Vector2(12, -4)
