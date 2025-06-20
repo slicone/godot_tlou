@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://df8u6lxcfllsw"]
 
-[ext_resource type="Script" uid="uid://bx1ws0qluguys" path="res://GD_Scripts/weapon.gd" id="1_aowxy"]
+[ext_resource type="Script" uid="uid://d25ofaq5mvac8" path="res://C#_Scripts/Weapon.cs" id="1_6o4l1"]
 [ext_resource type="Texture2D" uid="uid://di12mqv3amnm7" path="res://Art/weapon_2.png" id="2_6o4l1"]
 [ext_resource type="PackedScene" uid="uid://ddw144wuk63po" path="res://Scenes/melee_attack_component.tscn" id="3_6o4l1"]
 
@@ -95,20 +95,19 @@ _data = {
 &"slash": SubResource("Animation_rqofy")
 }
 
-[node name="Weapon" type="Area2D" node_paths=PackedStringArray("weapon_attack_component")]
+[node name="Weapon" type="Area2D" node_paths=PackedStringArray("WeaponAttackComponent")]
 collision_mask = 3
-script = ExtResource("1_aowxy")
-weapon_attack_component = NodePath("Sprite2D/MeleeAttackComponent")
+script = ExtResource("1_6o4l1")
+WeaponAttackComponent = NodePath("Sprite2D/MeleeAttackComponent")
 metadata/_custom_type_script = "uid://bx1ws0qluguys"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_6o4l1")
 
-[node name="MeleeAttackComponent" parent="Sprite2D" node_paths=PackedStringArray("weapon") instance=ExtResource("3_6o4l1")]
+[node name="MeleeAttackComponent" parent="Sprite2D" node_paths=PackedStringArray("Weapon") instance=ExtResource("3_6o4l1")]
 collision_mask = 2
-weapon = NodePath("../..")
-attack_damage = 50.0
+Weapon = NodePath("../..")
 
 [node name="AttackCollision" type="CollisionShape2D" parent="Sprite2D/MeleeAttackComponent"]
 position = Vector2(3.5, -7)

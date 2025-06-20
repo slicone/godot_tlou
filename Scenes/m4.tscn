@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cf2nugs1objng"]
 
-[ext_resource type="Script" uid="uid://bx1ws0qluguys" path="res://GD_Scripts/weapon.gd" id="1_wx2w5"]
+[ext_resource type="Script" uid="uid://d25ofaq5mvac8" path="res://C#_Scripts/Weapon.cs" id="1_187ft"]
 [ext_resource type="Texture2D" uid="uid://d0shvg0746d7l" path="res://Art/bolt_action.png" id="2_187ft"]
-[ext_resource type="Script" uid="uid://dcjytld5nvhf1" path="res://Scenes/range_attack_component.gd" id="2_ksdga"]
+[ext_resource type="Script" uid="uid://chwd6g4q21jt4" path="res://C#_Scripts/RangeAttackComponent.cs" id="3_187ft"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nc4x3"]
 size = Vector2(32, 9)
@@ -20,9 +20,9 @@ _data = {
 &"shoot": SubResource("Animation_nc4x3")
 }
 
-[node name="BoltActionRifle" type="Area2D" node_paths=PackedStringArray("weapon_attack_component")]
-script = ExtResource("1_wx2w5")
-weapon_attack_component = NodePath("RangeAttackComponent")
+[node name="BoltActionRifle" type="Area2D" node_paths=PackedStringArray("WeaponAttackComponent")]
+script = ExtResource("1_187ft")
+WeaponAttackComponent = NodePath("RangeAttackComponent")
 metadata/_custom_type_script = "uid://bx1ws0qluguys"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -33,10 +33,12 @@ texture = ExtResource("2_187ft")
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_nc4x3")
 
-[node name="RangeAttackComponent" type="Area2D" parent="." node_paths=PackedStringArray("weapon")]
-script = ExtResource("2_ksdga")
-weapon = NodePath("..")
-attack_damage = 50.0
+[node name="RangeAttackComponent" type="Area2D" parent="." node_paths=PackedStringArray("RayCast", "FireTimer", "ReloadTimer", "Weapon")]
+script = ExtResource("3_187ft")
+RayCast = NodePath("RayCast2D")
+FireTimer = NodePath("FireTimer")
+ReloadTimer = NodePath("ReloadTimer")
+Weapon = NodePath("..")
 
 [node name="FireTimer" type="Timer" parent="RangeAttackComponent"]
 

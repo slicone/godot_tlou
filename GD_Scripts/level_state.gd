@@ -7,13 +7,13 @@ signal start_round(enemies_to_spawn: Array) # signal for enemymanager to spawn e
 
 @export var enemy_manager: EnemyManager
 @export var score_system: ScoreSystem
-@export var player: Player
+@export var player: Node2D
 var start_time := 0
 var elapsed_time := 0
 var level_number: GlobalTypes.LevelNumber
 
 func _ready() -> void:
-	player.connect("player_died", _on_player_died)
+	player.connect("PlayerDied", _on_player_died)
 	init()
 
 func init():

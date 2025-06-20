@@ -18,7 +18,7 @@ func _spawn_enemies(number_of_enemies: Array):
 	for i in number_of_enemies.size(): # TODO spawn enemies dependent on type
 		var enemy_instance = enemyScene.instantiate()
 		add_child(enemy_instance)
-		enemy_instance.connect("enemy_died", _on_enemy_died)
+		enemy_instance.connect("EnemyDied", _on_enemy_died)
 		enemy_instance.global_position = Vector2(200 + i, 100 + i)
 		
 func spawn_enemy_dependent_on_type(enemy_type: GlobalTypes.EnemyTypes):

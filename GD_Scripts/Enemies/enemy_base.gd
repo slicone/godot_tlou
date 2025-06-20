@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export
 var animation: Sprite2D
 @onready
-var hitbox_component: HitboxComponent = $HitboxComponent
+var hitbox_component: Node2D = $HitboxComponent
 const JUMP_VELOCITY = -400.0
 var player: Player
 var player_detected: bool = false;

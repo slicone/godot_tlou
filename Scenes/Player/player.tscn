@@ -1,21 +1,20 @@
-[gd_scene load_steps=24 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=23 format=3 uid="uid://c6om3j5rle1fd"]
 
-[ext_resource type="Script" uid="uid://big7uykx4f77p" path="res://GD_Scripts/Player/player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://d02f0ybl22d3s" path="res://C#_Scripts/Player/Player.cs" id="1_hnuln"]
 [ext_resource type="Texture2D" uid="uid://doyb00t4lty86" path="res://Art/Player/player_idle.png" id="2_7g0yx"]
 [ext_resource type="Texture2D" uid="uid://b8w2kcy8ogike" path="res://Art/Player/player_2-run-Sheet.png" id="3_dey5f"]
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
 [ext_resource type="Script" uid="uid://bh4el1n8edue7" path="res://C#_Scripts/Player/PickupArea.cs" id="6_dey5f"]
 [ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
-[ext_resource type="Script" uid="uid://cpbfs8j6mwmg2" path="res://Scenes/Player/weapon_manager.gd" id="7_dey5f"]
-[ext_resource type="Script" uid="uid://s0dr3pwndx47" path="res://C#_Scripts/ItemEventDispatcher.cs" id="7_r5xpd"]
-[ext_resource type="Script" uid="uid://q0kpbxlwbp0j" path="res://Scenes/Player/idle.gd" id="8_jlvik"]
-[ext_resource type="Script" uid="uid://dnoi6swdxvqw3" path="res://Scenes/Player/jump.gd" id="9_jhyir"]
-[ext_resource type="Script" uid="uid://dupcvde42f0ri" path="res://Scenes/Player/fall.gd" id="10_74mp2"]
-[ext_resource type="Script" uid="uid://d1ooa5lhfbpiy" path="res://Scenes/Player/move.gd" id="11_oikmp"]
+[ext_resource type="Script" uid="uid://c387qppn24ij5" path="res://C#_Scripts/WeaponManager.cs" id="8_r5xpd"]
+[ext_resource type="Script" uid="uid://bgumwo5pneyt6" path="res://C#_Scripts/IdleState.cs" id="10_r5xpd"]
+[ext_resource type="Script" uid="uid://cmxxcqiogmoiu" path="res://C#_Scripts/JumpState.cs" id="11_ks1b7"]
 [ext_resource type="Texture2D" uid="uid://nhqx0gy3ww3j" path="res://Art/Enemies/health_bar_under.png" id="12_7g0yx"]
+[ext_resource type="Script" uid="uid://d1540urggk0r0" path="res://C#_Scripts/FallState.cs" id="12_hnuln"]
 [ext_resource type="Texture2D" uid="uid://df5k2ru517j36" path="res://Art/Enemies/healtbar_progress.png" id="13_7g0yx"]
-[ext_resource type="Script" uid="uid://27oggsglmf6o" path="res://Scenes/Enemies/enemy_progress_bar.gd" id="14_r5xpd"]
+[ext_resource type="Script" uid="uid://b7xnkre26o5s7" path="res://C#_Scripts/MoveState.cs" id="13_aqm4k"]
+[ext_resource type="Script" uid="uid://d0dsekm21iw8" path="res://C#_Scripts/HealthBar.cs" id="16_r5xpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtuoh"]
 size = Vector2(18, 47)
@@ -95,8 +94,14 @@ _data = {
 &"run": SubResource("Animation_0u5uq")
 }
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
-script = ExtResource("1_xhfnw")
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "StateMachine", "WeaponManager", "HitboxComponent", "HealthComponent", "PickupArea") groups=["Player"]]
+script = ExtResource("1_hnuln")
+AnimationPlayer = NodePath("AnimationPlayer")
+StateMachine = NodePath("state_machine")
+WeaponManager = NodePath("WeaponManager")
+HitboxComponent = NodePath("HitboxComponent")
+HealthComponent = NodePath("HealthComponent")
+PickupArea = NodePath("PickupArea")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -114,8 +119,8 @@ hframes = 5
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_mtuoh")]
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["Player"] instance=ExtResource("4_htcer")]
-health_component = NodePath("../HealthComponent")
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("HealthComponent") groups=["Player"] instance=ExtResource("4_htcer")]
+HealthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, 0.5)
@@ -134,50 +139,46 @@ libraries = {
 &"": SubResource("AnimationLibrary_0u5uq")
 }
 
-[node name="ItemEventDispatcher" type="Node" parent="." node_paths=PackedStringArray("PickupAreaReference")]
-script = ExtResource("7_r5xpd")
-PickupAreaReference = NodePath("../PickupArea")
-
-[node name="WeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("item_event_dispatcher")]
-script = ExtResource("7_dey5f")
-item_event_dispatcher = NodePath("../ItemEventDispatcher")
+[node name="WeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("PickupArea")]
+script = ExtResource("8_r5xpd")
+PickupArea = NodePath("../PickupArea")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 position = Vector2(12, -4)
 
-[node name="state_machine" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("7_74mp2")]
-starting_state = NodePath("idle")
+[node name="state_machine" parent="." node_paths=PackedStringArray("StartingState") instance=ExtResource("7_74mp2")]
+StartingState = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("fall_state", "jump_state", "move_state", "animation")]
-script = ExtResource("8_jlvik")
-fall_state = NodePath("../fall")
-jump_state = NodePath("../jump")
-move_state = NodePath("../move")
-animation_name = "idle"
-animation = NodePath("../../Idle")
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("FallState", "JumpState", "MoveState", "Animation")]
+script = ExtResource("10_r5xpd")
+FallState = NodePath("../fall")
+JumpState = NodePath("../jump")
+MoveState = NodePath("../move")
+AnimationName = "idle"
+Animation = NodePath("../../Idle")
 
-[node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "move_state", "fall_state", "animation")]
-script = ExtResource("9_jhyir")
-idle_state = NodePath("../idle")
-move_state = NodePath("../move")
-fall_state = NodePath("../fall")
-animation_name = "jump"
-animation = NodePath("../../Idle")
+[node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "FallState", "Animation")]
+script = ExtResource("11_ks1b7")
+IdleState = NodePath("../idle")
+MoveState = NodePath("../move")
+FallState = NodePath("../fall")
+AnimationName = "run"
+Animation = NodePath("../../Run")
 
-[node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "move_state", "animation")]
-script = ExtResource("10_74mp2")
-idle_state = NodePath("../idle")
-move_state = NodePath("../move")
-animation_name = "run"
-animation = NodePath("../../Run")
+[node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "Animation")]
+script = ExtResource("12_hnuln")
+IdleState = NodePath("../idle")
+MoveState = NodePath("../move")
+AnimationName = "run"
+Animation = NodePath("../../Run")
 
-[node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "fall_state", "jump_state", "animation")]
-script = ExtResource("11_oikmp")
-idle_state = NodePath("../idle")
-fall_state = NodePath("../fall")
-jump_state = NodePath("../jump")
-animation_name = "run"
-animation = NodePath("../../Run")
+[node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "FallState", "JumpState", "Animation")]
+script = ExtResource("13_aqm4k")
+IdleState = NodePath("../idle")
+FallState = NodePath("../fall")
+JumpState = NodePath("../jump")
+AnimationName = "run"
+Animation = NodePath("../../Run")
 
 [node name="EnemyProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1
@@ -187,4 +188,4 @@ offset_right = 48.0
 offset_bottom = 10.0
 texture_under = ExtResource("12_7g0yx")
 texture_progress = ExtResource("13_7g0yx")
-script = ExtResource("14_r5xpd")
+script = ExtResource("16_r5xpd")

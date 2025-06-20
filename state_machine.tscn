@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://byi7q4pa6eeem"]
 
-[ext_resource type="Script" uid="uid://wowehbeulcqj" path="res://Scenes/Player/state_machine.gd" id="1_ahvgy"]
+[ext_resource type="Script" uid="uid://bd4ahymm41ora" path="res://C#_Scripts/StateMachine.cs" id="1_yf3jm"]
 
 [node name="state_machine" type="Node"]
-script = ExtResource("1_ahvgy")
+script = ExtResource("1_yf3jm")
