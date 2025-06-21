@@ -1,31 +1,33 @@
 using Godot;
 using System;
 
-public partial class RangeAttackComponent : AttackComponent
+public partial class RangeWeapon : Weapon
 {
 	[Export]
 	public float FireRate { get; set; } = 0.5f;
-
 	[Export]
 	public float ReloadTime { get; set; } = 2.0f;
-
 	[Export]
 	public int MaxMagazineRounds { get; set; } = 6;
 
 	private int _currentMagazineRounds;
 	private bool _canFire = true;
 
-	[Export]
+
 	public RayCast2D RayCast { get; set; }
-
-	[Export]
 	public Timer FireTimer { get; set; }
-
-	[Export]
 	public Timer ReloadTimer { get; set; }
 
 	public override void _Ready()
 	{
+		RayCast = GetNodeOrNull<RayCast2D>("RayCast2D");
+		FireTimer = GetNodeOrNull<Timer>("FireTimer");
+		ReloadTimer = GetNodeOrNull<Timer>("ReloadTimer");
+		if (RayCast is null || FireTimer is null || ReloadTimer is null)
+		{
+			GD.PushError("Missing dependencies in RangeAttackComponent");
+			return;
+		}
 		_currentMagazineRounds = MaxMagazineRounds;
 		SetupTimers();
 		RayCast.CollideWithAreas = true;
@@ -41,7 +43,7 @@ public partial class RangeAttackComponent : AttackComponent
 	{
 		if (_canFire)
 		{
-			Weapon?._animationPlayer?.Play("shoot");
+			_animationPlayer?.Play("shoot");
 			Shoot();
 		}
 	}
@@ -83,7 +85,7 @@ public partial class RangeAttackComponent : AttackComponent
 					AttackDamage = AttackDamage,
 					AttackPosition = GlobalPosition,
 					KnockbackForce = 5000,
-					AttackComponent = this
+					WeaponType = GetType().Name
 				};
 				hitbox.Damage(attack);
 			}

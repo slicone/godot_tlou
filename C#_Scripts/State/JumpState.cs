@@ -10,8 +10,6 @@ public partial class JumpState : State
 	[Export] 
 	public State FallState { get; set; }
 
-	private const float JumpVelocity = -300.0f;
-
 	public override State ProcessInput(InputEvent @event)
 	{
 		CheckNonStateInput();
@@ -24,13 +22,13 @@ public partial class JumpState : State
 			return null;
 
 		// Apply vertical jump velocity
-		Parent.Velocity = new Vector2(Parent.Velocity.X, JumpVelocity);
+		Parent.Velocity = new Vector2(Parent.Velocity.X, Parent.JumpVelocity);
 
 		if (!Parent.IsOnFloor())
 			return FallState;
 
 		float input = Input.GetAxis("move-left", "move-right");
-		float movement = input * MoveSpeed;
+		float movement = input * Parent.MoveSpeed;
 
 		if (movement != 0)
 		{

@@ -9,14 +9,6 @@ public partial class State : Node
 	[Export]
 	public Sprite2D Animation { get; set; }
 
-	[Export]
-	public float MoveSpeed { get; set; } = 300f;
-
-	[Export]
-	public float StopSpeed { get; set; } = 900f;
-
-	protected float Gravity;
-
 	public Player Parent { get; set; }
 
 	public virtual void Enter()

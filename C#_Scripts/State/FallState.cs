@@ -22,7 +22,7 @@ public partial class FallState : State
 
 		// Horizontal movement
 		float input = Input.GetAxis("move-left", "move-right");
-		float movement = input * MoveSpeed;
+		float movement = input * Parent.MoveSpeed;
 
 		// Optional sprite flip logic
 		// if (movement != 0 && Animation != null)

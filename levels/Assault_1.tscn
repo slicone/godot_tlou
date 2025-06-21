@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://dy47ixfx16oo4" path="res://levels/assault_score_system.gd" id="3_a3lu2"]
 [ext_resource type="PackedScene" uid="uid://jhnl70vwrpeb" path="res://Scenes/Structures/platform.tscn" id="4_03c1t"]
 [ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/Player/player.tscn" id="5_kvlpm"]
-[ext_resource type="PackedScene" uid="uid://df8u6lxcfllsw" path="res://Scenes/axe.tscn" id="6_5qtuw"]
-[ext_resource type="PackedScene" uid="uid://cf2nugs1objng" path="res://Scenes/m4.tscn" id="7_k1rmq"]
+[ext_resource type="PackedScene" uid="uid://df8u6lxcfllsw" path="res://Scenes/Axe.tscn" id="7_6bswn"]
+[ext_resource type="PackedScene" uid="uid://dbejmwhbtas0k" path="res://Scenes/bolt_action.tscn" id="7_8h0w4"]
 
 [node name="Assault_1" type="Node2D"]
 
@@ -28,12 +28,15 @@ enemy_manager = NodePath("../EnemyManager")
 
 [node name="Platform" parent="platforms" instance=ExtResource("4_03c1t")]
 position = Vector2(16, 200)
+collision_layer = 3
 
 [node name="Platform14" parent="platforms" instance=ExtResource("4_03c1t")]
 position = Vector2(-16, 168)
+collision_layer = 3
 
 [node name="Platform15" parent="platforms" instance=ExtResource("4_03c1t")]
 position = Vector2(431, 168)
+collision_layer = 3
 
 [node name="Platform2" parent="platforms" instance=ExtResource("4_03c1t")]
 position = Vector2(208, 200)
@@ -77,9 +80,9 @@ position = Vector2(37, 157)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -53)
 
-[node name="Weapon" parent="." instance=ExtResource("6_5qtuw")]
-
-[node name="M4" parent="." instance=ExtResource("7_k1rmq")]
-position = Vector2(32.715, 0)
-
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="Axe" parent="." instance=ExtResource("7_6bswn")]
+AttackDamage = 100.0
+
+[node name="BoltAction" parent="." instance=ExtResource("7_8h0w4")]

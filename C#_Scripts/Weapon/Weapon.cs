@@ -1,20 +1,21 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
-public partial class Weapon : Area2D
+public abstract partial class Weapon : Area2D
 {
 
-	[Export]
-	public AttackComponent WeaponAttackComponent { get; set; }
+	//[Export]
+	//public AttackComponent WeaponAttackComponent { get; set; }
 
 	[Export]
 	public bool GravityEnabled { get; set; } = true;
 
-	//private new const float Gravity = 98.0f;
+	[Export]
+	public float AttackDamage { get; set; } = 20.0f;
+
 	private Vector2 _velocity = Vector2.Zero;
 
 	public AnimationPlayer _animationPlayer;
+	
 
 	public override void _Ready()
 	{
@@ -57,8 +58,5 @@ public partial class Weapon : Area2D
 		}
 	}
 
-	public void Attack()
-	{
-		WeaponAttackComponent?.Attack();
-	}
+	public abstract void Attack();
 }

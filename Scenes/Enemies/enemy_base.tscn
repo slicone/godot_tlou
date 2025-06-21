@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b7njof4dv3745"]
+[gd_scene load_steps=15 format=3 uid="uid://b7njof4dv3745"]
 
 [ext_resource type="Script" uid="uid://bo2bgdu67c3ow" path="res://C#_Scripts/Enemy/EnemyBase.cs" id="1_2j2wd"]
 [ext_resource type="Texture2D" uid="uid://0or26fo6upya" path="res://Art/Enemies/enemy_runner.png" id="2_srdml"]
@@ -9,8 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://nhqx0gy3ww3j" path="res://Art/Enemies/health_bar_under.png" id="7_srdml"]
 [ext_resource type="Texture2D" uid="uid://df5k2ru517j36" path="res://Art/Enemies/healtbar_progress.png" id="8_xxtca"]
 [ext_resource type="Script" uid="uid://d0dsekm21iw8" path="res://C#_Scripts/HealthBar.cs" id="9_s2qay"]
-[ext_resource type="PackedScene" uid="uid://s8atmq8n6b27" path="res://runner_weapon.tscn" id="10_xxtca"]
-[ext_resource type="PackedScene" uid="uid://ddw144wuk63po" path="res://Scenes/melee_attack_component.tscn" id="11_2j2wd"]
+[ext_resource type="PackedScene" uid="uid://ddw144wuk63po" path="res://Scenes/melee_weapon.tscn" id="11_2j2wd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gk4pb"]
 size = Vector2(17.5, 45)
@@ -21,9 +20,6 @@ radius = 153.264
 [sub_resource type="CircleShape2D" id="CircleShape2D_guy7p"]
 radius = 34.1321
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2qay"]
-size = Vector2(15, 8)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vlbp2"]
 size = Vector2(22, 51)
 
@@ -32,6 +28,7 @@ script = ExtResource("1_2j2wd")
 Animation = NodePath("Sprite2D")
 HitboxComponent = NodePath("HitboxComponent")
 DetectionAreaComponent = NodePath("DetectionAreaComponent")
+PatrolPoints = Array[NodePath]([NodePath("PatrolPoint1"), NodePath("PatrolPoint2")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -42,13 +39,11 @@ position = Vector2(1.75, 1.5)
 shape = SubResource("RectangleShape2D_gk4pb")
 
 [node name="DetectionAreaComponent" parent="." instance=ExtResource("3_5xbfy")]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionAreaComponent"]
 shape = SubResource("CircleShape2D_gk4pb")
 
 [node name="AttackAreaComponent" parent="." instance=ExtResource("3_sgjdr")]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackAreaComponent"]
 shape = SubResource("CircleShape2D_guy7p")
@@ -61,11 +56,11 @@ position = Vector2(150, 0)
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_b1gup")]
 
-[node name="HitboxComponent" parent="." groups=["Enemy"] instance=ExtResource("4_sgjdr")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("HealthComponent") groups=["Enemy"] instance=ExtResource("4_sgjdr")]
 collision_layer = 2
+HealthComponent = NodePath("../HealthComponent")
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="HitboxComponent"]
-visible = false
 shape = SubResource("RectangleShape2D_gk4pb")
 
 [node name="EnemyProgressBar" type="TextureProgressBar" parent="." node_paths=PackedStringArray("HealthComponent")]
@@ -79,19 +74,10 @@ texture_progress = ExtResource("8_xxtca")
 script = ExtResource("9_s2qay")
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="Weapon" parent="." node_paths=PackedStringArray("WeaponAttackComponent") instance=ExtResource("10_xxtca")]
-WeaponAttackComponent = NodePath("MeleeAttackComponent2")
-GravityEnabled = false
+[node name="MeleeAttackComponent2" parent="." instance=ExtResource("11_2j2wd")]
 
-[node name="WeaponCollision2" type="CollisionShape2D" parent="Weapon"]
-position = Vector2(2.5, 2)
-shape = SubResource("RectangleShape2D_s2qay")
-debug_color = Color(0.375184, 0.476242, 1, 0.42)
-
-[node name="MeleeAttackComponent2" parent="Weapon" node_paths=PackedStringArray("Weapon") instance=ExtResource("11_2j2wd")]
-Weapon = NodePath("..")
-
-[node name="AttackCollision" type="CollisionShape2D" parent="Weapon/MeleeAttackComponent2"]
-visible = false
+[node name="AttackCollision2" type="CollisionShape2D" parent="MeleeAttackComponent2"]
 position = Vector2(2, 0.5)
 shape = SubResource("RectangleShape2D_vlbp2")
+
+[node name="MeleeWeapon" parent="." instance=ExtResource("11_2j2wd")]

@@ -1,9 +1,10 @@
 using Godot;
 
-public partial class MeleeAttackComponent : AttackComponent
+public partial class MeleeWeapon : Weapon
 {
 	public override void _Ready()
 	{
+		base._Ready();
 		RegisterEvents();
 	}
 
@@ -21,7 +22,7 @@ public partial class MeleeAttackComponent : AttackComponent
 				AttackPosition = GlobalPosition,
 				KnockbackForce = 20,
 				AttackDamage = AttackDamage,
-				AttackComponent = this
+				WeaponType = GetType().Name
 			};
 
 			hitbox.Damage(attack);
@@ -30,9 +31,9 @@ public partial class MeleeAttackComponent : AttackComponent
 
 	public override void Attack()
 	{
-		if (Weapon?._animationPlayer != null)
+		if (_animationPlayer != null)
 		{
-			Weapon._animationPlayer.Play("slash");
+			_animationPlayer.Play("slash");
 			//await ToSignal(Weapon._animationPlayer, "animation_finished");
 		}
 	}

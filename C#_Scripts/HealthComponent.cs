@@ -34,7 +34,7 @@ public partial class HealthComponent : Node2D
 
         ForceEntityKnockback(attack, entity);
         CalculateEntityHealth(attack);
-        CheckIfEntityDies(entity, attack.AttackComponent);
+        CheckIfEntityDies(entity, attack.WeaponType);
     }
 
     private void CalculateEntityHealth(Attack attack)
@@ -44,23 +44,23 @@ public partial class HealthComponent : Node2D
         EmitSignal(SignalName.EntityTookDamage, (int) attack.AttackDamage);
     }
 
-    private void CheckIfEntityDies(CharacterBody2D entity, IAttackComponent attackComponent)
+    private void CheckIfEntityDies(CharacterBody2D entity, string weaponType)
     {
         if (Health <= 0)
         {
-            var killResult = GetEntityKillResult(entity, attackComponent);
+            var killResult = GetEntityKillResult(entity, weaponType);
             EmitSignal(SignalName.EntityDied, killResult);
             entity.QueueFree();
         }
     }
 
     
-    private Godot.Collections.Array<GlobalTypes.EnemyKillResult> GetEntityKillResult(CharacterBody2D entity, IAttackComponent attackComponent)
+    private Godot.Collections.Array<GlobalTypes.EnemyKillResult> GetEntityKillResult(CharacterBody2D entity, string weaponType)
     {
         var killResult = new Godot.Collections.Array<GlobalTypes.EnemyKillResult>();
         if (entity is EnemyBase enemy)
         {
-            killResult.Add(DetermineWeaponType(attackComponent));
+            killResult.Add(DetermineWeaponType(weaponType));
             var entityKillResults = enemy.KillResults;
             foreach (var result in entityKillResults)
             {
@@ -72,18 +72,17 @@ public partial class HealthComponent : Node2D
 
     private void ForceEntityKnockback(Attack attack, CharacterBody2D entity)
     {
-        // Richtung vom Entity zur Attack Position (Kraftvektor)
         entity.Velocity = entity.GlobalPosition.DirectionTo(attack.AttackPosition) * 70f;
         entity.MoveAndSlide();
     }
 
-    private GlobalTypes.EnemyKillResult DetermineWeaponType(IAttackComponent attackComponent)
+    private GlobalTypes.EnemyKillResult DetermineWeaponType(string weaponType)
     {
-        if (attackComponent is MeleeAttackComponent)
+        if (weaponType == typeof(MeleeWeapon).Name)
             return GlobalTypes.EnemyKillResult.MELEE;
-        if (attackComponent is RangeAttackComponent)
+        if (weaponType == typeof(RangeWeapon).Name)
             return GlobalTypes.EnemyKillResult.GUN;
-        return GlobalTypes.EnemyKillResult.NONE; // Falls vorhanden, sonst anpassen
+        return GlobalTypes.EnemyKillResult.NONE;
     }
     
 }

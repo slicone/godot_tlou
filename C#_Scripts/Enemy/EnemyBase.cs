@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
 public partial class EnemyBase : CharacterBody2D
 {
@@ -105,7 +103,7 @@ public partial class EnemyBase : CharacterBody2D
             if (PatrolPoints.Count == 0)
                 return;
 
-            var node = GetNode<Node2D>((NodePath)PatrolPoints[currentTargetIndex]);
+            var node = GetNode<Node2D>(PatrolPoints[currentTargetIndex]);
             targetPosition = node.GlobalPosition;
 
             Vector2 direction = GlobalPosition.DirectionTo(targetPosition).Normalized();
@@ -139,13 +137,13 @@ public partial class EnemyBase : CharacterBody2D
 
     private void OnDetectionEntered(Node body)
     {
-        if (body.IsInGroup("Player"))
+        if (body is Player)
             playerDetected = true;
     }
 
     private void OnDetectionExited(Node body)
     {
-        if (body.IsInGroup("Player"))
+        if (body is Player) 
             playerDetected = false;
     }
 }

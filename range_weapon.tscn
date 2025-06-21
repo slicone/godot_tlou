@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://da1circ2p1gab"]
+
+[ext_resource type="Script" uid="uid://i5tsmn7becjf" path="res://C#_Scripts/Weapon/RangeWeapon.cs" id="1_b3g7e"]
+
+[node name="RangeWeapon" type="Area2D"]
+script = ExtResource("1_b3g7e")
+
+[node name="FireTimer" type="Timer" parent="."]
+
+[node name="ReloadTimer" type="Timer" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(69, 0)
+collision_mask = 2

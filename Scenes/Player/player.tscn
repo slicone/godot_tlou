@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
 [ext_resource type="Script" uid="uid://bh4el1n8edue7" path="res://C#_Scripts/Player/PickupArea.cs" id="6_dey5f"]
 [ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
-[ext_resource type="Script" uid="uid://c387qppn24ij5" path="res://C#_Scripts/WeaponManager.cs" id="8_r5xpd"]
-[ext_resource type="Script" uid="uid://bgumwo5pneyt6" path="res://C#_Scripts/IdleState.cs" id="10_r5xpd"]
-[ext_resource type="Script" uid="uid://cmxxcqiogmoiu" path="res://C#_Scripts/JumpState.cs" id="11_ks1b7"]
+[ext_resource type="Script" uid="uid://c387qppn24ij5" path="res://C#_Scripts/Weapon/WeaponManager.cs" id="7_dey5f"]
+[ext_resource type="Script" uid="uid://bgumwo5pneyt6" path="res://C#_Scripts/State/IdleState.cs" id="9_r5xpd"]
+[ext_resource type="Script" uid="uid://cmxxcqiogmoiu" path="res://C#_Scripts/State/JumpState.cs" id="10_ks1b7"]
+[ext_resource type="Script" uid="uid://d1540urggk0r0" path="res://C#_Scripts/State/FallState.cs" id="11_hnuln"]
 [ext_resource type="Texture2D" uid="uid://nhqx0gy3ww3j" path="res://Art/Enemies/health_bar_under.png" id="12_7g0yx"]
-[ext_resource type="Script" uid="uid://d1540urggk0r0" path="res://C#_Scripts/FallState.cs" id="12_hnuln"]
+[ext_resource type="Script" uid="uid://b7xnkre26o5s7" path="res://C#_Scripts/State/MoveState.cs" id="12_aqm4k"]
 [ext_resource type="Texture2D" uid="uid://df5k2ru517j36" path="res://Art/Enemies/healtbar_progress.png" id="13_7g0yx"]
-[ext_resource type="Script" uid="uid://b7xnkre26o5s7" path="res://C#_Scripts/MoveState.cs" id="13_aqm4k"]
 [ext_resource type="Script" uid="uid://d0dsekm21iw8" path="res://C#_Scripts/HealthBar.cs" id="16_r5xpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtuoh"]
@@ -140,7 +140,7 @@ libraries = {
 }
 
 [node name="WeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("PickupArea")]
-script = ExtResource("8_r5xpd")
+script = ExtResource("7_dey5f")
 PickupArea = NodePath("../PickupArea")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
@@ -150,7 +150,7 @@ position = Vector2(12, -4)
 StartingState = NodePath("idle")
 
 [node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("FallState", "JumpState", "MoveState", "Animation")]
-script = ExtResource("10_r5xpd")
+script = ExtResource("9_r5xpd")
 FallState = NodePath("../fall")
 JumpState = NodePath("../jump")
 MoveState = NodePath("../move")
@@ -158,7 +158,7 @@ AnimationName = "idle"
 Animation = NodePath("../../Idle")
 
 [node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "FallState", "Animation")]
-script = ExtResource("11_ks1b7")
+script = ExtResource("10_ks1b7")
 IdleState = NodePath("../idle")
 MoveState = NodePath("../move")
 FallState = NodePath("../fall")
@@ -166,14 +166,14 @@ AnimationName = "run"
 Animation = NodePath("../../Run")
 
 [node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "Animation")]
-script = ExtResource("12_hnuln")
+script = ExtResource("11_hnuln")
 IdleState = NodePath("../idle")
 MoveState = NodePath("../move")
 AnimationName = "run"
 Animation = NodePath("../../Run")
 
 [node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "FallState", "JumpState", "Animation")]
-script = ExtResource("13_aqm4k")
+script = ExtResource("12_aqm4k")
 IdleState = NodePath("../idle")
 FallState = NodePath("../fall")
 JumpState = NodePath("../jump")
