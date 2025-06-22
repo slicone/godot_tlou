@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=26 format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://d02f0ybl22d3s" path="res://C#_Scripts/Player/Player.cs" id="1_hnuln"]
 [ext_resource type="Texture2D" uid="uid://doyb00t4lty86" path="res://Art/Player/player_idle.png" id="2_7g0yx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
 [ext_resource type="Script" uid="uid://bh4el1n8edue7" path="res://C#_Scripts/Player/PickupArea.cs" id="6_dey5f"]
+[ext_resource type="Script" uid="uid://b3olywc1cm8hk" path="res://Scenes/Player/NearbyItemTracker.cs" id="6_hnuln"]
 [ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
 [ext_resource type="Script" uid="uid://c387qppn24ij5" path="res://C#_Scripts/Weapon/WeaponManager.cs" id="7_dey5f"]
 [ext_resource type="Script" uid="uid://cwi0yoks3d3as" path="res://Scenes/Player/ResourceManager.cs" id="8_ks1b7"]
@@ -96,12 +97,13 @@ _data = {
 &"run": SubResource("Animation_0u5uq")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "StateMachine", "HitboxComponent", "HealthComponent", "PickupArea") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "StateMachine", "HitboxComponent", "HealthComponent", "NearbyItemTracker", "PickupArea") groups=["Player"]]
 script = ExtResource("1_hnuln")
 AnimationPlayer = NodePath("AnimationPlayer")
 StateMachine = NodePath("state_machine")
 HitboxComponent = NodePath("HitboxComponent")
 HealthComponent = NodePath("HealthComponent")
+NearbyItemTracker = NodePath("NearbyItemManager")
 PickupArea = NodePath("PickupArea")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
@@ -125,6 +127,9 @@ texture = ExtResource("3_dey5f")
 hframes = 5
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_mtuoh")]
+
+[node name="NearbyItemManager" type="Node" parent="."]
+script = ExtResource("6_hnuln")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("HealthComponent") groups=["Player"] instance=ExtResource("4_htcer")]
 HealthComponent = NodePath("../HealthComponent")

@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Godot;
 
-public partial class ResourceManager : ItemManager<Resource>
+public partial class ResourceManager : ItemManager
 {
     // Tell ui that item is not pickable
 	[Signal] public delegate void ResourceBackpackFullEventHandler();
     private const int BACKPACK_MAX_VALUE = 3;
-    private Dictionary<GlobalTypes.ResourceType, float> _playerResources = new Dictionary<GlobalTypes.ResourceType, float> {
+    private Dictionary<GlobalTypes.ResourceType, float> playerResources = new Dictionary<GlobalTypes.ResourceType, float> {
         {GlobalTypes.ResourceType.ETHANOL, 0},
         {GlobalTypes.ResourceType.GUNPOWDER, 0},
         {GlobalTypes.ResourceType.PAPER, 0},
@@ -14,40 +14,17 @@ public partial class ResourceManager : ItemManager<Resource>
         {GlobalTypes.ResourceType.TAPE, 0},
         {GlobalTypes.ResourceType.SCISSOR, 0},
     };
-    
-    public override void Init(Player parent)
+
+    public override void Init(Player parent, NearbyItemTracker nearbyItemTracker)
     {
-        base.Init(parent);
-
-        // Connect to player signals
-        _player.Interact += PickUpResource;
-
-        // Connect item signals
-        _player.PickupArea.ItemNearbyEntered += ResourceNearbyEntered;
-        _player.PickupArea.ItemNearbyExited += ResourceNearbyExited;
+        base.Init(parent, nearbyItemTracker);
+        nearbyItemTracker.PlayerPickUp += PickUpResource;
     }
 
-    public void ResourceNearbyEntered(Area2D area)
-    {
-        if (area is Resource resource && !_itemsNearby.Contains(resource))
-		{
-			_itemsNearby.Add(resource);
-		}     
-    }
-
-    public void ResourceNearbyExited(Area2D area)
-    {
-        if (area is Resource resource && _itemsNearby.Contains(resource))
-		{
-			_itemsNearby.Remove(resource);
-		} 
-    }
-
-    private void PickUpResource()
-    {
-        var resource = PickNearestItem();
-        if (resource == null)
-            return;
+    private void PickUpResource(Area2D area)
+    {   
+        if (area == null || area is not Resource resource)
+			return;
 
         if (!SetPlayerResources(resource))
         {
@@ -67,7 +44,7 @@ public partial class ResourceManager : ItemManager<Resource>
         var resourceType = resource.resourceType;
         var resourceValue = resource.ResourceValue;
 
-        if (!_playerResources.TryGetValue(resourceType, out float backpackValue))
+        if (!playerResources.TryGetValue(resourceType, out float backpackValue))
         {
             GD.PushError($"ResourceType not known in playerResources Dictionary: {resourceType}");
             return false;
@@ -82,7 +59,7 @@ public partial class ResourceManager : ItemManager<Resource>
         if (newBackpackValue > BACKPACK_MAX_VALUE)
             newBackpackValue = BACKPACK_MAX_VALUE;
 
-        _playerResources[resourceType] = newBackpackValue;
+        playerResources[resourceType] = newBackpackValue;
         return true;
     }
 }

@@ -7,6 +7,7 @@ public partial class Player : CharacterBody2D
 	[Export] public StateMachine StateMachine { get; set; }
 	[Export] public HitboxComponent HitboxComponent { get; set; }
 	[Export] public HealthComponent HealthComponent { get; set; }
+	[Export] public NearbyItemTracker NearbyItemTracker { get; set; }
 	[Export] public PickupArea PickupArea { get; set; }
 	[Export] public float MoveSpeed { get; set; } = 299f;
 	[Export] public float StopSpeed { get; set; } = 999f;
@@ -31,13 +32,14 @@ public partial class Player : CharacterBody2D
 
 	private void InitItemManagers()
 	{
+		NearbyItemTracker.Init(this);
 		foreach (var child in GetChildren())
-    {
-        if (child is IItemManager itemManager)
-        {
-            itemManager.Init(this);
-        }
-    }
+		{
+			if (child is IItemManager itemManager)
+			{
+				itemManager.Init(this, NearbyItemTracker);
+			}
+		}
 	}
 
 	private void OnPlayerDied(Godot.Collections.Array<GlobalTypes.EnemyKillResult> killResult)

@@ -1,36 +1,15 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
-public partial class ItemManager<T> : Node, IItemManager where T : Area2D, IItem
+public partial class ItemManager : Node, IItemManager
 {
-    protected Player _player;
-    protected List<T> _itemsNearby = new();
-    protected T _currentItem;
+    protected Player player;
+    protected NearbyItemTracker nearbyItemTracker;
 
-    public virtual void Init(Player parent)
+    public virtual void Init(Player parent, NearbyItemTracker nearbyItemTracker)
     {
-        _player = parent;
-    }
-
-    protected T PickNearestItem()
-    {
-        float shortestDistance = float.PositiveInfinity;
-        T closestWeapon = null;
-
-        foreach (var item in _itemsNearby)
-        {
-            if (item == _currentItem)
-                continue;
-
-            float distance = item.GlobalPosition.DistanceTo(_player.GlobalPosition);
-            if (distance < shortestDistance)
-            {
-                shortestDistance = distance;
-                closestWeapon = item;
-            }
-        }
-
-        return closestWeapon;
+        if (player == null || nearbyItemTracker == null)
+            GD.PushError($"Missing dependencies in {GetType().Name}");   
+        player = parent;
+        this.nearbyItemTracker = nearbyItemTracker;
     }
 }
