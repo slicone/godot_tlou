@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=25 format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://d02f0ybl22d3s" path="res://C#_Scripts/Player/Player.cs" id="1_hnuln"]
 [ext_resource type="Texture2D" uid="uid://doyb00t4lty86" path="res://Art/Player/player_idle.png" id="2_7g0yx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bh4el1n8edue7" path="res://C#_Scripts/Player/PickupArea.cs" id="6_dey5f"]
 [ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
 [ext_resource type="Script" uid="uid://c387qppn24ij5" path="res://C#_Scripts/Weapon/WeaponManager.cs" id="7_dey5f"]
+[ext_resource type="Script" uid="uid://cwi0yoks3d3as" path="res://Scenes/Player/ResourceManager.cs" id="8_ks1b7"]
 [ext_resource type="Script" uid="uid://bgumwo5pneyt6" path="res://C#_Scripts/State/IdleState.cs" id="9_r5xpd"]
 [ext_resource type="Script" uid="uid://cmxxcqiogmoiu" path="res://C#_Scripts/State/JumpState.cs" id="10_ks1b7"]
 [ext_resource type="Script" uid="uid://d1540urggk0r0" path="res://C#_Scripts/State/FallState.cs" id="11_hnuln"]
@@ -95,11 +96,10 @@ _data = {
 &"run": SubResource("Animation_0u5uq")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "StateMachine", "WeaponManager", "HitboxComponent", "HealthComponent", "PickupArea") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "StateMachine", "HitboxComponent", "HealthComponent", "PickupArea") groups=["Player"]]
 script = ExtResource("1_hnuln")
 AnimationPlayer = NodePath("AnimationPlayer")
 StateMachine = NodePath("state_machine")
-WeaponManager = NodePath("WeaponManager")
 HitboxComponent = NodePath("HitboxComponent")
 HealthComponent = NodePath("HealthComponent")
 PickupArea = NodePath("PickupArea")
@@ -146,9 +146,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_0u5uq")
 }
 
-[node name="WeaponManager" type="Node2D" parent="." node_paths=PackedStringArray("PickupArea")]
+[node name="ResourceManager" type="Node" parent="."]
+script = ExtResource("8_ks1b7")
+
+[node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("7_dey5f")
-PickupArea = NodePath("../PickupArea")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 position = Vector2(5, -8)

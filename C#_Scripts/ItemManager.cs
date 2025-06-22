@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class ItemManager<T> : Node2D where T : Area2D, IItem
+public partial class ItemManager<T> : Node, IItemManager where T : Area2D, IItem
 {
     protected Player _player;
     protected List<T> _itemsNearby = new();

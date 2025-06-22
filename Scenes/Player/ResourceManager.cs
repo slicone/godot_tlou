@@ -3,6 +3,9 @@ using Godot;
 
 public partial class ResourceManager : ItemManager<Resource>
 {
+    // Tell ui that item is not pickable
+	[Signal] public delegate void ResourceBackpackFullEventHandler();
+    private const int BACKPACK_MAX_VALUE = 3;
     private Dictionary<GlobalTypes.ResourceType, float> _playerResources = new Dictionary<GlobalTypes.ResourceType, float> {
         {GlobalTypes.ResourceType.ETHANOL, 0},
         {GlobalTypes.ResourceType.GUNPOWDER, 0},
@@ -11,12 +14,15 @@ public partial class ResourceManager : ItemManager<Resource>
         {GlobalTypes.ResourceType.TAPE, 0},
         {GlobalTypes.ResourceType.SCISSOR, 0},
     };
-
-
+    
     public override void Init(Player parent)
     {
         base.Init(parent);
-        // Connect player signals
+
+        // Connect to player signals
+        _player.Interact += PickUpResource;
+
+        // Connect item signals
         _player.PickupArea.ItemNearbyEntered += ResourceNearbyEntered;
         _player.PickupArea.ItemNearbyExited += ResourceNearbyExited;
     }
@@ -37,6 +43,20 @@ public partial class ResourceManager : ItemManager<Resource>
 		} 
     }
 
+    private void PickUpResource()
+    {
+        var resource = PickNearestItem();
+        if (resource == null)
+            return;
+
+        if (!SetPlayerResources(resource))
+        {
+            EmitSignal(SignalName.ResourceBackpackFull);
+            return;
+        }
+        resource.QueueFree(); // TODO probably best that the ItemManager of the level does it? 
+    }
+
     /// <summary>
     /// Add resource to playerResources if there is space left
     /// </summary>
@@ -46,15 +66,21 @@ public partial class ResourceManager : ItemManager<Resource>
     {
         var resourceType = resource.resourceType;
         var resourceValue = resource.ResourceValue;
+
         if (!_playerResources.TryGetValue(resourceType, out float backpackValue))
         {
             GD.PushError($"ResourceType not known in playerResources Dictionary: {resourceType}");
             return false;
         }
+
         float newBackpackValue = backpackValue + resourceValue;
         // check if resource backpack full
-        if (backpackValue >= 3 || newBackpackValue > 3)
+        if (backpackValue >= BACKPACK_MAX_VALUE)
             return false;
+
+        // set to max if resource would exceed max backpack value
+        if (newBackpackValue > BACKPACK_MAX_VALUE)
+            newBackpackValue = BACKPACK_MAX_VALUE;
 
         _playerResources[resourceType] = newBackpackValue;
         return true;

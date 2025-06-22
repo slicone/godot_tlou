@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://pr0h4440xlxl"]
+[gd_scene load_steps=11 format=3 uid="uid://pr0h4440xlxl"]
 
 [ext_resource type="Script" uid="uid://cqu70lcyiy8wj" path="res://levels/level_state.gd" id="1_8h0w4"]
 [ext_resource type="Script" uid="uid://qiyof2180iuj" path="res://levels/enemy_manager.gd" id="2_6bswn"]
@@ -7,6 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/Player/player.tscn" id="5_kvlpm"]
 [ext_resource type="PackedScene" uid="uid://df8u6lxcfllsw" path="res://Scenes/Axe.tscn" id="7_6bswn"]
 [ext_resource type="PackedScene" uid="uid://dbejmwhbtas0k" path="res://Scenes/bolt_action.tscn" id="7_8h0w4"]
+[ext_resource type="PackedScene" uid="uid://d2ba8bqlqnwyb" path="res://resource.tscn" id="8_a3lu2"]
+[ext_resource type="Texture2D" uid="uid://df5k2ru517j36" path="res://Art/Enemies/healtbar_progress.png" id="9_03c1t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3lu2"]
+size = Vector2(28, 2)
 
 [node name="Assault_1" type="Node2D"]
 
@@ -75,7 +80,7 @@ position = Vector2(80, 200)
 position = Vector2(48, 200)
 
 [node name="Player" parent="." instance=ExtResource("5_kvlpm")]
-position = Vector2(37, 157)
+position = Vector2(248, 156)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -53)
@@ -86,3 +91,12 @@ position = Vector2(0, -53)
 collision_mask = 2
 
 [node name="BoltAction" parent="." instance=ExtResource("7_8h0w4")]
+
+[node name="Resource" parent="." instance=ExtResource("8_a3lu2")]
+position = Vector2(295, 172)
+
+[node name="Sprite2D" type="Sprite2D" parent="Resource"]
+texture = ExtResource("9_03c1t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Resource"]
+shape = SubResource("RectangleShape2D_a3lu2")

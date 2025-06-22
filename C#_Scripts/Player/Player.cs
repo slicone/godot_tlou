@@ -5,7 +5,6 @@ public partial class Player : CharacterBody2D
 {
 	[Export] public AnimationPlayer AnimationPlayer { get; set; }
 	[Export] public StateMachine StateMachine { get; set; }
-	[Export] public WeaponManager WeaponManager { get; set; }
 	[Export] public HitboxComponent HitboxComponent { get; set; }
 	[Export] public HealthComponent HealthComponent { get; set; }
 	[Export] public PickupArea PickupArea { get; set; }
@@ -27,7 +26,18 @@ public partial class Player : CharacterBody2D
 			HitboxComponent.HealthComponent = HealthComponent;
 
 		StateMachine.Init(this);
-		WeaponManager?.Init(this);
+		InitItemManagers();
+	}
+
+	private void InitItemManagers()
+	{
+		foreach (var child in GetChildren())
+    {
+        if (child is IItemManager itemManager)
+        {
+            itemManager.Init(this);
+        }
+    }
 	}
 
 	private void OnPlayerDied(Godot.Collections.Array<GlobalTypes.EnemyKillResult> killResult)
