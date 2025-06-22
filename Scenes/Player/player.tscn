@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=24 format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://d02f0ybl22d3s" path="res://C#_Scripts/Player/Player.cs" id="1_hnuln"]
 [ext_resource type="Texture2D" uid="uid://doyb00t4lty86" path="res://Art/Player/player_idle.png" id="2_7g0yx"]
+[ext_resource type="Texture2D" uid="uid://ca7rdl27avge5" path="res://Art/Player/player_bolt_action_hold.png" id="2_r5xpd"]
 [ext_resource type="Texture2D" uid="uid://b8w2kcy8ogike" path="res://Art/Player/player_2-run-Sheet.png" id="3_dey5f"]
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
@@ -107,7 +108,13 @@ PickupArea = NodePath("PickupArea")
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_mtuoh")
 
+[node name="HoldingGun" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("2_r5xpd")
+
 [node name="Idle" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 texture = ExtResource("2_7g0yx")
 
@@ -144,7 +151,7 @@ script = ExtResource("7_dey5f")
 PickupArea = NodePath("../PickupArea")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
-position = Vector2(12, -4)
+position = Vector2(5, -8)
 
 [node name="state_machine" parent="." node_paths=PackedStringArray("StartingState") instance=ExtResource("7_74mp2")]
 StartingState = NodePath("idle")
@@ -155,7 +162,7 @@ FallState = NodePath("../fall")
 JumpState = NodePath("../jump")
 MoveState = NodePath("../move")
 AnimationName = "idle"
-Animation = NodePath("../../Idle")
+Animation = NodePath("../../HoldingGun")
 
 [node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "FallState", "Animation")]
 script = ExtResource("10_ks1b7")

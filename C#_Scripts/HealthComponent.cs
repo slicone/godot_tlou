@@ -78,9 +78,9 @@ public partial class HealthComponent : Node2D
 
     private GlobalTypes.EnemyKillResult DetermineWeaponType(string weaponType)
     {
-        if (weaponType == typeof(MeleeWeapon).Name)
+        if (weaponType == typeof(MeleeAttackComponent).Name)
             return GlobalTypes.EnemyKillResult.MELEE;
-        if (weaponType == typeof(RangeWeapon).Name)
+        if (weaponType == typeof(RangeAttackComponent).Name)
             return GlobalTypes.EnemyKillResult.GUN;
         return GlobalTypes.EnemyKillResult.NONE;
     }

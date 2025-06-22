@@ -1,10 +1,10 @@
 using Godot;
 using System;
 
-interface IItem
+public interface IItem
 {
     /// <summary>
     /// Execute logic if item has entered an area
     /// </summary>
-    public void ItemNearby();
+    //public void ItemNearby();
 }

@@ -22,13 +22,13 @@ public partial class PickupArea : Area2D
 
 	private void OnEntered(Area2D area)
 	{
-		//if (area is IItem item)
-			//item.ItemNearby();
-		EmitSignal(SignalName.ItemNearbyEntered, area);
+		if (area is IItem)
+			EmitSignal(SignalName.ItemNearbyEntered, area);
 	}
 
 	private void OnExited(Area2D area)
 	{
-		EmitSignal(SignalName.ItemNearbyExited, area);
+		if(area is IItem)
+			EmitSignal(SignalName.ItemNearbyExited, area);
 	}
 }

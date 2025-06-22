@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class MeleeWeapon : Weapon
+public partial class MeleeAttackComponent : AttackComponent
 {
 	public override void _Ready()
 	{
@@ -31,9 +31,9 @@ public partial class MeleeWeapon : Weapon
 
 	public override void Attack()
 	{
-		if (_animationPlayer != null)
+		if (Weapon._animationPlayer != null)
 		{
-			_animationPlayer.Play("slash");
+			Weapon._animationPlayer.Play("slash");
 			//await ToSignal(Weapon._animationPlayer, "animation_finished");
 		}
 	}

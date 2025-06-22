@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://df8u6lxcfllsw"]
+[gd_scene load_steps=9 format=3 uid="uid://df8u6lxcfllsw"]
 
-[ext_resource type="PackedScene" uid="uid://ddw144wuk63po" path="res://Scenes/melee_weapon.tscn" id="1_wnqyi"]
-[ext_resource type="Texture2D" uid="uid://di12mqv3amnm7" path="res://Art/weapon_2.png" id="2_wmxsr"]
+[ext_resource type="PackedScene" uid="uid://bab68kfkt5wbh" path="res://Scenes/weapon.tscn" id="1_6o4l1"]
+[ext_resource type="PackedScene" uid="uid://ddw144wuk63po" path="res://Scenes/melee_attack_component.tscn" id="2_2q7ty"]
+[ext_resource type="Texture2D" uid="uid://di12mqv3amnm7" path="res://Art/weapon_2.png" id="3_dd7ca"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnqyi"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqofy"]
 size = Vector2(12, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7ob3"]
+size = Vector2(7, 6)
 
 [sub_resource type="Animation" id="Animation_dd7ca"]
 length = 0.001
@@ -91,27 +95,28 @@ _data = {
 &"slash": SubResource("Animation_rqofy")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyw2k"]
-size = Vector2(7, 6)
-
-[node name="Axe" instance=ExtResource("1_wnqyi")]
-collision_mask = 2
+[node name="Axe" node_paths=PackedStringArray("WeaponAttackComponent") instance=ExtResource("1_6o4l1")]
+WeaponAttackComponent = NodePath("MeleeAttackComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 position = Vector2(1, 0.5)
-shape = SubResource("RectangleShape2D_wnqyi")
+shape = SubResource("RectangleShape2D_rqofy")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_rqofy")
-}
+[node name="MeleeAttackComponent" parent="." index="1" node_paths=PackedStringArray("Weapon") instance=ExtResource("2_2q7ty")]
+Weapon = NodePath("..")
+AttackDamage = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="2"]
 texture_filter = 1
-texture = ExtResource("2_wmxsr")
+texture = ExtResource("3_dd7ca")
 
 [node name="AttackCollision" type="CollisionShape2D" parent="Sprite2D" index="0"]
 position = Vector2(3.5, -7)
-shape = SubResource("RectangleShape2D_pyw2k")
+shape = SubResource("RectangleShape2D_s7ob3")
 disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+root_node = NodePath("../MeleeAttackComponent")
+libraries = {
+&"": SubResource("AnimationLibrary_rqofy")
+}

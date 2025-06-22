@@ -1,10 +1,10 @@
 using Godot;
 
-public abstract partial class Weapon : Area2D
+public partial class Weapon : Area2D, IItem
 {
 
-	//[Export]
-	//public AttackComponent WeaponAttackComponent { get; set; }
+	[Export]
+	public AttackComponent WeaponAttackComponent { get; set; }
 
 	[Export]
 	public bool GravityEnabled { get; set; } = true;
@@ -58,5 +58,8 @@ public abstract partial class Weapon : Area2D
 		}
 	}
 
-	public abstract void Attack();
+	public void Attack()
+	{
+		WeaponAttackComponent?.Attack();
+	}
 }

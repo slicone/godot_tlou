@@ -1,17 +1,7 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
-public partial class WeaponManager : Node2D
+public partial class WeaponManager : ItemManager<Weapon>
 {
-	private Player _player;
-	private Weapon _currentWeapon;
-
-	private List<Weapon> _weaponsNearby = new();
-
-	[Export]
-	public PickupArea PickupArea { get; set; }
-
 	private Node2D _weaponHolder;
 
 	public override void _Ready()
@@ -19,9 +9,9 @@ public partial class WeaponManager : Node2D
 		_weaponHolder = GetNode<Node2D>("WeaponHolder");
 	}
 
-	public void Init(Player parent)
+	public override void Init(Player parent)
 	{
-		_player = parent;
+		base.Init(parent);
 
 		// Connect player signals
 		_player.Attack += OnAttack;
@@ -29,29 +19,29 @@ public partial class WeaponManager : Node2D
 		_player.Interact += OnPickUpWeapon;
 
 		// Connect item signals
-		PickupArea.ItemNearbyEntered += OnWeaponNearbyEntered;
-		PickupArea.ItemNearbyExited += OnWeaponNearbyExited;
+		_player.PickupArea.ItemNearbyEntered += OnWeaponNearbyEntered;
+		_player.PickupArea.ItemNearbyExited += OnWeaponNearbyExited;
 	}
 
 	private void OnWeaponNearbyEntered(Area2D area)
 	{
-		if (area is Weapon weapon && !_weaponsNearby.Contains(weapon))
+		if (area is Weapon weapon && !_itemsNearby.Contains(weapon))
 		{
-			_weaponsNearby.Add(weapon);
+			_itemsNearby.Add(weapon);
 		}
 	}
 
 	private void OnWeaponNearbyExited(Area2D area)
 	{
-		if (area is Weapon weapon && _weaponsNearby.Contains(weapon))
+		if (area is Weapon weapon && _itemsNearby.Contains(weapon))
 		{
-			_weaponsNearby.Remove(weapon);
+			_itemsNearby.Remove(weapon);
 		}
 	}
 
 	private void OnAttack()
 	{
-		_currentWeapon?.Attack();
+		_currentItem?.Attack();
 	}
 
 	private Weapon PickNearestWeapon()
@@ -59,9 +49,9 @@ public partial class WeaponManager : Node2D
 		float shortestDistance = float.PositiveInfinity;
 		Weapon closestWeapon = null;
 
-		foreach (var weapon in _weaponsNearby)
+		foreach (var weapon in _itemsNearby)
 		{
-			if (weapon == _currentWeapon)
+			if (weapon == _currentItem)
 				continue;
 
 			float distance = weapon.GlobalPosition.DistanceTo(_player.GlobalPosition);
@@ -77,19 +67,19 @@ public partial class WeaponManager : Node2D
 
 	private void OnDropCurrentWeapon()
 	{
-		if (_currentWeapon == null)
+		if (_currentItem == null)
 			return;
 
-		_weaponHolder.RemoveChild(_currentWeapon);
-		GetTree().CurrentScene.AddChild(_currentWeapon); // Or _player.GetWorld() equivalent
-		_currentWeapon.GlobalPosition = _player.GlobalPosition;
-		_currentWeapon.GravityEnabled = true;
-		_currentWeapon = null;
+		_weaponHolder.RemoveChild(_currentItem);
+		GetTree().CurrentScene.AddChild(_currentItem); // Or _player.GetWorld() equivalent
+		_currentItem.GlobalPosition = _player.GlobalPosition;
+		_currentItem.GravityEnabled = true;
+		_currentItem = null;
 	}
 
 	private void OnPickUpWeapon()
 	{
-		var weapon = PickNearestWeapon();
+		var weapon = PickNearestItem();
 		if (weapon == null)
 			return;
 
@@ -101,10 +91,10 @@ public partial class WeaponManager : Node2D
 		weapon.Position = Vector2.Zero;
 		weapon.GravityEnabled = false;
 
-		_currentWeapon = weapon;
+		_currentItem = weapon;
 	}
 
-	// Placeholder for animation control
+	// Placeholder for animation contrrl
 	public void SetAnimation(string animation)
 	{
 		// TODO: Implement animation logic

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class RangeWeapon : Weapon
+public partial class RangeAttackComponent : AttackComponent
 {
 	[Export]
 	public float FireRate { get; set; } = 0.5f;
@@ -43,7 +43,7 @@ public partial class RangeWeapon : Weapon
 	{
 		if (_canFire)
 		{
-			_animationPlayer?.Play("shoot");
+			Weapon._animationPlayer?.Play("shoot");
 			Shoot();
 		}
 	}

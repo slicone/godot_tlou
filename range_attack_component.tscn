@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://da1circ2p1gab"]
 
-[ext_resource type="Script" uid="uid://i5tsmn7becjf" path="res://C#_Scripts/Weapon/RangeWeapon.cs" id="1_b3g7e"]
+[ext_resource type="Script" uid="uid://i5tsmn7becjf" path="res://C#_Scripts/Weapon/RangeAttackComponent.cs" id="1_pwa8c"]
 
-[node name="RangeWeapon" type="Area2D"]
-script = ExtResource("1_b3g7e")
+[node name="RangeAttackComponent" type="Area2D"]
+script = ExtResource("1_pwa8c")
 
 [node name="FireTimer" type="Timer" parent="."]
 

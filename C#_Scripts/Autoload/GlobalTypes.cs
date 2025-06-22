@@ -30,5 +30,15 @@ public partial class GlobalTypes : Node
 		BOSS
 	}
 
+	public enum ResourceType
+	{
+		ETHANOL,
+		PAPER,
+		PLASTIC,
+		GUNPOWDER,
+		TAPE,
+		SCISSOR
+	}
+
 	public const float PreparationTimeInSec = 2f;
 }

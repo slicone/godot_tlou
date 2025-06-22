@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddw144wuk63po"]
+
+[ext_resource type="Script" uid="uid://dqq6a4psh3ho4" path="res://C#_Scripts/Weapon/MeleeAttackComponent.cs" id="1_tqhb8"]
+
+[node name="MeleeAttackComponent" type="Area2D"]
+script = ExtResource("1_tqhb8")
