@@ -79,18 +79,20 @@ position = Vector2(80, 200)
 [node name="Platform7" parent="platforms" instance=ExtResource("4_03c1t")]
 position = Vector2(48, 200)
 
-[node name="Player" parent="." instance=ExtResource("5_kvlpm")]
-position = Vector2(248, 156)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -53)
-
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
 [node name="Axe" parent="." instance=ExtResource("7_6bswn")]
 collision_mask = 2
 
 [node name="BoltAction" parent="." instance=ExtResource("7_8h0w4")]
+position = Vector2(260, 150)
+AttackDamage = 70.0
+
+[node name="Player" parent="." instance=ExtResource("5_kvlpm")]
+position = Vector2(248, 156)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -53)
 
 [node name="Resource" parent="." instance=ExtResource("8_a3lu2")]
 position = Vector2(295, 172)

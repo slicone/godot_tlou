@@ -22,16 +22,16 @@ public partial class ResourceManager : ItemManager
     }
 
     private void PickUpResource(Area2D area)
-    {   
+    {
         if (area == null || area is not Resource resource)
-			return;
+            return;
 
         if (!SetPlayerResources(resource))
         {
             EmitSignal(SignalName.ResourceBackpackFull);
             return;
         }
-        resource.QueueFree(); // TODO probably best that the ItemManager of the level does it? 
+        resource.QueueFree(); // TODO probably best that the ItemManager of the level does it?
     }
 
     /// <summary>

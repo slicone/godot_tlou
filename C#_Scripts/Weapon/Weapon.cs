@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Weapon : Area2D, IItem
+public partial class Weapon : Item
 {
 
 	[Export]

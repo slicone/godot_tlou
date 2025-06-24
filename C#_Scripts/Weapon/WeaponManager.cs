@@ -35,6 +35,7 @@ public partial class WeaponManager : ItemManager
 		GetTree().CurrentScene.AddChild(currentWeapon); // Or _player.GetWorld() equivalent
 		currentWeapon.GlobalPosition = player.GlobalPosition;
 		currentWeapon.GravityEnabled = true;
+		currentWeapon.IsItemEquipped = false;
 		currentWeapon = null;
 	}
 
@@ -52,6 +53,7 @@ public partial class WeaponManager : ItemManager
 		weapon.GravityEnabled = false;
 
 		currentWeapon = weapon;
+		weapon.IsItemEquipped = true;
 	}
 
 	// Placeholder for animation contrrl
