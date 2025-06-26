@@ -1,14 +1,372 @@
-[gd_scene load_steps=11 format=3 uid="uid://pr0h4440xlxl"]
+[gd_scene load_steps=14 format=4 uid="uid://pr0h4440xlxl"]
 
 [ext_resource type="Script" uid="uid://cqu70lcyiy8wj" path="res://levels/level_state.gd" id="1_8h0w4"]
 [ext_resource type="Script" uid="uid://qiyof2180iuj" path="res://levels/enemy_manager.gd" id="2_6bswn"]
 [ext_resource type="Script" uid="uid://dy47ixfx16oo4" path="res://levels/assault_score_system.gd" id="3_a3lu2"]
-[ext_resource type="PackedScene" uid="uid://jhnl70vwrpeb" path="res://Scenes/Structures/platform.tscn" id="4_03c1t"]
 [ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/Player/player.tscn" id="5_kvlpm"]
 [ext_resource type="PackedScene" uid="uid://df8u6lxcfllsw" path="res://Scenes/Axe.tscn" id="7_6bswn"]
 [ext_resource type="PackedScene" uid="uid://dbejmwhbtas0k" path="res://Scenes/bolt_action.tscn" id="7_8h0w4"]
 [ext_resource type="PackedScene" uid="uid://d2ba8bqlqnwyb" path="res://resource.tscn" id="8_a3lu2"]
 [ext_resource type="Texture2D" uid="uid://df5k2ru517j36" path="res://Art/Enemies/healtbar_progress.png" id="9_03c1t"]
+[ext_resource type="Texture2D" uid="uid://b06gvltidbo33" path="res://Art/Background/assault_1_background.png" id="10_03c1t"]
+[ext_resource type="Texture2D" uid="uid://dtnrbeaujavl3" path="res://Art/Tiles/Solaria Demo Tiles.png" id="11_kvlpm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kvlpm"]
+texture = ExtResource("11_kvlpm")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+18:0/0 = 0
+19:0/0 = 0
+20:0/0 = 0
+21:0/0 = 0
+22:0/0 = 0
+23:0/0 = 0
+24:0/0 = 0
+25:0/0 = 0
+26:0/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+21:1/0 = 0
+22:1/0 = 0
+23:1/0 = 0
+24:1/0 = 0
+25:1/0 = 0
+26:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+20:2/0 = 0
+21:2/0 = 0
+22:2/0 = 0
+23:2/0 = 0
+24:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+19:3/0 = 0
+20:3/0 = 0
+21:3/0 = 0
+22:3/0 = 0
+23:3/0 = 0
+24:3/0 = 0
+25:3/0 = 0
+27:3/0 = 0
+0:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+18:4/0 = 0
+19:4/0 = 0
+20:4/0 = 0
+22:4/0 = 0
+23:4/0 = 0
+24:4/0 = 0
+27:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+18:5/0 = 0
+19:5/0 = 0
+20:5/0 = 0
+21:5/0 = 0
+22:5/0 = 0
+23:5/0 = 0
+24:5/0 = 0
+25:5/0 = 0
+26:5/0 = 0
+27:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+18:6/0 = 0
+19:6/0 = 0
+20:6/0 = 0
+21:6/0 = 0
+22:6/0 = 0
+23:6/0 = 0
+24:6/0 = 0
+25:6/0 = 0
+26:6/0 = 0
+27:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+16:7/0 = 0
+17:7/0 = 0
+18:7/0 = 0
+19:7/0 = 0
+21:7/0 = 0
+22:7/0 = 0
+23:7/0 = 0
+24:7/0 = 0
+25:7/0 = 0
+26:7/0 = 0
+27:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+16:8/0 = 0
+17:8/0 = 0
+18:8/0 = 0
+19:8/0 = 0
+20:8/0 = 0
+21:8/0 = 0
+22:8/0 = 0
+23:8/0 = 0
+24:8/0 = 0
+25:8/0 = 0
+26:8/0 = 0
+27:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+1:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.1423, 8, -6.1423, 8, 8, -8, 8)
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+16:9/0 = 0
+17:9/0 = 0
+18:9/0 = 0
+19:9/0 = 0
+21:9/0 = 0
+23:9/0 = 0
+24:9/0 = 0
+25:9/0 = 0
+26:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+12:10/0 = 0
+13:10/0 = 0
+14:10/0 = 0
+15:10/0 = 0
+16:10/0 = 0
+17:10/0 = 0
+18:10/0 = 0
+19:10/0 = 0
+20:10/0 = 0
+21:10/0 = 0
+22:10/0 = 0
+23:10/0 = 0
+24:10/0 = 0
+25:10/0 = 0
+26:10/0 = 0
+27:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+14:11/0 = 0
+15:11/0 = 0
+16:11/0 = 0
+17:11/0 = 0
+18:11/0 = 0
+19:11/0 = 0
+20:11/0 = 0
+22:11/0 = 0
+23:11/0 = 0
+24:11/0 = 0
+25:11/0 = 0
+26:11/0 = 0
+27:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+12:12/0 = 0
+13:12/0 = 0
+14:12/0 = 0
+15:12/0 = 0
+16:12/0 = 0
+17:12/0 = 0
+18:12/0 = 0
+19:12/0 = 0
+22:12/0 = 0
+23:12/0 = 0
+24:12/0 = 0
+25:12/0 = 0
+27:12/0 = 0
+0:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+5:13/0 = 0
+9:13/0 = 0
+10:13/0 = 0
+11:13/0 = 0
+12:13/0 = 0
+13:13/0 = 0
+14:13/0 = 0
+15:13/0 = 0
+16:13/0 = 0
+17:13/0 = 0
+0:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+5:14/0 = 0
+9:14/0 = 0
+10:14/0 = 0
+11:14/0 = 0
+12:14/0 = 0
+6:3/size_in_atlas = Vector2i(1, 2)
+6:3/0 = 0
+6:10/size_in_atlas = Vector2i(3, 5)
+6:10/0 = 0
+7:0/size_in_atlas = Vector2i(3, 3)
+7:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5qtuw"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_kvlpm")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3lu2"]
 size = Vector2(28, 2)
@@ -29,67 +387,21 @@ level_state = NodePath("../AssaultLevelState")
 script = ExtResource("3_a3lu2")
 enemy_manager = NodePath("../EnemyManager")
 
-[node name="platforms" type="Node" parent="."]
-
-[node name="Platform" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(16, 200)
-collision_layer = 3
-
-[node name="Platform14" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(-16, 168)
-collision_layer = 3
-
-[node name="Platform15" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(431, 168)
-collision_layer = 3
-
-[node name="Platform2" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(208, 200)
-
-[node name="Platform8" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(303, 200)
-
-[node name="Platform11" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(335, 200)
-
-[node name="Platform12" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(367, 200)
-
-[node name="Platform13" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(399, 200)
-
-[node name="Platform9" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(272, 200)
-
-[node name="Platform10" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(240, 200)
-
-[node name="Platform3" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(176, 200)
-
-[node name="Platform4" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(144, 200)
-
-[node name="Platform5" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(112, 200)
-
-[node name="Platform6" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(80, 200)
-
-[node name="Platform7" parent="platforms" instance=ExtResource("4_03c1t")]
-position = Vector2(48, 200)
-
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+position = Vector2(192, 199.77)
+rotation = -0.000908292
+tile_map_data = PackedByteArray("AAD/////AAABAAkAAAD+////AAABAAkAAAD9////AAABAAkAAAD8////AAABAAkAAAD7////AAABAAkAAAD6////AAABAAkAAAAAAP//AAABAAkAAAD5////AAABAAkAAAD4////AAABAAkAAAD3////AAABAAkAAAD2////AAABAAkAAAABAP//AAABAAkAAAACAP//AAABAAkAAAADAP//AAABAAkAAAAEAP//AAABAAkAAAAFAP//AAABAAkAAAAGAP//AAABAAkAAAAHAP//AAABAAkAAAAIAP//AAABAAkAAAAJAP//AAABAAkAAAAKAP//AAABAAkAAAALAP//AAABAAkAAAAMAP//AAABAAkAAAANAP//AAABAAkAAAD0////AAABAAkAAAD1////AAABAAkAAAD0/wAAAAAFAAQAAAD1/wAAAAAFAAQAAAD2/wAAAAAFAAQAAAD3/wAAAAAFAAQAAAD4/wAAAAAFAAQAAAD5/wAAAAAFAAQAAAD6/wAAAAAFAAQAAAD7/wAAAAAFAAQAAAD8/wAAAAAFAAQAAAD9/wAAAAAFAAQAAAD+/wAAAAAFAAQAAAD//wAAAAAFAAQAAAAAAAAAAAAFAAQAAAABAAAAAAAFAAQAAAACAAAAAAAFAAQAAAADAAAAAAAFAAQAAAAEAAAAAAAFAAQAAAAFAAAAAAAFAAQAAAAGAAAAAAAFAAQAAAAHAAAAAAAFAAQAAAAIAAAAAAAFAAQAAAAJAAAAAAAFAAQAAAAKAAAAAAAFAAQAAAALAAAAAAAFAAQAAAAMAAAAAAAFAAQAAAANAAAAAAAFAAQAAADz////AAABAAkAAADy////AAABAAkAAADx////AAABAAkAAADw////AAABAAkAAADv////AAABAAkAAADu////AAABAAkAAADt////AAABAAkAAADs////AAABAAkAAADr////AAABAAkAAADq////AAABAAkAAADp////AAABAAkAAADo////AAABAAkAAADn////AAABAAkAAADm////AAABAAkAAADl////AAABAAkAAADk////AAABAAkAAADj////AAABAAkAAADi////AAABAAkAAADh////AAABAAkAAADg////AAABAAkAAADf////AAABAAkAAADe////AAABAAkAAAAOAP//AAABAAkAAAAPAP//AAABAAkAAAAQAP//AAABAAkAAAARAP//AAABAAkAAAASAP//AAABAAkAAAATAP//AAABAAkAAAAUAP//AAABAAkAAAAVAP//AAABAAkAAAAWAP//AAABAAkAAAAXAP//AAABAAkAAAAYAP//AAABAAkAAAAZAP//AAABAAkAAAAaAP//AAABAAkAAAAbAP//AAABAAkAAAAcAP//AAABAAkAAAAdAP//AAABAAkAAAAeAP//AAABAAkAAAAfAP//AAABAAkAAAAgAP//AAABAAkAAAAhAP//AAABAAkAAAAiAP//AAABAAkAAADz/wAAAAAFAAQAAADy/wAAAAAFAAQAAADx/wAAAAAFAAQAAADw/wAAAAAFAAQAAADv/wAAAAAFAAQAAADu/wAAAAAFAAQAAADt/wAAAAAFAAQAAADs/wAAAAAFAAQAAADr/wAAAAAFAAQAAADq/wAAAAAFAAQAAADp/wAAAAAFAAQAAADo/wAAAAAFAAQAAADn/wAAAAAFAAQAAADm/wAAAAAFAAQAAADl/wAAAAAFAAQAAADk/wAAAAAFAAQAAADj/wAAAAAFAAQAAADi/wAAAAAFAAQAAADh/wAAAAAFAAQAAADg/wAAAAAFAAQAAADf/wAAAAAFAAQAAADe/wAAAAAFAAQAAAAOAAAAAAAFAAQAAAAPAAAAAAAFAAQAAAAQAAAAAAAFAAQAAAARAAAAAAAFAAQAAAASAAAAAAAFAAQAAAATAAAAAAAFAAQAAAAUAAAAAAAFAAQAAAAVAAAAAAAFAAQAAAAWAAAAAAAFAAQAAAAXAAAAAAAFAAQAAAAYAAAAAAAFAAQAAAAZAAAAAAAFAAQAAAAaAAAAAAAFAAQAAAAbAAAAAAAFAAQAAAAcAAAAAAAFAAQAAAAdAAAAAAAFAAQAAAAeAAAAAAAFAAQAAAAfAAAAAAAFAAQAAAAgAAAAAAAFAAQAAAAhAAAAAAAFAAQAAAAiAAAAAAAFAAQAAADd//7/AAABAAkAAADd//3/AAABAAkAAADd//z/AAABAAkAAADd//v/AAABAAkAAADd//r/AAABAAkAAADd//n/AAABAAkAAAAjAP7/AAABAAkAAAAjAP3/AAABAAkAAAAjAPz/AAABAAkAAAAjAPv/AAABAAkAAAAjAPr/AAABAAkAAAAjAPn/AAABAAkAAAA=")
+tile_set = SubResource("TileSet_5qtuw")
 
 [node name="Axe" parent="." instance=ExtResource("7_6bswn")]
 collision_mask = 2
 
 [node name="BoltAction" parent="." instance=ExtResource("7_8h0w4")]
-position = Vector2(260, 150)
-AttackDamage = 70.0
+position = Vector2(243, 166)
 
 [node name="Player" parent="." instance=ExtResource("5_kvlpm")]
-position = Vector2(248, 156)
+position = Vector2(192, 159)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -53)
@@ -102,3 +414,14 @@ texture = ExtResource("9_03c1t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Resource"]
 shape = SubResource("RectangleShape2D_a3lu2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+position = Vector2(192, 50.355)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("10_03c1t")

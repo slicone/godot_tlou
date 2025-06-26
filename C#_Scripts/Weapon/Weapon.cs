@@ -9,9 +9,6 @@ public partial class Weapon : Item
 	[Export]
 	public bool GravityEnabled { get; set; } = true;
 
-	[Export]
-	public float AttackDamage { get; set; } = 20.0f;
-
 	private Vector2 _velocity = Vector2.Zero;
 
 	public AnimationPlayer _animationPlayer;
@@ -41,7 +38,7 @@ public partial class Weapon : Item
 	{
 		foreach (var body in bodies)
 		{
-			if (body is StaticBody2D)
+			if (body is StaticBody2D || body is TileMapLayer)
 				return true;
 		}
 		return false;

@@ -11,17 +11,27 @@ public partial class State : Node
 
 	public Player Parent { get; set; }
 
+	//public GlobalTypes.PlayerAnimationState weaponState = GlobalTypes.PlayerAnimationState.NOGUN; 
+
 	public virtual void Enter()
 	{
-		Parent.AnimationPlayer.Play(AnimationName);
-		if (Animation != null)
-			Animation.Visible = true;
+
+		//if (Animation != null)
+		//	Animation.Visible = true;
+		/*
+		if (Parent.HasWeapon)
+		{
+			((Node2D)Parent.GetNode("RangeWeaponIdle")).Visible = true;
+			return;
+		}
+		((Node2D)Parent.GetNode("RangeWeaponIdle")).Visible = false;
+		*/
 	}
 
 	public virtual void Exit()
 	{
-		if (Animation != null)
-			Animation.Visible = false;
+		//if (Animation != null)
+		//	Animation.Visible = false;
 	}
 
 	public virtual State ProcessInput(InputEvent inputEvent)
@@ -42,12 +52,18 @@ public partial class State : Node
 	protected void CheckNonStateInput()
 	{
 		if (Input.IsActionJustPressed("interact"))
+		{
 			Parent.TriggerInteract();
+		}
 
 		if (Input.IsActionJustPressed("drop"))
+		{
 			Parent.TriggerDrop();
+		}
 
 		if (Input.IsActionJustPressed("attack"))
+		{
 			Parent.TriggerAttack();
+		}
 	}
 }

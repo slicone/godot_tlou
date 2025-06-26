@@ -3,7 +3,8 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-	[Export] public AnimationPlayer AnimationPlayer { get; set; }
+	//[Export] public AnimationPlayer AnimationPlayer { get; set; }
+	[Export] public PlayerAnimationTree PlayerAnimationTree { get; set; }
 	[Export] public StateMachine StateMachine { get; set; }
 	[Export] public HitboxComponent HitboxComponent { get; set; }
 	[Export] public HealthComponent HealthComponent { get; set; }
@@ -17,6 +18,22 @@ public partial class Player : CharacterBody2D
 	[Signal] public delegate void AttackEventHandler();
 	[Signal] public delegate void InteractEventHandler();
 	[Signal] public delegate void DropEventHandler();
+	private GlobalTypes.PlayerAnimationState _playerAnimationState = GlobalTypes.PlayerAnimationState.NOGUN;
+
+	public GlobalTypes.PlayerAnimationState PlayerAnimationState
+	{
+		get => _playerAnimationState;
+		// always notify state_machine that state of player has to be refreshed
+		set
+		{
+			_playerAnimationState = value;
+			StateMachine?.PlayerAnimationStateChanged();
+		}
+	}
+
+	// Node because sometimes Sprites can be collected in a Node2D
+	// Is used to make current sprite not visible for next state
+	public Node2D currentSprite;
 
 	public override void _Ready()
 	{
@@ -26,6 +43,7 @@ public partial class Player : CharacterBody2D
 		if (HitboxComponent != null && HealthComponent != null)
 			HitboxComponent.HealthComponent = HealthComponent;
 
+		PlayerAnimationTree.Init(this);
 		StateMachine.Init(this);
 		InitItemManagers();
 	}

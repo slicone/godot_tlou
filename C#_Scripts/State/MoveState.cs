@@ -9,6 +9,11 @@ public partial class MoveState : State
 
 	private float timeSinceInput = 0f;
 
+	public override void Enter()
+	{
+		Parent.PlayerAnimationTree.SetRunAnimation(Parent.PlayerAnimationState);
+	}
+
 	public override State ProcessInput(InputEvent @event)
 	{
 		CheckNonStateInput();
@@ -43,7 +48,6 @@ public partial class MoveState : State
 		}
 		else
 		{
-			
 			Parent.Velocity = new Vector2(Mathf.MoveToward(Parent.Velocity.X, 0, Parent.StopSpeed * (float) delta), Parent.Velocity.Y);
 
 			if (Mathf.IsEqualApprox(Parent.Velocity.X, 0))

@@ -3,17 +3,23 @@ using System;
 
 public partial class IdleState : State
 {
-	[Export] 
+	[Export]
 	public State FallState { get; set; }
-	[Export] 
+	[Export]
 	public State JumpState { get; set; }
-	[Export] 
+	[Export]
 	public State MoveState { get; set; }
 
 	public override void Enter()
 	{
-		base.Enter();
+		Parent.PlayerAnimationTree.SetIdleAnimation(Parent.PlayerAnimationState);
 	}
+
+	public override void Exit()
+	{
+		base.Exit();
+	}
+
 
 	public override State ProcessInput(InputEvent @event)
 	{

@@ -39,6 +39,13 @@ public partial class GlobalTypes : Node
 		TAPE,
 		SCISSOR
 	}
+	
+	public enum PlayerAnimationState
+	{
+		NOGUN,
+		RANGEWEAPON,
+		MELEEWEAPON
+	}
 
 	public const float PreparationTimeInSec = 2f;
 }

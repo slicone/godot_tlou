@@ -37,6 +37,7 @@ public partial class WeaponManager : ItemManager
 		currentWeapon.GravityEnabled = true;
 		currentWeapon.IsItemEquipped = false;
 		currentWeapon = null;
+		player.PlayerAnimationState = GlobalTypes.PlayerAnimationState.NOGUN;
 	}
 
 	private void PickUpWeapon(Area2D area)
@@ -54,11 +55,14 @@ public partial class WeaponManager : ItemManager
 
 		currentWeapon = weapon;
 		weapon.IsItemEquipped = true;
+		player.PlayerAnimationState = weapon.WeaponAttackComponent is RangeAttackComponent
+			? GlobalTypes.PlayerAnimationState.RANGEWEAPON 
+			: GlobalTypes.PlayerAnimationState.MELEEWEAPON;
 	}
 
-	// Placeholder for animation contrrl
-	public void SetAnimation(string animation)
+	// Placeholder for animation control
+	public void SetAnimation(Weapon weapon)
 	{
-		// TODO: Implement animation logic
+		// TODO maybe if Weapon has multiple animations? Like player gets upgrade for example an now different animation?	
 	}
 }

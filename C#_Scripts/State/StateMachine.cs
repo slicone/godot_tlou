@@ -21,6 +21,11 @@ public partial class StateMachine : Node
 		ChangeState(StartingState);
 	}
 
+	public void PlayerAnimationStateChanged()
+	{
+		_currentState?.Enter();
+	}
+
 	public void ChangeState(State newState)
 	{
 		if (_currentState != null)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=48 format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://d02f0ybl22d3s" path="res://C#_Scripts/Player/Player.cs" id="1_hnuln"]
 [ext_resource type="Texture2D" uid="uid://doyb00t4lty86" path="res://Art/Player/player_idle.png" id="2_7g0yx"]
-[ext_resource type="Texture2D" uid="uid://ca7rdl27avge5" path="res://Art/Player/player_bolt_action_hold.png" id="2_r5xpd"]
+[ext_resource type="Texture2D" uid="uid://c56vh4anm0uig" path="res://Art/Player/player_bolt_action_hold_1.png" id="2_h8ma5"]
 [ext_resource type="Texture2D" uid="uid://b8w2kcy8ogike" path="res://Art/Player/player_2-run-Sheet.png" id="3_dey5f"]
+[ext_resource type="Texture2D" uid="uid://dfwo4xr8i2r45" path="res://Art/Player/player_bolt_action_hold_2.png" id="3_eksi1"]
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
 [ext_resource type="Script" uid="uid://bh4el1n8edue7" path="res://C#_Scripts/Player/PickupArea.cs" id="6_dey5f"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
 [ext_resource type="Script" uid="uid://c387qppn24ij5" path="res://C#_Scripts/Weapon/WeaponManager.cs" id="7_dey5f"]
 [ext_resource type="Script" uid="uid://cwi0yoks3d3as" path="res://Scenes/Player/ResourceManager.cs" id="8_ks1b7"]
+[ext_resource type="Script" uid="uid://3vobuoj6m80j" path="res://C#_Scripts/Player/RecipeManager.cs" id="8_rcvs5"]
 [ext_resource type="Script" uid="uid://bgumwo5pneyt6" path="res://C#_Scripts/State/IdleState.cs" id="9_r5xpd"]
 [ext_resource type="Script" uid="uid://cmxxcqiogmoiu" path="res://C#_Scripts/State/JumpState.cs" id="10_ks1b7"]
 [ext_resource type="Script" uid="uid://d1540urggk0r0" path="res://C#_Scripts/State/FallState.cs" id="11_hnuln"]
@@ -18,6 +20,8 @@
 [ext_resource type="Script" uid="uid://b7xnkre26o5s7" path="res://C#_Scripts/State/MoveState.cs" id="12_aqm4k"]
 [ext_resource type="Texture2D" uid="uid://df5k2ru517j36" path="res://Art/Enemies/healtbar_progress.png" id="13_7g0yx"]
 [ext_resource type="Script" uid="uid://d0dsekm21iw8" path="res://C#_Scripts/HealthBar.cs" id="16_r5xpd"]
+[ext_resource type="Script" uid="uid://bdaebiqjid0id" path="res://C#_Scripts/Item/Recipe.cs" id="20_h8ma5"]
+[ext_resource type="Script" uid="uid://c2xe60m1bmxim" path="res://C#_Scripts/Player/PlayerAnimationTree.cs" id="22_eksi1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtuoh"]
 size = Vector2(18, 47)
@@ -28,6 +32,80 @@ size = Vector2(18, 47)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mtuoh"]
 radius = 24.0
 height = 78.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jincj"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rqdc0"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qr1w5"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ythyg"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_bmb2s"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_jincj")
+blend_point_0/pos = Vector2(-1, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_rqdc0")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_qr1w5")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_ythyg")
+blend_point_3/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bmb2s"]
+animation = &"idle_range"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ur3l4"]
+animation = &"idle_range"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_2ahak"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_bmb2s")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_ur3l4")
+blend_point_1/pos = -1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eksi1"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2ahak"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_rukb4"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_eksi1")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_2ahak")
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qr1w5"]
+advance_mode = 2
+advance_expression = "PlayerAnimationState == 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4no11"]
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcwna"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eksi1"]
+advance_mode = 2
+advance_expression = "PlayerAnimationState == 1"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2ahak"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_bmb2s")
+states/Idle/position = Vector2(351, 100)
+states/Idle_Range/node = SubResource("AnimationNodeBlendSpace1D_2ahak")
+states/Idle_Range/position = Vector2(351, 279)
+states/Run/node = SubResource("AnimationNodeBlendSpace1D_rukb4")
+states/Run/position = Vector2(617, 100)
+states/Start/position = Vector2(125, 193)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qr1w5"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_4no11"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_fcwna"), "Start", "Idle_Range", SubResource("AnimationNodeStateMachineTransition_eksi1")]
+graph_offset = Vector2(-231, -21)
 
 [sub_resource type="Animation" id="Animation_dd0ac"]
 length = 0.001
@@ -50,6 +128,30 @@ tracks/1/path = NodePath("Idle:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RangeWeaponIdle/HoldingGun_1:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RangeWeaponIdle/HoldingGun_2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -90,30 +192,69 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
+[sub_resource type="Animation" id="Animation_rqdc0"]
+resource_name = "run_range"
+
+[sub_resource type="Animation" id="Animation_qr1w5"]
+resource_name = "idle_range"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RangeWeaponIdle/HoldingGun_1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RangeWeaponIdle/HoldingGun_2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0u5uq"]
 _data = {
 &"RESET": SubResource("Animation_dd0ac"),
 &"idle": SubResource("Animation_htcer"),
-&"run": SubResource("Animation_0u5uq")
+&"idle_range": SubResource("Animation_qr1w5"),
+&"run": SubResource("Animation_0u5uq"),
+&"run_range": SubResource("Animation_rqdc0")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "StateMachine", "HitboxComponent", "HealthComponent", "NearbyItemTracker", "PickupArea") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerAnimationTree", "StateMachine", "HitboxComponent", "HealthComponent", "NearbyItemTracker", "PickupArea") groups=["Player"]]
 script = ExtResource("1_hnuln")
-AnimationPlayer = NodePath("AnimationPlayer")
+PlayerAnimationTree = NodePath("PlayerAnimation")
 StateMachine = NodePath("state_machine")
 HitboxComponent = NodePath("HitboxComponent")
 HealthComponent = NodePath("HealthComponent")
-NearbyItemTracker = NodePath("NearbyItemManager")
+NearbyItemTracker = NodePath("NearbyItemTracker")
 PickupArea = NodePath("PickupArea")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_mtuoh")
 
-[node name="HoldingGun" type="Sprite2D" parent="."]
+[node name="RangeWeaponIdle" type="Node2D" parent="."]
 visible = false
+
+[node name="HoldingGun_1" type="Sprite2D" parent="RangeWeaponIdle"]
 texture_filter = 1
-texture = ExtResource("2_r5xpd")
+texture = ExtResource("2_h8ma5")
+
+[node name="HoldingGun_2" type="Sprite2D" parent="RangeWeaponIdle"]
+z_index = 2
+texture_filter = 1
+texture = ExtResource("3_eksi1")
 
 [node name="Idle" type="Sprite2D" parent="."]
 visible = false
@@ -127,9 +268,6 @@ texture = ExtResource("3_dey5f")
 hframes = 5
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_mtuoh")]
-
-[node name="NearbyItemManager" type="Node" parent="."]
-script = ExtResource("6_hnuln")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("HealthComponent") groups=["Player"] instance=ExtResource("4_htcer")]
 HealthComponent = NodePath("../HealthComponent")
@@ -146,10 +284,11 @@ visible = false
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_mtuoh")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0u5uq")
-}
+[node name="RecipeManager" type="Node" parent="."]
+script = ExtResource("8_rcvs5")
+
+[node name="NearbyItemTracker" type="Node" parent="."]
+script = ExtResource("6_hnuln")
 
 [node name="ResourceManager" type="Node" parent="."]
 script = ExtResource("8_ks1b7")
@@ -158,7 +297,7 @@ script = ExtResource("8_ks1b7")
 script = ExtResource("7_dey5f")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
-position = Vector2(5, -8)
+position = Vector2(7, -10)
 
 [node name="state_machine" parent="." node_paths=PackedStringArray("StartingState") instance=ExtResource("7_74mp2")]
 StartingState = NodePath("idle")
@@ -169,21 +308,19 @@ FallState = NodePath("../fall")
 JumpState = NodePath("../jump")
 MoveState = NodePath("../move")
 AnimationName = "idle"
-Animation = NodePath("../../HoldingGun")
+Animation = NodePath("../../Idle")
 
 [node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "FallState", "Animation")]
 script = ExtResource("10_ks1b7")
 IdleState = NodePath("../idle")
 MoveState = NodePath("../move")
 FallState = NodePath("../fall")
-AnimationName = "run"
 Animation = NodePath("../../Run")
 
 [node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "Animation")]
 script = ExtResource("11_hnuln")
 IdleState = NodePath("../idle")
 MoveState = NodePath("../move")
-AnimationName = "run"
 Animation = NodePath("../../Run")
 
 [node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "FallState", "JumpState", "Animation")]
@@ -191,7 +328,6 @@ script = ExtResource("12_aqm4k")
 IdleState = NodePath("../idle")
 FallState = NodePath("../fall")
 JumpState = NodePath("../jump")
-AnimationName = "run"
 Animation = NodePath("../../Run")
 
 [node name="EnemyProgressBar" type="TextureProgressBar" parent="."]
@@ -203,3 +339,25 @@ offset_bottom = 10.0
 texture_under = ExtResource("12_7g0yx")
 texture_progress = ExtResource("13_7g0yx")
 script = ExtResource("16_r5xpd")
+
+[node name="Recipe" type="Area2D" parent="."]
+script = ExtResource("20_h8ma5")
+
+[node name="PlayerAnimation" type="Node2D" parent="." node_paths=PackedStringArray("AnimationTree")]
+script = ExtResource("22_eksi1")
+AnimationTree = NodePath("../AnimationTree")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_2ahak")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/run = false
+parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Idle_Range/blend_position = 0
+parameters/Run/blend_position = -0.997894
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0u5uq")
+}
