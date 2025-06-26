@@ -25,7 +25,7 @@ public partial class PlayerAnimationTree : Node2D
         {
             case GlobalTypes.PlayerAnimationState.NOGUN:
             {
-                var spriteWithOut = player.GetNode<Node2D>("Idle");
+                var spriteWithOut = player.GetNode<Sprite2D>("Idle");
                 spriteWithOut.Visible = true;
                 player.currentSprite = spriteWithOut;
                 break;    
@@ -54,16 +54,17 @@ public partial class PlayerAnimationTree : Node2D
         {
             case GlobalTypes.PlayerAnimationState.NOGUN:
                 {
-                    var spriteWithOut = player.GetNode<Node2D>("Run");
+                    var spriteWithOut = player.GetNode<Sprite2D>("Run");
                     spriteWithOut.Visible = true;
                     player.currentSprite = spriteWithOut;
                     break;
                 }
             case GlobalTypes.PlayerAnimationState.RANGEWEAPON:
                 {
-                    //var sprite = player.GetNode<Node2D>("RangeWeaponIdle");
-                    //sprite.Visible = true;
-                    //player.currentSprite = sprite;
+                    // TODO make new animation
+                    var spriteWithOut = player.GetNode<Node2D>("RangeWeaponRun");
+                    spriteWithOut.Visible = true;
+                    player.currentSprite = spriteWithOut;
                     break;
                 }
         }

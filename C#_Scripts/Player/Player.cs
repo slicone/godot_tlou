@@ -3,7 +3,6 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-	//[Export] public AnimationPlayer AnimationPlayer { get; set; }
 	[Export] public PlayerAnimationTree PlayerAnimationTree { get; set; }
 	[Export] public StateMachine StateMachine { get; set; }
 	[Export] public HitboxComponent HitboxComponent { get; set; }
@@ -18,8 +17,9 @@ public partial class Player : CharacterBody2D
 	[Signal] public delegate void AttackEventHandler();
 	[Signal] public delegate void InteractEventHandler();
 	[Signal] public delegate void DropEventHandler();
-	private GlobalTypes.PlayerAnimationState _playerAnimationState = GlobalTypes.PlayerAnimationState.NOGUN;
 
+	// Additional weapon state. Needed because different animations for different weapons/no weapon
+	private GlobalTypes.PlayerAnimationState _playerAnimationState = GlobalTypes.PlayerAnimationState.NOGUN;
 	public GlobalTypes.PlayerAnimationState PlayerAnimationState
 	{
 		get => _playerAnimationState;
