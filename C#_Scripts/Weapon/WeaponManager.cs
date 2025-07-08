@@ -32,7 +32,7 @@ public partial class WeaponManager : ItemManager
 			return;
 
 		_weaponHolder.RemoveChild(currentWeapon);
-		GetTree().CurrentScene.AddChild(currentWeapon); // Or _player.GetWorld() equivalent
+		GetTree().CurrentScene.AddChild(currentWeapon);
 		currentWeapon.GlobalPosition = player.GlobalPosition;
 		currentWeapon.GravityEnabled = true;
 		currentWeapon.IsItemEquipped = false;

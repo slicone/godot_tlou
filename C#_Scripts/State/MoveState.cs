@@ -33,8 +33,8 @@ public partial class MoveState : State
 
 		if (movement != 0)
 		{
-			if (Animation != null)
-				Animation.FlipH = movement < 0;
+			//if (Animation != null)
+			//	Animation.FlipH = movement < 0;
 
 			// Optional: flip weapon holder and current weapon sprite if needed
 			// if (Parent.WeaponHolder.Position.x != 0 && Parent.CurrentWeapon != null)

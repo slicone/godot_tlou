@@ -31,7 +31,7 @@ public partial class ResourceManager : ItemManager
             EmitSignal(SignalName.ResourceBackpackFull);
             return;
         }
-        resource.QueueFree(); // TODO probably best that the ItemManager of the level does it?
+        resource.QueueFree();
     }
 
     /// <summary>
