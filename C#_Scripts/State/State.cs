@@ -11,28 +11,9 @@ public partial class State : Node
 
 	public Player Parent { get; set; }
 
-	//public GlobalTypes.PlayerAnimationState weaponState = GlobalTypes.PlayerAnimationState.NOGUN; 
+	public virtual void Enter() {}
 
-	public virtual void Enter()
-	{
-
-		//if (Animation != null)
-		//	Animation.Visible = true;
-		/*
-		if (Parent.HasWeapon)
-		{
-			((Node2D)Parent.GetNode("RangeWeaponIdle")).Visible = true;
-			return;
-		}
-		((Node2D)Parent.GetNode("RangeWeaponIdle")).Visible = false;
-		*/
-	}
-
-	public virtual void Exit()
-	{
-		//if (Animation != null)
-		//	Animation.Visible = false;
-	}
+	public virtual void Exit() {}
 
 	public virtual State ProcessInput(InputEvent inputEvent)
 	{

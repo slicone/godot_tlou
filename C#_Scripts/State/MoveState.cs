@@ -6,13 +6,20 @@ public partial class MoveState : State
 	[Export] public State IdleState { get; set; }
 	[Export] public State FallState { get; set; }
 	[Export] public State JumpState { get; set; }
+	[Export] public State BackpackState { get; set; }
 
 	private float timeSinceInput = 0f;
 
 	public override void Enter()
 	{
-		Parent.PlayerAnimationTree.SetRunAnimation(Parent.PlayerAnimationState);
+		Parent.PlayerAnimationTree.SetRunAnimation(true);
 	}
+
+    public override void Exit()
+    {
+		Parent.PlayerAnimationTree.SetRunAnimation(false);
+    }
+
 
 	public override State ProcessInput(InputEvent @event)
 	{
@@ -20,6 +27,9 @@ public partial class MoveState : State
 
 		if (Input.IsActionJustPressed("jump") && Parent.IsOnFloor())
 			return JumpState;
+
+		if (Input.IsActionJustPressed("backpack"))
+			return BackpackState;
 
 		return null;
 	}
@@ -33,16 +43,6 @@ public partial class MoveState : State
 
 		if (movement != 0)
 		{
-			//if (Animation != null)
-			//	Animation.FlipH = movement < 0;
-
-			// Optional: flip weapon holder and current weapon sprite if needed
-			// if (Parent.WeaponHolder.Position.x != 0 && Parent.CurrentWeapon != null)
-			// {
-			//     Parent.WeaponHolder.Position = new Vector2(-Parent.WeaponHolder.Position.x, Parent.WeaponHolder.Position.y);
-			//     Parent.CurrentWeapon.FlipSprite();
-			// }
-
 			Parent.Velocity = new Vector2(movement, Parent.Velocity.Y);
 			timeSinceInput = 0f;
 		}

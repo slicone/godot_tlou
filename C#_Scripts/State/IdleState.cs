@@ -3,33 +3,33 @@ using System;
 
 public partial class IdleState : State
 {
-	[Export]
-	public State FallState { get; set; }
-	[Export]
-	public State JumpState { get; set; }
-	[Export]
-	public State MoveState { get; set; }
+	[Export] public State FallState { get; set; }
+	[Export] public State JumpState { get; set; }
+	[Export] public State MoveState { get; set; }
+	[Export] public State BackpackState { get; set; }
 
 	public override void Enter()
 	{
-		Parent.PlayerAnimationTree.SetIdleAnimation(Parent.PlayerAnimationState);
+		Parent.PlayerAnimationTree.SetIdleAnimation(true);
 	}
 
 	public override void Exit()
 	{
-		base.Exit();
+		Parent.PlayerAnimationTree.SetIdleAnimation(false);
 	}
 
 
 	public override State ProcessInput(InputEvent @event)
 	{
 		CheckNonStateInput();
-
 		if (Input.IsActionJustPressed("jump") && Parent.IsOnFloor())
 			return JumpState;
 
 		if (Input.IsActionJustPressed("move-left") || Input.IsActionJustPressed("move-right"))
 			return MoveState;
+
+        if (Input.IsActionJustPressed("backpack"))
+			return BackpackState;
 
 		return null;
 	}

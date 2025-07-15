@@ -3,7 +3,10 @@ using Godot;
 public partial class WeaponManager : ItemManager
 {
 	private Node2D _weaponHolder;
-	private Weapon currentWeapon;
+	private Weapon _currentWeapon;
+
+	public Weapon GetCurrentWeapon { get { return _currentWeapon; } }
+	public Node2D GetWeaponHolder { get { return _weaponHolder; } }
 
 	public override void _Ready()
 	{
@@ -23,20 +26,20 @@ public partial class WeaponManager : ItemManager
 
 	private void OnAttack()
 	{
-		currentWeapon?.Attack();
+		_currentWeapon?.Attack();
 	}
 
 	private void OnDropCurrentWeapon()
 	{
-		if (currentWeapon == null)
+		if (_currentWeapon == null)
 			return;
 
-		_weaponHolder.RemoveChild(currentWeapon);
-		GetTree().CurrentScene.AddChild(currentWeapon);
-		currentWeapon.GlobalPosition = player.GlobalPosition;
-		currentWeapon.GravityEnabled = true;
-		currentWeapon.IsItemEquipped = false;
-		currentWeapon = null;
+		_weaponHolder.RemoveChild(_currentWeapon);
+		GetTree().CurrentScene.AddChild(_currentWeapon);
+		_currentWeapon.GlobalPosition = player.GlobalPosition;
+		_currentWeapon.GravityEnabled = true;
+		_currentWeapon.IsItemEquipped = false;
+		_currentWeapon = null;
 		player.PlayerAnimationState = GlobalTypes.PlayerAnimationState.NOGUN;
 	}
 
@@ -53,7 +56,7 @@ public partial class WeaponManager : ItemManager
 		weapon.Position = Vector2.Zero;
 		weapon.GravityEnabled = false;
 
-		currentWeapon = weapon;
+		_currentWeapon = weapon;
 		weapon.IsItemEquipped = true;
 		player.PlayerAnimationState = weapon.WeaponAttackComponent is RangeAttackComponent
 			? GlobalTypes.PlayerAnimationState.RANGEWEAPON 

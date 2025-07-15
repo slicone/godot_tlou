@@ -9,6 +9,7 @@ public partial class Player : CharacterBody2D
 	[Export] public HealthComponent HealthComponent { get; set; }
 	[Export] public NearbyItemTracker NearbyItemTracker { get; set; }
 	[Export] public PickupArea PickupArea { get; set; }
+	[Export] public WeaponManager WeaponManager { get; set; }
 	[Export] public float MoveSpeed { get; set; } = 299f;
 	[Export] public float StopSpeed { get; set; } = 999f;
 	[Export] public float JumpVelocity { get; set; } = -302.0f;
@@ -48,6 +49,8 @@ public partial class Player : CharacterBody2D
 		InitItemManagers();
 	}
 
+
+	// TODO maybe obsolete? Because WeaponManager for example is now needed for other parts in the player class
 	private void InitItemManagers()
 	{
 		NearbyItemTracker.Init(this);

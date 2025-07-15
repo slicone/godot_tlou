@@ -39,14 +39,13 @@ public partial class Weapon : Item
 		return false;
 	}
 
-	// TODO obsolete?
-	public void FlipSprite()
+	public void FlipSprite(bool flipSprite)
 	{
 		foreach (Node child in GetChildren())
 		{
 			if (child is Sprite2D sprite)
 			{
-				sprite.FlipH = !sprite.FlipH;
+				sprite.FlipH = flipSprite;
 			}
 		}
 	}
