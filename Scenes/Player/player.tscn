@@ -1,9 +1,7 @@
-[gd_scene load_steps=60 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene load_steps=58 format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://d02f0ybl22d3s" path="res://C#_Scripts/Player/Player.cs" id="1_hnuln"]
-[ext_resource type="Texture2D" uid="uid://c56vh4anm0uig" path="res://Art/Player/player_bolt_action_hold_1.png" id="2_h8ma5"]
 [ext_resource type="Texture2D" uid="uid://bjgvr503f1jx6" path="res://Art/Player/player_bolt_action_hold_run-Sheet_1.png" id="2_jincj"]
-[ext_resource type="Texture2D" uid="uid://dfwo4xr8i2r45" path="res://Art/Player/player_bolt_action_hold_2.png" id="3_eksi1"]
 [ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
 [ext_resource type="Texture2D" uid="uid://cq236ymofxgte" path="res://Art/Player/player_bolt_action_hold_run-Sheet_2.png" id="3_rqdc0"]
 [ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
@@ -144,7 +142,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Run:frame")
+tracks/0/path = NodePath("Player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -156,7 +154,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Run:flip_h")
+tracks/1/path = NodePath("Player:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -164,6 +162,54 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerWithGun/PlayerGun_1:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerWithGun/PlayerGun_2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerWithGun/PlayerGun_1:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerWithGun/PlayerGun_2:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ur3l4"]
@@ -173,7 +219,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Run:frame")
+tracks/0/path = NodePath("Player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -185,7 +231,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Run:flip_h")
+tracks/1/path = NodePath("Player:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -201,7 +247,7 @@ length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RangeWeaponIdle/HoldingGun_1:frame")
+tracks/0/path = NodePath("PlayerWithGun/PlayerGun_1:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -213,7 +259,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("RangeWeaponIdle/HoldingGun_2:frame")
+tracks/1/path = NodePath("PlayerWithGun/PlayerGun_2:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -225,7 +271,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("RangeWeaponIdle/HoldingGun_2:flip_h")
+tracks/2/path = NodePath("PlayerWithGun/PlayerGun_2:flip_h")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -237,7 +283,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RangeWeaponIdle/HoldingGun_1:flip_h")
+tracks/3/path = NodePath("PlayerWithGun/PlayerGun_1:flip_h")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -249,10 +295,11 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_qr1w5"]
 resource_name = "idle_range_right"
+length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RangeWeaponIdle/HoldingGun_1:frame")
+tracks/0/path = NodePath("PlayerWithGun/PlayerGun_1:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -264,7 +311,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("RangeWeaponIdle/HoldingGun_2:frame")
+tracks/1/path = NodePath("PlayerWithGun/PlayerGun_2:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -276,7 +323,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("RangeWeaponIdle/HoldingGun_1:flip_h")
+tracks/2/path = NodePath("PlayerWithGun/PlayerGun_1:flip_h")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -288,7 +335,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RangeWeaponIdle/HoldingGun_2:flip_h")
+tracks/3/path = NodePath("PlayerWithGun/PlayerGun_2:flip_h")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -304,7 +351,7 @@ length = 0.002
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Run:frame")
+tracks/0/path = NodePath("Player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -316,7 +363,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Run:flip_h")
+tracks/1/path = NodePath("Player:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -328,16 +375,16 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_bmb2s"]
 resource_name = "run_left"
-length = 0.405
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Run:frame")
+tracks/0/path = NodePath("Player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
@@ -345,7 +392,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Run:flip_h")
+tracks/1/path = NodePath("Player:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -357,36 +404,36 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ythyg"]
 resource_name = "run_range_left"
-length = 0.5
+length = 0.55
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RangeWeaponRun/Run_1:frame")
+tracks/0/path = NodePath("PlayerWithGun/PlayerGun_1:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [1, 2, 3, 4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("RangeWeaponRun/Run_2:frame")
+tracks/1/path = NodePath("PlayerWithGun/PlayerGun_2:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [1, 2, 3, 4, 5]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("RangeWeaponRun/Run_2:flip_h")
+tracks/2/path = NodePath("PlayerWithGun/PlayerGun_2:flip_h")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -398,7 +445,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RangeWeaponRun/Run_1:flip_h")
+tracks/3/path = NodePath("PlayerWithGun/PlayerGun_1:flip_h")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -415,31 +462,31 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RangeWeaponRun/Run_1:frame")
+tracks/0/path = NodePath("PlayerWithGun/PlayerGun_1:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [1, 2, 3, 4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("RangeWeaponRun/Run_2:frame")
+tracks/1/path = NodePath("PlayerWithGun/PlayerGun_2:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [1, 2, 3, 4, 5]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("RangeWeaponRun/Run_2:flip_h")
+tracks/2/path = NodePath("PlayerWithGun/PlayerGun_2:flip_h")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -451,7 +498,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("RangeWeaponRun/Run_1:flip_h")
+tracks/3/path = NodePath("PlayerWithGun/PlayerGun_1:flip_h")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -463,16 +510,16 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_0u5uq"]
 resource_name = "run_right"
-length = 0.5
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Run:frame")
+tracks/0/path = NodePath("Player:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
@@ -480,7 +527,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Run:flip_h")
+tracks/1/path = NodePath("Player:flip_h")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -513,42 +560,26 @@ NearbyItemTracker = NodePath("NearbyItemTracker")
 PickupArea = NodePath("PickupArea")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_mtuoh")
 
-[node name="RangeWeaponRun" type="Node2D" parent="."]
+[node name="PlayerWithGun" type="Node2D" parent="."]
 visible = false
 
-[node name="Run_1" type="Sprite2D" parent="RangeWeaponRun"]
+[node name="PlayerGun_1" type="Sprite2D" parent="PlayerWithGun"]
 texture_filter = 1
 texture = ExtResource("2_jincj")
-hframes = 5
+hframes = 6
 
-[node name="Run_2" type="Sprite2D" parent="RangeWeaponRun"]
-texture_filter = 1
-texture = ExtResource("3_rqdc0")
-hframes = 5
-
-[node name="RangeWeaponIdle" type="Node2D" parent="."]
-visible = false
-
-[node name="HoldingGun_1" type="Sprite2D" parent="RangeWeaponIdle"]
-texture_filter = 1
-texture = ExtResource("2_h8ma5")
-
-[node name="HoldingGun_2" type="Sprite2D" parent="RangeWeaponIdle"]
+[node name="PlayerGun_2" type="Sprite2D" parent="PlayerWithGun"]
 z_index = 2
 texture_filter = 1
-texture = ExtResource("3_eksi1")
-
-[node name="Idle" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-texture = ExtResource("6_jincj")
+texture = ExtResource("3_rqdc0")
 hframes = 6
-frame = 5
+frame = 1
 
-[node name="Run" type="Sprite2D" parent="."]
+[node name="Player" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("6_jincj")
 flip_h = true
@@ -596,27 +627,27 @@ FallState = NodePath("../fall")
 JumpState = NodePath("../jump")
 MoveState = NodePath("../move")
 AnimationName = "idle"
-Animation = NodePath("../../Idle")
+Animation = NodePath("")
 
 [node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "FallState", "Animation")]
 script = ExtResource("10_ks1b7")
 IdleState = NodePath("../idle")
 MoveState = NodePath("../move")
 FallState = NodePath("../fall")
-Animation = NodePath("../../Run")
+Animation = NodePath("../../Player")
 
 [node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "Animation")]
 script = ExtResource("11_hnuln")
 IdleState = NodePath("../idle")
 MoveState = NodePath("../move")
-Animation = NodePath("../../Run")
+Animation = NodePath("../../Player")
 
 [node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "FallState", "JumpState", "Animation")]
 script = ExtResource("12_aqm4k")
 IdleState = NodePath("../idle")
 FallState = NodePath("../fall")
 JumpState = NodePath("../jump")
-Animation = NodePath("../../Run")
+Animation = NodePath("../../Player")
 
 [node name="EnemyProgressBar" type="TextureProgressBar" parent="."]
 texture_filter = 1

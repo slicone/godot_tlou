@@ -31,9 +31,9 @@ public partial class MeleeAttackComponent : AttackComponent
 
 	public override void Attack()
 	{
-		if (Weapon._animationPlayer != null)
+		if (Weapon.AnimationPlayer != null)
 		{
-			Weapon._animationPlayer.Play("slash");
+			Weapon.AnimationPlayer.Play("slash");
 			//await ToSignal(Weapon._animationPlayer, "animation_finished");
 		}
 	}

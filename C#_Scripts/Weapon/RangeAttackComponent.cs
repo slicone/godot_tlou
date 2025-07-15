@@ -23,13 +23,14 @@ public partial class RangeAttackComponent : AttackComponent
 		RayCast = GetNodeOrNull<RayCast2D>("RayCast2D");
 		FireTimer = GetNodeOrNull<Timer>("FireTimer");
 		ReloadTimer = GetNodeOrNull<Timer>("ReloadTimer");
-		if (RayCast is null || FireTimer is null || ReloadTimer is null)
+		if (RayCast is null || FireTimer is null || Weapon is null || Weapon.AnimationPlayer is null)
 		{
 			GD.PushError("Missing dependencies in RangeAttackComponent");
 			return;
 		}
 		_currentMagazineRounds = MaxMagazineRounds;
-		SetupTimers();
+		SetupTimer();
+		Weapon.AnimationPlayer.AnimationFinished += OnAnimationFinished;
 		RayCast.CollideWithAreas = true;
 	}
 
@@ -43,20 +44,16 @@ public partial class RangeAttackComponent : AttackComponent
 	{
 		if (_canFire)
 		{
-			Weapon._animationPlayer?.Play("shoot");
+			Weapon.AnimationPlayer?.Play("shoot");
 			Shoot();
 		}
 	}
 
-	private void SetupTimers()
+	private void SetupTimer()
 	{
 		FireTimer.WaitTime = FireRate;
-		ReloadTimer.WaitTime = ReloadTime;
 		FireTimer.OneShot = true;
-		ReloadTimer.OneShot = true;
-
 		FireTimer.Timeout += OnFireTimerTimeout;
-		ReloadTimer.Timeout += OnReloadTimerTimeout;
 	}
 
 	private void Shoot()
@@ -67,7 +64,9 @@ public partial class RangeAttackComponent : AttackComponent
 			return;
 
 		_currentMagazineRounds--;
+		Weapon.AnimationPlayer.Play("Shoot");
 		FireTimer.Start();
+
 
 		Vector2 mousePos = GetGlobalMousePosition();
 		Vector2 dir = (mousePos - GlobalPosition).Normalized();
@@ -94,8 +93,11 @@ public partial class RangeAttackComponent : AttackComponent
 
 	private void Reload()
 	{
-		_canFire = false;
-		ReloadTimer.Start();
+		if (_currentMagazineRounds < MaxMagazineRounds && !Weapon.AnimationPlayer.IsPlaying())
+		{
+			_canFire = false;
+			Weapon.AnimationPlayer.Play("Reload");
+		}
 	}
 
 	private void OnFireTimerTimeout()
@@ -103,7 +105,17 @@ public partial class RangeAttackComponent : AttackComponent
 		_canFire = true;
 	}
 
-	private void OnReloadTimerTimeout()
+	private void OnAnimationFinished(StringName animName)
+	{
+		switch (animName)
+		{
+			case "Reload":
+				ReloadAnimationFinished();
+				break;
+		}
+	}
+
+	private void ReloadAnimationFinished()
 	{
 		_currentMagazineRounds = MaxMagazineRounds;
 		_canFire = true;

@@ -11,14 +11,9 @@ public partial class Weapon : Item
 
 	private Vector2 _velocity = Vector2.Zero;
 
-	public AnimationPlayer _animationPlayer;
+	[Export]
+	public AnimationPlayer AnimationPlayer { get; set; }
 	
-
-	public override void _Ready()
-	{
-		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-	}
-
 	public override void _PhysicsProcess(double delta)
 	{
 		if (!GravityEnabled)
@@ -44,6 +39,7 @@ public partial class Weapon : Item
 		return false;
 	}
 
+	// TODO obsolete?
 	public void FlipSprite()
 	{
 		foreach (Node child in GetChildren())

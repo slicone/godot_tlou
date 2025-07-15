@@ -13,66 +13,46 @@ public partial class PlayerAnimationTree : Node2D
 
     public void SetIdleAnimation(GlobalTypes.PlayerAnimationState playerAnimationState)
     {
-
-        //AnimationTree.Set("parameters/conditions/idle", true);
-        //AnimationTree.Set("parameters/conditions/run", false);
         idle = true;
         run = false;
-        //  MakeIdleSpriteVisibleOnCondition(playerAnimationState);
+        MakeSpriteVisibleOnCondition(playerAnimationState);
+    }
+    public void SetRunAnimation(GlobalTypes.PlayerAnimationState playerAnimationState)
+    {
+        idle = false;
+        run = true;
+        MakeSpriteVisibleOnCondition(playerAnimationState);
     }
 
-    public void MakeIdleSpriteVisibleOnCondition(GlobalTypes.PlayerAnimationState playerAnimationState)
+    public void MakeSpriteVisibleOnCondition(GlobalTypes.PlayerAnimationState playerAnimationState)
     {
-        //if (player.currentSprite != null)
-        //    player.currentSprite.Visible = false;
+        if (player.currentSprite != null)
+            player.currentSprite.Visible = false;
 
         switch (playerAnimationState)
         {
             case GlobalTypes.PlayerAnimationState.NOGUN:
             {
-                var spriteWithOut = player.GetNode<Sprite2D>("Idle");
-                spriteWithOut.Visible = true;
-                player.currentSprite = spriteWithOut;
+                var spriteNameNoGun = "Player";
+                var spriteNoGun = player.GetNode<Sprite2D>(spriteNameNoGun);
+
+                if (spriteNoGun is null)
+                    GD.PrintErr($"Sprite {spriteNameNoGun} is null");
+
+                spriteNoGun.Visible = true;
+                player.currentSprite = spriteNoGun;
                 break; 
             }
             case GlobalTypes.PlayerAnimationState.RANGEWEAPON: {
-                var sprite = player.GetNode<Node2D>("RangeWeaponIdle");
-                sprite.Visible = true;
-                player.currentSprite = sprite;
+                var spriteNameRange = "PlayerWithGun";
+                var spriteRange = player.GetNode<Node2D>(spriteNameRange);
+                if (spriteNameRange is null)
+                    GD.PrintErr($"Sprite {spriteNameRange} is null");
+
+                spriteRange.Visible = true;
+                player.currentSprite = spriteRange;
                 break;
             }
-        }
-    }
-
-    public void SetRunAnimation(GlobalTypes.PlayerAnimationState playerAnimationState)
-    {
-        //AnimationTree.Set("parameters/conditions/run", true);
-        //AnimationTree.Set("parameters/conditions/idle", false);
-        idle = false;
-        run = true;
-        MakeRunSpriteVisibleOnCondition(playerAnimationState);
-    }
-    public void MakeRunSpriteVisibleOnCondition(GlobalTypes.PlayerAnimationState playerAnimationState)
-    {
-        //if (player.currentSprite != null)
-        //    player.currentSprite.Visible = false;
-
-        switch (playerAnimationState)
-        {
-            case GlobalTypes.PlayerAnimationState.NOGUN:
-                {
-                    var spriteWithOut = player.GetNode<Sprite2D>("Run");
-                    spriteWithOut.Visible = true;
-                    player.currentSprite = spriteWithOut;
-                    break;
-                }
-            case GlobalTypes.PlayerAnimationState.RANGEWEAPON:
-                {
-                    var spriteWithOut = player.GetNode<Node2D>("RangeWeaponRun");
-                    spriteWithOut.Visible = true;
-                    player.currentSprite = spriteWithOut;
-                    break;
-                }
         }
     }
 
@@ -87,21 +67,15 @@ public partial class PlayerAnimationTree : Node2D
             lastFacingDirectionNotZero = currentFacingDirection;
         }
 
-        if ((bool)AnimationTree.Get("parameters/conditions/idle"))
-        {
-        }
-
-        if ((bool)AnimationTree.Get("parameters/conditions/run"))
-        {
-        }
-     
-            AnimationTree.Set("parameters/Idle/blend_position", lastFacingDirectionNotZero);
-            AnimationTree.Set("parameters/Idle_Range/blend_position", lastFacingDirectionNotZero);
-            AnimationTree.Set("parameters/Run/blend_position", lastFacingDirectionNotZero);
-            AnimationTree.Set("parameters/Run_Range/blend_position", lastFacingDirectionNotZero); 
+        // Blend pos 
+        AnimationTree.Set("parameters/Idle/blend_position", lastFacingDirectionNotZero);
+        AnimationTree.Set("parameters/Idle_Range/blend_position", lastFacingDirectionNotZero);
+        AnimationTree.Set("parameters/Run_Range/blend_position", lastFacingDirectionNotZero); 
+        AnimationTree.Set("parameters/Run/blend_position", lastFacingDirectionNotZero);
+    
+        // State change
         AnimationTree.Set("parameters/conditions/idle", idle);
         AnimationTree.Set("parameters/conditions/run", run);
 
-        // Immer den letzten gültigen Wert verwenden
     }
 }
