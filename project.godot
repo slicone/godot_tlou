@@ -16,11 +16,10 @@ config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 
 [autoload]
 
-LevelManager="*res://level_manager.gd"
-GameState="*res://game_state.gd"
-GlobalTypes="*res://global_types.gd"
-AssaultGlobals="*res://assault_globals.gd"
-RunState="*res://run_state.gd"
+LevelManager="*res://C#_Scripts/Globals/LevelManager.cs"
+AssaultGlobals="*res://C#_Scripts/Globals/AssaultGlobals.cs"
+RunState="*res://C#_Scripts/Globals/RunState.cs"
+GlobalTypes="*res://C#_Scripts/Globals/GlobalTypes.cs"
 
 [display]
 

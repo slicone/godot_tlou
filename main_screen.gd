@@ -2,7 +2,7 @@ extends Control
 
 
 func _on_play_pressed() -> void:
-	LevelManager.load_random_level()
+	LevelManager.LoadRandomLevel()
 
 
 func _on_exit_pressed() -> void:

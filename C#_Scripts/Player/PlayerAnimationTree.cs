@@ -77,10 +77,6 @@ public partial class PlayerAnimationTree : Node2D
         if (player.PlayerAnimationState != GlobalTypes.PlayerAnimationState.NOGUN && playerCurrentWeapon is not null && playerWeaponHolder is not null)
         {
             playerCurrentWeapon.FlipSprite(lastFacingDirectionNotZero < 0);
-            if (playerWeaponHolder.Position.X > 0 && lastFacingDirectionNotZero < 0 || playerWeaponHolder.Position.X < 0 && lastFacingDirectionNotZero > 0)
-            {
-                playerWeaponHolder.Position = new Vector2(playerWeaponHolder.Position.X * -1, playerWeaponHolder.Position.Y);
-            }
         }
     }
 

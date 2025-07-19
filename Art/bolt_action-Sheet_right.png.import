@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwg71s5ovpw86"
-path="res://.godot/imported/bolt_action-Sheett_right.png-9459e76eb9b502ec3e30950958cb1923.ctex"
+uid="uid://b6hhd4coa2kw5"
+path="res://.godot/imported/bolt_action-Sheet_right.png-c1a278e15b63162e333f3d9e86b34047.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/bolt_action-Sheett_right.png"
-dest_files=["res://.godot/imported/bolt_action-Sheett_right.png-9459e76eb9b502ec3e30950958cb1923.ctex"]
+source_file="res://Art/bolt_action-Sheet_right.png"
+dest_files=["res://.godot/imported/bolt_action-Sheet_right.png-c1a278e15b63162e333f3d9e86b34047.ctex"]
 
 [params]
 

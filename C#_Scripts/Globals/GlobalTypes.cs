@@ -30,6 +30,8 @@ public partial class GlobalTypes : Node
 		BOSS
 	}
 
+	
+
 	public enum ResourceType
 	{
 		ETHANOL,
@@ -39,7 +41,7 @@ public partial class GlobalTypes : Node
 		TAPE,
 		SCISSOR
 	}
-	
+
 	public enum PlayerAnimationState
 	{
 		NOGUN,
@@ -48,4 +50,6 @@ public partial class GlobalTypes : Node
 	}
 
 	public const float PreparationTimeInSec = 2f;
+
+
 }

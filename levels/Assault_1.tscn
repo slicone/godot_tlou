@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=4 uid="uid://pr0h4440xlxl"]
 
-[ext_resource type="Script" uid="uid://cqu70lcyiy8wj" path="res://levels/level_state.gd" id="1_8h0w4"]
-[ext_resource type="Script" uid="uid://qiyof2180iuj" path="res://levels/enemy_manager.gd" id="2_6bswn"]
-[ext_resource type="Script" uid="uid://dy47ixfx16oo4" path="res://levels/assault_score_system.gd" id="3_a3lu2"]
+[ext_resource type="Script" uid="uid://bnowxbvog82gk" path="res://C#_Scripts/LevelLogic/AssaultLevelState.cs" id="1_03c1t"]
+[ext_resource type="Script" uid="uid://ols1o8sgsvkn" path="res://C#_Scripts/LevelLogic/EnemyManager.cs" id="2_kvlpm"]
+[ext_resource type="Script" uid="uid://0mmtkys4wewi" path="res://C#_Scripts/LevelLogic/AssaultScoreSystem.cs" id="3_5qtuw"]
 [ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/Player/player.tscn" id="5_kvlpm"]
 [ext_resource type="PackedScene" uid="uid://df8u6lxcfllsw" path="res://Scenes/Axe.tscn" id="7_6bswn"]
 [ext_resource type="PackedScene" uid="uid://dbejmwhbtas0k" path="res://Scenes/bolt_action.tscn" id="7_8h0w4"]
@@ -374,17 +374,17 @@ size = Vector2(28, 2)
 [node name="Assault_1" type="Node2D"]
 
 [node name="AssaultLevelState" type="Node" parent="." node_paths=PackedStringArray("enemy_manager", "score_system", "player")]
-script = ExtResource("1_8h0w4")
+script = ExtResource("1_03c1t")
 enemy_manager = NodePath("../EnemyManager")
 score_system = NodePath("../AssaultScoreSystem")
 player = NodePath("../Player")
 
-[node name="EnemyManager" type="Node" parent="." node_paths=PackedStringArray("level_state")]
-script = ExtResource("2_6bswn")
-level_state = NodePath("../AssaultLevelState")
+[node name="EnemyManager" type="Node" parent="." node_paths=PackedStringArray("LevelState")]
+script = ExtResource("2_kvlpm")
+LevelState = NodePath("../AssaultLevelState")
 
 [node name="AssaultScoreSystem" type="Node" parent="." node_paths=PackedStringArray("enemy_manager")]
-script = ExtResource("3_a3lu2")
+script = ExtResource("3_5qtuw")
 enemy_manager = NodePath("../EnemyManager")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]

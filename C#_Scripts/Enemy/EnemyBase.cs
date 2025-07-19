@@ -130,8 +130,8 @@ public partial class EnemyBase : CharacterBody2D
     {
         if (DetectionAreaComponent != null)
         {
-            DetectionAreaComponent.Connect("body_entered", new Callable(this, nameof(OnDetectionEntered)));
-            DetectionAreaComponent.Connect("body_exited", new Callable(this, nameof(OnDetectionExited)));
+            DetectionAreaComponent.BodyEntered += OnDetectionEntered;
+            DetectionAreaComponent.BodyExited += OnDetectionExited;
         }
     }
 

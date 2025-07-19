@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://beokxbdxxr45v"]
+[gd_scene load_steps=7 format=3 uid="uid://beokxbdxxr45v"]
 
 [ext_resource type="PackedScene" uid="uid://c6om3j5rle1fd" path="res://Scenes/Player/player.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://jhnl70vwrpeb" path="res://Scenes/Structures/platform.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://b7njof4dv3745" path="res://Scenes/Enemies/enemy_base.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://df8u6lxcfllsw" path="res://Scenes/axe.tscn" id="5_21xkr"]
+[ext_resource type="PackedScene" uid="uid://df8u6lxcfllsw" path="res://Scenes/Axe.tscn" id="5_21xkr"]
 [ext_resource type="PackedScene" uid="uid://cmqmpekef4jhf" path="res://Scenes/test_weapon.tscn" id="5_kry3j"]
-[ext_resource type="PackedScene" uid="uid://cf2nugs1objng" path="res://Scenes/m4.tscn" id="6_21xkr"]
 [ext_resource type="Script" uid="uid://bw0oa4fjxecpr" path="res://Scenes/health_bar_player.gd" id="7_6bp64"]
 
 [node name="World" type="Node2D"]
@@ -28,8 +27,18 @@ position = Vector2(311, 262)
 [node name="axe_weapon" parent="." instance=ExtResource("5_21xkr")]
 position = Vector2(188, 238)
 
-[node name="M4" parent="." instance=ExtResource("6_21xkr")]
+[node name="M4" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(389, 245)
+script = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

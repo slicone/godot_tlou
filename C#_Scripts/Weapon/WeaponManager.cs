@@ -11,6 +11,8 @@ public partial class WeaponManager : ItemManager
 	public override void _Ready()
 	{
 		_weaponHolder = GetNode<Node2D>("WeaponHolder");
+		if (_weaponHolder is null)
+			GD.Print("WeaponHolder not found in WeaponManager of Player");
 	}
 
 	public override void Init(Player parent, NearbyItemTracker nearbyItemTracker)
@@ -61,11 +63,5 @@ public partial class WeaponManager : ItemManager
 		player.PlayerAnimationState = weapon.WeaponAttackComponent is RangeAttackComponent
 			? GlobalTypes.PlayerAnimationState.RANGEWEAPON 
 			: GlobalTypes.PlayerAnimationState.MELEEWEAPON;
-	}
-
-	// Placeholder for animation control
-	public void SetAnimation(Weapon weapon)
-	{
-		// TODO maybe if Weapon has multiple animations? Like player gets upgrade for example an now different animation?	
 	}
 }
