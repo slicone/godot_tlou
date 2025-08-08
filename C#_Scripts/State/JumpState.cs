@@ -30,12 +30,6 @@ public partial class JumpState : State
 		float input = Input.GetAxis("move-left", "move-right");
 		float movement = input * Parent.MoveSpeed;
 
-		if (movement != 0)
-		{
-			if (Animation != null)
-				Animation.FlipH = movement < 0;
-		}
-
 		Parent.Velocity = new Vector2(movement, Parent.Velocity.Y);
 		Parent.MoveAndSlide();
 

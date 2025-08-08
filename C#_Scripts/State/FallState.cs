@@ -23,10 +23,6 @@ public partial class FallState : State
 		float input = Input.GetAxis("move-left", "move-right");
 		float movement = input * Parent.MoveSpeed;
 
-		// Optional sprite flip logic
-		// if (movement != 0 && Animation != null)
-		//     Animation.FlipH = movement < 0;
-
 		Parent.Velocity = new Vector2(movement, Parent.Velocity.Y);
 		Parent.MoveAndSlide();
 
