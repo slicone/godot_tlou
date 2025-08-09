@@ -1,4 +1,4 @@
-# Performacne round based game 
+# Performance round based game 
 
 Game is in an early stage of development. Player Movement + Item system is integrated + Enemy spawns.
 
