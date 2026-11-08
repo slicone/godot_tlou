@@ -1,16 +1,16 @@
-[gd_scene load_steps=64 format=3 uid="uid://c6om3j5rle1fd"]
+[gd_scene format=3 uid="uid://c6om3j5rle1fd"]
 
 [ext_resource type="Script" uid="uid://d02f0ybl22d3s" path="res://C#_Scripts/Player/Player.cs" id="1_hnuln"]
 [ext_resource type="Texture2D" uid="uid://bjgvr503f1jx6" path="res://Art/Player/player_bolt_action_hold_run-Sheet_1.png" id="2_jincj"]
-[ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/health_component.tscn" id="3_mtuoh"]
+[ext_resource type="PackedScene" uid="uid://dl7t35yvoi3m5" path="res://Scenes/Player/health_component.tscn" id="3_mtuoh"]
 [ext_resource type="Texture2D" uid="uid://cq236ymofxgte" path="res://Art/Player/player_bolt_action_hold_run-Sheet_2.png" id="3_rqdc0"]
-[ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/hitbox_component.tscn" id="4_htcer"]
+[ext_resource type="PackedScene" uid="uid://n45isauu1rkp" path="res://Scenes/Player/hitbox_component.tscn" id="4_htcer"]
 [ext_resource type="Script" uid="uid://bh4el1n8edue7" path="res://C#_Scripts/Player/PickupArea.cs" id="6_dey5f"]
-[ext_resource type="Script" uid="uid://b3olywc1cm8hk" path="res://Scenes/Player/NearbyItemTracker.cs" id="6_hnuln"]
+[ext_resource type="Script" uid="uid://b3olywc1cm8hk" path="res://C#_Scripts/NearbyItemTracker.cs" id="6_hnuln"]
 [ext_resource type="Texture2D" uid="uid://dy5spjxngt8l" path="res://Art/Player/player_run-Sheet.png" id="6_jincj"]
-[ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://state_machine.tscn" id="7_74mp2"]
+[ext_resource type="PackedScene" uid="uid://byi7q4pa6eeem" path="res://Scenes/Player/state_machine.tscn" id="7_74mp2"]
 [ext_resource type="Script" uid="uid://c387qppn24ij5" path="res://C#_Scripts/Weapon/WeaponManager.cs" id="7_dey5f"]
-[ext_resource type="Script" uid="uid://cwi0yoks3d3as" path="res://Scenes/Player/ResourceManager.cs" id="8_ks1b7"]
+[ext_resource type="Script" uid="uid://cwi0yoks3d3as" path="res://C#_Scripts/ResourceManager.cs" id="8_ks1b7"]
 [ext_resource type="Script" uid="uid://3vobuoj6m80j" path="res://C#_Scripts/Player/RecipeManager.cs" id="8_rcvs5"]
 [ext_resource type="Script" uid="uid://bgumwo5pneyt6" path="res://C#_Scripts/State/IdleState.cs" id="9_r5xpd"]
 [ext_resource type="Script" uid="uid://cmxxcqiogmoiu" path="res://C#_Scripts/State/JumpState.cs" id="10_ks1b7"]
@@ -39,6 +39,7 @@ animation = &"run_range_right"
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_eksi1"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_jincj")
 blend_point_0/pos = 0.0
+blend_point_0/name = &"0"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fcwna"]
 animation = &"idle_left"
@@ -47,11 +48,13 @@ animation = &"idle_left"
 animation = &"idle_right"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_2jnj1"]
+blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_fcwna")
 blend_point_0/pos = -1.0
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_1agin")
 blend_point_1/pos = 1.0
-blend_mode = 1
+blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bmb2s"]
 animation = &"idle_range_right"
@@ -60,11 +63,13 @@ animation = &"idle_range_right"
 animation = &"idle_range_left"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_2ahak"]
+blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_bmb2s")
 blend_point_0/pos = 1.0
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_ur3l4")
 blend_point_1/pos = -1.0
-blend_mode = 1
+blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eksi1"]
 animation = &"run_left"
@@ -73,11 +78,13 @@ animation = &"run_left"
 animation = &"run_right"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_rukb4"]
+blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_eksi1")
 blend_point_0/pos = -1.0
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_2ahak")
 blend_point_1/pos = 1.0
-blend_mode = 1
+blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4no11"]
 animation = &"run_range_right"
@@ -86,11 +93,13 @@ animation = &"run_range_right"
 animation = &"run_range_left"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_fcwna"]
+blend_mode = 1
 blend_point_0/node = SubResource("AnimationNodeAnimation_4no11")
 blend_point_0/pos = 1.0
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_rukb4")
 blend_point_1/pos = -1.0
-blend_mode = 1
+blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eksi1"]
 advance_mode = 2
@@ -632,7 +641,7 @@ _data = {
 &"run_right": SubResource("Animation_0u5uq")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerAnimationTree", "StateMachine", "HitboxComponent", "HealthComponent", "NearbyItemTracker", "PickupArea", "WeaponManager") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1319919480 node_paths=PackedStringArray("PlayerAnimationTree", "StateMachine", "HitboxComponent", "HealthComponent", "NearbyItemTracker", "PickupArea", "WeaponManager") groups=["Player"]]
 script = ExtResource("1_hnuln")
 PlayerAnimationTree = NodePath("PlayerAnimation")
 StateMachine = NodePath("state_machine")
@@ -642,27 +651,27 @@ NearbyItemTracker = NodePath("NearbyItemTracker")
 PickupArea = NodePath("PickupArea")
 WeaponManager = NodePath("WeaponManager")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=1384155314]
 visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_mtuoh")
 
-[node name="PlayerWithGun" type="Node2D" parent="."]
+[node name="PlayerWithGun" type="Node2D" parent="." unique_id=733305810]
 visible = false
 
-[node name="PlayerGun_1" type="Sprite2D" parent="PlayerWithGun"]
+[node name="PlayerGun_1" type="Sprite2D" parent="PlayerWithGun" unique_id=1892274822]
 texture_filter = 1
 texture = ExtResource("2_jincj")
 hframes = 6
 
-[node name="PlayerGun_2" type="Sprite2D" parent="PlayerWithGun"]
+[node name="PlayerGun_2" type="Sprite2D" parent="PlayerWithGun" unique_id=126656294]
 z_index = 2
 texture_filter = 1
 texture = ExtResource("3_rqdc0")
 hframes = 6
 frame = 1
 
-[node name="Player" type="Sprite2D" parent="."]
+[node name="Player" type="Sprite2D" parent="." unique_id=1275026885]
 visible = false
 texture_filter = 1
 texture = ExtResource("6_jincj")
@@ -670,62 +679,62 @@ flip_h = true
 hframes = 6
 frame = 5
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_mtuoh")]
+[node name="HealthComponent" parent="." unique_id=1955348242 instance=ExtResource("3_mtuoh")]
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("HealthComponent") groups=["Player"] instance=ExtResource("4_htcer")]
+[node name="HitboxComponent" parent="." unique_id=1491420678 node_paths=PackedStringArray("HealthComponent") groups=["Player"] instance=ExtResource("4_htcer")]
 HealthComponent = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=254256118]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_kpjcp")
 
-[node name="PickupArea" type="Area2D" parent="."]
+[node name="PickupArea" type="Area2D" parent="." unique_id=543710192]
 script = ExtResource("6_dey5f")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=1934515961]
 visible = false
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_mtuoh")
 
-[node name="RecipeManager" type="Node" parent="."]
+[node name="RecipeManager" type="Node" parent="." unique_id=1721340615]
 script = ExtResource("8_rcvs5")
 
-[node name="NearbyItemTracker" type="Node" parent="."]
+[node name="NearbyItemTracker" type="Node" parent="." unique_id=1847913852]
 script = ExtResource("6_hnuln")
 
-[node name="ResourceManager" type="Node" parent="."]
+[node name="ResourceManager" type="Node" parent="." unique_id=1146200399]
 script = ExtResource("8_ks1b7")
 
-[node name="WeaponManager" type="Node2D" parent="."]
+[node name="WeaponManager" type="Node2D" parent="." unique_id=178014885]
 script = ExtResource("7_dey5f")
 
-[node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
+[node name="WeaponHolder" type="Node2D" parent="WeaponManager" unique_id=1911075057]
 position = Vector2(8, -9.5)
 
-[node name="state_machine" parent="." node_paths=PackedStringArray("StartingState") instance=ExtResource("7_74mp2")]
+[node name="state_machine" parent="." unique_id=129409530 node_paths=PackedStringArray("StartingState") instance=ExtResource("7_74mp2")]
 StartingState = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("FallState", "JumpState", "MoveState")]
+[node name="idle" type="Node" parent="state_machine" unique_id=1733717429 node_paths=PackedStringArray("FallState", "JumpState", "MoveState")]
 script = ExtResource("9_r5xpd")
 FallState = NodePath("../fall")
 JumpState = NodePath("../jump")
 MoveState = NodePath("../move")
 AnimationName = "idle"
 
-[node name="jump" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "FallState", "Animation")]
+[node name="jump" type="Node" parent="state_machine" unique_id=1004758722 node_paths=PackedStringArray("IdleState", "MoveState", "FallState", "Animation")]
 script = ExtResource("10_ks1b7")
 IdleState = NodePath("../idle")
 MoveState = NodePath("../move")
 FallState = NodePath("../fall")
 Animation = NodePath("../../Player")
 
-[node name="fall" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "MoveState", "Animation")]
+[node name="fall" type="Node" parent="state_machine" unique_id=1332516451 node_paths=PackedStringArray("IdleState", "MoveState", "Animation")]
 script = ExtResource("11_hnuln")
 IdleState = NodePath("../idle")
 MoveState = NodePath("../move")
 Animation = NodePath("../../Player")
 
-[node name="move" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState", "FallState", "JumpState", "BackpackState", "Animation")]
+[node name="move" type="Node" parent="state_machine" unique_id=1693007362 node_paths=PackedStringArray("IdleState", "FallState", "JumpState", "BackpackState", "Animation")]
 script = ExtResource("12_aqm4k")
 IdleState = NodePath("../idle")
 FallState = NodePath("../fall")
@@ -733,11 +742,11 @@ JumpState = NodePath("../jump")
 BackpackState = NodePath("../backpack")
 Animation = NodePath("../../Player")
 
-[node name="backpack" type="Node" parent="state_machine" node_paths=PackedStringArray("IdleState")]
+[node name="backpack" type="Node" parent="state_machine" unique_id=494847463 node_paths=PackedStringArray("IdleState")]
 script = ExtResource("17_eksi1")
 IdleState = NodePath("../idle")
 
-[node name="EnemyProgressBar" type="TextureProgressBar" parent="."]
+[node name="EnemyProgressBar" type="TextureProgressBar" parent="." unique_id=499164943]
 texture_filter = 1
 offset_left = -16.0
 offset_top = -30.0
@@ -747,14 +756,14 @@ texture_under = ExtResource("12_7g0yx")
 texture_progress = ExtResource("13_7g0yx")
 script = ExtResource("16_r5xpd")
 
-[node name="Recipe" type="Area2D" parent="."]
+[node name="Recipe" type="Area2D" parent="." unique_id=863775848]
 script = ExtResource("20_h8ma5")
 
-[node name="PlayerAnimation" type="Node2D" parent="." node_paths=PackedStringArray("AnimationTree")]
+[node name="PlayerAnimation" type="Node2D" parent="." unique_id=209610562 node_paths=PackedStringArray("AnimationTree")]
 script = ExtResource("22_eksi1")
 AnimationTree = NodePath("../AnimationTree")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1078005266]
 tree_root = SubResource("AnimationNodeStateMachine_2ahak")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
@@ -767,7 +776,5 @@ parameters/Idle_Range/blend_position = -0.217742
 parameters/Run/blend_position = 1.0
 parameters/Run_Range/blend_position = -0.0309038
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0u5uq")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=338935694]
+libraries/ = SubResource("AnimationLibrary_0u5uq")

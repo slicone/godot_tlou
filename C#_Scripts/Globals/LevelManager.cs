@@ -14,7 +14,7 @@ public partial class LevelManager : Node
 
     private List<string> levelScenes = new()
     {
-        "res://levels/Assault_1.tscn"
+        "res://Scenes/Levels/Assault_1.tscn"
     };
 
     private GlobalTypes.LevelNumber[] levelNumbers = new GlobalTypes.LevelNumber[]

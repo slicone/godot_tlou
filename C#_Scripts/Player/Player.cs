@@ -56,7 +56,7 @@ public partial class Player : CharacterBody2D
 		NearbyItemTracker.Init(this);
 		foreach (var child in GetChildren())
 		{
-			if (child is IItemManager itemManager)
+			if (child is ItemManager itemManager)
 			{
 				itemManager.Init(this, NearbyItemTracker);
 			}

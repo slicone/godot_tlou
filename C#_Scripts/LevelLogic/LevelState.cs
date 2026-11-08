@@ -60,13 +60,13 @@ public abstract partial class LevelState : Node
         GD.Print(score_system.GetScore());
 
         string encounterStatsStatic = JsonSerializer.Serialize(score_system.GetEncounterStats()[0]);
-            string encounterStatsDynamic = JsonSerializer.Serialize(score_system.GetEncounterStats()[1]);
+        string encounterStatsDynamic = JsonSerializer.Serialize(score_system.GetEncounterStats()[1]);
 
-            GD.Print("static: \n" + encounterStatsStatic);
-            GD.Print("dynamic: \n" + encounterStatsDynamic);
+        GD.Print("static: \n" + encounterStatsStatic);
+        GD.Print("dynamic: \n" + encounterStatsDynamic);
 
-            LevelManager.Instance.LoadRandomLevel();
-            GD.Print("level completed");
+        LevelManager.Instance.LoadRandomLevel();
+        GD.Print("level completed");
         }
 
         private void OnPlayerDied()

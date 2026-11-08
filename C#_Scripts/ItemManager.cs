@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class ItemManager : Node, IItemManager
+public partial class ItemManager : Node
 {
     protected Player player;
     protected NearbyItemTracker nearbyItemTracker;
